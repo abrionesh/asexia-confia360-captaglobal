@@ -1,0 +1,835 @@
+//#region node_modules/.nitro/vite/services/ssr/assets/places-BJ7DURjs.js
+var getafe_default = /*#__PURE__*/ JSON.parse("[{\"id\":1,\"name\":\"Restaurante Balcón Gastrobar\",\"sector\":\"Hostelería\",\"sub\":\"Gastrobar\",\"zone\":\"Centro\",\"address\":\"C. Arboleda, 12, 28901\",\"phone\":\"914 346 510\",\"phoneAlt\":\"\",\"email\":\"balconcapricho@gmail.com\",\"web\":\"https://balcongastrobar.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Balc%C3%B3n+Gastrobar&query_place_id=ChIJvfbCea4hQg0RaRevE1bhuPM\",\"rating\":4.8,\"reviews\":2124,\"reservations\":\"web propia\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"2124 reseñas en Google, email público\",\"lat\":40.30488,\"lng\":-3.72839,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Balc%C3%B3n+Gastrobar&query_place_id=ChIJvfbCea4hQg0RaRevE1bhuPM\"},{\"label\":\"Web atribuida\",\"url\":\"https://balcongastrobar.com/\"},{\"label\":\"Reservas\",\"url\":\"https://balcongastrobar.com/restaurante-getafe/reservas/\"}],\"hasPage\":true},{\"id\":2,\"name\":\"Meditt 23 l Restaurante Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"Av. Buenos Aires, 21, 28907\",\"phone\":\"640 783 851\",\"phoneAlt\":\"\",\"email\":\"meditt23@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Meditt+23+l+Restaurante+Getafe&query_place_id=ChIJn_x77ZYhQg0R8TnlsHUroKs\",\"rating\":4.7,\"reviews\":1089,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Media\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital media, 1089 reseñas en Google, email público\",\"lat\":40.3277231,\"lng\":-3.7363385,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Meditt+23+l+Restaurante+Getafe&query_place_id=ChIJn_x77ZYhQg0R8TnlsHUroKs\"}],\"hasPage\":true},{\"id\":3,\"name\":\"Restaurante Casa de Pías\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Escuelas Pias, 4, 28901\",\"phone\":\"916 964 757\",\"phoneAlt\":\"619 242 956\",\"email\":\"catering@casadepias.com\",\"web\":\"https://www.casadepias.com/restaurante/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Casa+de+P%C3%ADas&query_place_id=ChIJWWdWA5cgQg0RqaB7ZHE4RUo\",\"rating\":4.6,\"reviews\":1078,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":45,\"why\":\"1078 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3068767,\"lng\":-3.7316284,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Casa+de+P%C3%ADas&query_place_id=ChIJWWdWA5cgQg0RqaB7ZHE4RUo\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.casadepias.com/restaurante/\"}],\"hasPage\":true},{\"id\":4,\"name\":\"Manda Carallo\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Carabanchel, 12, 28903\",\"phone\":\"916 958 464\",\"phoneAlt\":\"654 078 823\",\"email\":\"mandacarallogetafe@hotmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Manda+Carallo&query_place_id=ChIJfTcA1L0gQg0Rae7mGX7MAMo\",\"rating\":4.7,\"reviews\":1402,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital media, 1402 reseñas en Google, email público\",\"lat\":40.3124146,\"lng\":-3.7285042,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Manda+Carallo&query_place_id=ChIJfTcA1L0gQg0Rae7mGX7MAMo\"}],\"hasPage\":false},{\"id\":5,\"name\":\"Un plan perfecto\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. San Eugenio, 12, 28901\",\"phone\":\"916 961 013\",\"phoneAlt\":\"619 979 857\",\"email\":\"administracion@unplanperfecto.es\",\"web\":\"https://unplanperfecto.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Un+plan+perfecto&query_place_id=ChIJVdkX_kchQg0RBFnTlcUdRn0\",\"rating\":4.2,\"reviews\":1133,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":45,\"why\":\"1133 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3083116,\"lng\":-3.7287925,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Un+plan+perfecto&query_place_id=ChIJVdkX_kchQg0RBFnTlcUdRn0\"},{\"label\":\"Web atribuida\",\"url\":\"https://unplanperfecto.es/\"}],\"hasPage\":true},{\"id\":6,\"name\":\"Restaurante La Trasiega\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. Teresa de Calcuta, 12,28903\",\"phone\":\"911 105 472\",\"phoneAlt\":\"\",\"email\":\"reservas@restaurantelatrasiega.com\",\"web\":\"https://restaurantelatrasiega.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+La+Trasiega&query_place_id=ChIJSeamRM4gQg0RBjZPWoDIEUU\",\"rating\":4.4,\"reviews\":1488,\"reservations\":\"web propia\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"1488 reseñas en Google, email público\",\"lat\":40.3243376,\"lng\":-3.7148975,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+La+Trasiega&query_place_id=ChIJSeamRM4gQg0RBjZPWoDIEUU\"},{\"label\":\"Web atribuida\",\"url\":\"https://restaurantelatrasiega.com/\"},{\"label\":\"Reservas\",\"url\":\"https://restaurantelatrasiega.com/app/calendario\"}],\"hasPage\":true},{\"id\":7,\"name\":\"Restaurante Meet Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"C. Alcalde Jesús Prieto, 3,28907\",\"phone\":\"911 295 395\",\"phoneAlt\":\"671 128 110\",\"email\":\"reservas@restaurantemeet.com\",\"web\":\"https://restaurantemeet.com/gran-fiesta-de-inauguracion-del-restaurante-meet-getafe-cocina-de-alta-calidad/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Meet+Getafe&query_place_id=ChIJ24CYQVAhQg0RLpQ2PMmIcqU\",\"rating\":4.4,\"reviews\":1167,\"reservations\":\"TheFork (listado)\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"1167 reseñas en Google, email público\",\"lat\":40.3279109,\"lng\":-3.730479,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Meet+Getafe&query_place_id=ChIJ24CYQVAhQg0RLpQ2PMmIcqU\"},{\"label\":\"Web atribuida\",\"url\":\"https://restaurantemeet.com/gran-fiesta-de-inauguracion-del-restaurante-meet-getafe-cocina-de-alta-calidad/\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurantes/getafe-c187443\"}],\"hasPage\":true},{\"id\":8,\"name\":\"Mesón Las Ventas de Velazquez (GetafeNorte)\",\"sector\":\"Hostelería\",\"sub\":\"Mesón\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Cedra, 37, 28903\",\"phone\":\"916 962 377\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Mes%C3%B3n+Las+Ventas+de+Velazquez+%28Getafe+Norte%29&query_place_id=ChIJc2Np1MkgQg0RPij_pLN8iiw\",\"rating\":4.4,\"reviews\":2774,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 2774 reseñas en Google\",\"lat\":40.3233759,\"lng\":-3.7229295,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Mes%C3%B3n+Las+Ventas+de+Velazquez+%28Getafe+Norte%29&query_place_id=ChIJc2Np1MkgQg0RPij_pLN8iiw\"}],\"hasPage\":false},{\"id\":9,\"name\":\"La Pernilita\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"Calle Pizarro, 11, 28902\",\"phone\":\"910 724 045\",\"phoneAlt\":\"640 184 440\",\"email\":\"lapernilitamadrid@gmail.com\",\"web\":\"https://www.lapernilita.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Pernilita&query_place_id=ChIJrelo7BshQg0RNamMeiWPD8o\",\"rating\":4.9,\"reviews\":965,\"reservations\":\"web propia\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"965 reseñas en Google, email público\",\"lat\":40.3128449,\"lng\":-3.7303652,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Pernilita&query_place_id=ChIJrelo7BshQg0RNamMeiWPD8o\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.lapernilita.es/\"},{\"label\":\"Reservas\",\"url\":\"https://www.lapernilita.es/reservas/\"}],\"hasPage\":true},{\"id\":10,\"name\":\"DESTINO bar y brasa\",\"sector\":\"Hostelería\",\"sub\":\"Brasa / parrilla\",\"zone\":\"Centro\",\"address\":\"Destino, C. Hospital de SanJosé, 67, 28901\",\"phone\":\"919 958 389\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=DESTINO+bar+y+brasa&query_place_id=ChIJBSPjZwAhQg0RY5YosY9oJYw\",\"rating\":4.7,\"reviews\":264,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":58,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3054477,\"lng\":-3.7267148,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=DESTINO+bar+y+brasa&query_place_id=ChIJBSPjZwAhQg0RY5YosY9oJYw\"}],\"hasPage\":false},{\"id\":11,\"name\":\"Restaurante Peruano Peru Brasa\",\"sector\":\"Hostelería\",\"sub\":\"Peruano\",\"zone\":\"Centro norte\",\"address\":\"C. Villaverde, 9, 28902\",\"phone\":\"910 511 638\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Peruano+Peru+Brasa&query_place_id=ChIJAdDGSwAhQg0RQmDdsquiP0U\",\"rating\":4.9,\"reviews\":197,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3093676,\"lng\":-3.7285692,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Peruano+Peru+Brasa&query_place_id=ChIJAdDGSwAhQg0RQmDdsquiP0U\"}],\"hasPage\":false},{\"id\":12,\"name\":\"El Texu de Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Cuestas Altas, 9, 28901\",\"phone\":\"685 129 110\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=El+Texu+de+Getafe&query_place_id=ChIJT0GpZgAhQg0RNh_GyelJwQU\",\"rating\":4.4,\"reviews\":535,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 535 reseñas en Google\",\"lat\":40.3055271,\"lng\":-3.7336314,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=El+Texu+de+Getafe&query_place_id=ChIJT0GpZgAhQg0RNh_GyelJwQU\"}],\"hasPage\":true},{\"id\":13,\"name\":\"Restaurante Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Madrid, 25, 28901\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Getafe&query_place_id=ChIJ42JNRcYhQg0RL4VofRqjPzg\",\"rating\":4.4,\"reviews\":85,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":55,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3063005,\"lng\":-3.7311187,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Getafe&query_place_id=ChIJ42JNRcYhQg0RL4VofRqjPzg\"}],\"hasPage\":false},{\"id\":14,\"name\":\"Restaurante Baserri\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"Av. Juan de la Cierva, 29,28901\",\"phone\":\"916 840 020\",\"phoneAlt\":\"\",\"email\":\"reservas@asadorbaserrigetafe.com\",\"web\":\"https://www.asadorbaserrigetafe.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Baserri&query_place_id=ChIJ7yA5DJUgQg0RQquKMtx8A50\",\"rating\":4.3,\"reviews\":1332,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":45,\"why\":\"1332 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3083985,\"lng\":-3.725354,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Baserri&query_place_id=ChIJ7yA5DJUgQg0RQquKMtx8A50\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.asadorbaserrigetafe.com/\"}],\"hasPage\":true},{\"id\":15,\"name\":\"Trattoria Venecia\",\"sector\":\"Hostelería\",\"sub\":\"Italiano\",\"zone\":\"Centro norte\",\"address\":\"C. Gral. Castaños, 9, 28902\",\"phone\":\"628 558 591\",\"phoneAlt\":\"628 668 591\",\"email\":\"venecia.group.25@gmail.com\",\"web\":\"https://trattoriavenecia.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Trattoria+Venecia&query_place_id=ChIJ9fiMH2whQg0R9tKz9FmGQDA\",\"rating\":4.6,\"reviews\":435,\"reservations\":\"web propia\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":28,\"why\":\"email público\",\"lat\":40.3110099,\"lng\":-3.7297245,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Trattoria+Venecia&query_place_id=ChIJ9fiMH2whQg0R9tKz9FmGQDA\"},{\"label\":\"Web atribuida\",\"url\":\"https://trattoriavenecia.com/\"},{\"label\":\"Reservas\",\"url\":\"https://trattoriavenecia.com/reservar/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/trattoria-venecia-getafe/ic4OBPqKTxKEMMQqO09_nQ\"}],\"hasPage\":true},{\"id\":16,\"name\":\"Órdago Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Leganés, 3, 28901\",\"phone\":\"916 018 797\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=%C3%93rdago+Getafe&query_place_id=ChIJQW3WGZcgQg0RYJkHdt7yjWw\",\"rating\":4.4,\"reviews\":1138,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 1138 reseñas en Google\",\"lat\":40.3064566,\"lng\":-3.7314446,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=%C3%93rdago+Getafe&query_place_id=ChIJQW3WGZcgQg0RYJkHdt7yjWw\"}],\"hasPage\":false},{\"id\":17,\"name\":\"Restaurante LaPoza Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Sector III\",\"address\":\"Av. Juan Carlos I, 1 C.C.Getafe3, Local 200A, 28905\",\"phone\":\"910 082 222\",\"phoneAlt\":\"\",\"email\":\"info@lapozadelaqua.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+LaPoza+Getafe&query_place_id=ChIJ_yFj1nKLQQ0RO3rgdwzT8pA\",\"rating\":4.5,\"reviews\":948,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Media\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital media, 948 reseñas en Google, email público\",\"lat\":40.2968079,\"lng\":-3.7457616,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+LaPoza+Getafe&query_place_id=ChIJ_yFj1nKLQQ0RO3rgdwzT8pA\"},{\"label\":\"Instagram\",\"url\":\"https://www.instagram.com/lapoza.es/\"},{\"label\":\"Facebook\",\"url\":\"https://www.facebook.com/p/LaPoza-Getafe-100086826964492/\"}],\"hasPage\":true},{\"id\":18,\"name\":\"El Quillo restaurante\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C/ Dolores Ibarruri, 1, 28901\",\"phone\":\"915 616 596\",\"phoneAlt\":\"\",\"email\":\"elquillorestaurante@gmail.com\",\"web\":\"https://elquillorestaurante.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=El+Quillo+restaurante&query_place_id=ChIJrYaFfMAgQg0RwUizaSyFE80\",\"rating\":4.7,\"reviews\":1905,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":45,\"why\":\"1905 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3060051,\"lng\":-3.7336314,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=El+Quillo+restaurante&query_place_id=ChIJrYaFfMAgQg0RwUizaSyFE80\"},{\"label\":\"Web atribuida\",\"url\":\"https://elquillorestaurante.com/\"}],\"hasPage\":true},{\"id\":19,\"name\":\"Envero Taberna\",\"sector\":\"Hostelería\",\"sub\":\"Taberna\",\"zone\":\"Centro norte\",\"address\":\"C. Perales, 9, 28902\",\"phone\":\"918 135 618\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://www.enverotabernagetafe.es/carta-envero-taberna/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Envero+Taberna&query_place_id=ChIJ_TuXBJUhQg0RA4HxZ2v2j-o\",\"rating\":4.6,\"reviews\":399,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":18,\"why\":\"web sin reservas enlazadas\",\"lat\":40.3095319,\"lng\":-3.7256687,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Envero+Taberna&query_place_id=ChIJ_TuXBJUhQg0RA4HxZ2v2j-o\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.enverotabernagetafe.es/carta-envero-taberna/\"}],\"hasPage\":true},{\"id\":20,\"name\":\"Restaurante Molcajete & Tejolote GETAFE\",\"sector\":\"Hostelería\",\"sub\":\"Mexicano\",\"zone\":\"Centro\",\"address\":\"C. Valdemoro, 62, 28901\",\"phone\":\"672 621 710\",\"phoneAlt\":\"\",\"email\":\"oficial@molcajete.es\",\"web\":\"https://molcajete.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Molcajete+%26+Tejolote+GETAFE&query_place_id=ChIJgzUCPbchQg0RLs6M4fmK7Kg\",\"rating\":4.8,\"reviews\":1665,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":35,\"why\":\"1665 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3015362,\"lng\":-3.7286041,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Molcajete+%26+Tejolote+GETAFE&query_place_id=ChIJgzUCPbchQg0RLs6M4fmK7Kg\"},{\"label\":\"Web atribuida\",\"url\":\"https://molcajete.es/\"}],\"hasPage\":true},{\"id\":21,\"name\":\"Bar Avenida 47\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. España, 47, 28903\",\"phone\":\"627 177 742\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Avenida+47&query_place_id=ChIJE91Qj7chQg0RtHSVBftL8Ek\",\"rating\":5,\"reviews\":87,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3145638,\"lng\":-3.7200618,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Avenida+47&query_place_id=ChIJE91Qj7chQg0RtHSVBftL8Ek\"}],\"hasPage\":false},{\"id\":22,\"name\":\"Cervecería El Eskinazo\",\"sector\":\"Hostelería\",\"sub\":\"Cervecería\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. de las Ciudades, 1,28903\",\"phone\":\"679 964 279\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Cervecer%C3%ADa+El+Eskinazo&query_place_id=ChIJZUb5RrggQg0Rfmytliq3zAQ\",\"rating\":4.6,\"reviews\":4965,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 4965 reseñas en Google\",\"lat\":40.3193553,\"lng\":-3.725246,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Cervecer%C3%ADa+El+Eskinazo&query_place_id=ChIJZUb5RrggQg0Rfmytliq3zAQ\"},{\"label\":\"Facebook\",\"url\":\"https://www.facebook.com/eleskinazogetafe/\"}],\"hasPage\":false},{\"id\":23,\"name\":\"Entre Cañas\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Polvoranca, 5, 28901\",\"phone\":\"609 204 798\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Entre+Ca%C3%B1as&query_place_id=ChIJYQFkrJAgQg0R6c08p7mMHH0\",\"rating\":4.6,\"reviews\":454,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":58,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3048204,\"lng\":-3.732982,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Entre+Ca%C3%B1as&query_place_id=ChIJYQFkrJAgQg0R6c08p7mMHH0\"}],\"hasPage\":false},{\"id\":24,\"name\":\"Vinoteca the Esquinita\",\"sector\":\"Hostelería\",\"sub\":\"Vinoteca / bar\",\"zone\":\"Centro\",\"address\":\"Calle Don Fadrique 20Esquina, C. Leganés, 7,28901\",\"phone\":\"916 823 405\",\"phoneAlt\":\"\",\"email\":\"laesquinita@icloud.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Vinoteca+the+Esquinita&query_place_id=ChIJzY-DFZcgQg0Rpdx9MRh0TPk\",\"rating\":4.2,\"reviews\":2405,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital media, 2405 reseñas en Google, email público\",\"lat\":40.306541,\"lng\":-3.731731,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Vinoteca+the+Esquinita&query_place_id=ChIJzY-DFZcgQg0Rpdx9MRh0TPk\"},{\"label\":\"Instagram\",\"url\":\"https://www.instagram.com/laesquinitagetafe/\"},{\"label\":\"Facebook\",\"url\":\"https://www.facebook.com/laesquinitagetafe/\"}],\"hasPage\":true},{\"id\":25,\"name\":\"Bar El Rincon De La Morenita\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. Don Juan de Borbón,s/n, 28903\",\"phone\":\"916 823 003\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://rincondelamorenita.odoo.com/about-us\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+El+Rincon+De+La+Morenita&query_place_id=ChIJ_WiffMQgQg0Rq-0CRkNxiZU\",\"rating\":4.2,\"reviews\":2678,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":35,\"why\":\"presencia digital media, 2678 reseñas en Google, web sin reservas enlazadas\",\"lat\":40.3169781,\"lng\":-3.715129,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+El+Rincon+De+La+Morenita&query_place_id=ChIJ_WiffMQgQg0Rq-0CRkNxiZU\"},{\"label\":\"Web atribuida\",\"url\":\"https://rincondelamorenita.odoo.com/about-us\"}],\"hasPage\":true},{\"id\":26,\"name\":\"Bar La Bodega\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"La Alhóndiga\",\"address\":\"C. Perdiz, 4, 28904\",\"phone\":\"911 488 090\",\"phoneAlt\":\"690 183 672\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+La+Bodega&query_place_id=ChIJV0Hu0AEhQg0RnivwyPrK_WA\",\"rating\":4.8,\"reviews\":21,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3076644,\"lng\":-3.7389256,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+La+Bodega&query_place_id=ChIJV0Hu0AEhQg0RnivwyPrK_WA\"}],\"hasPage\":false},{\"id\":27,\"name\":\"Bar Soportal\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Centro norte\",\"address\":\"C. Carabanchel, 20, 28902\",\"phone\":\"916 010 378\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Soportal&query_place_id=ChIJFVKML7wgQg0Re1-rimxdqpU\",\"rating\":4.6,\"reviews\":1496,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital baja, 1496 reseñas en Google\",\"lat\":40.3133926,\"lng\":-3.7287828,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Soportal&query_place_id=ChIJFVKML7wgQg0Re1-rimxdqpU\"}],\"hasPage\":false},{\"id\":28,\"name\":\"La Ramona\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"C. Madrid, 109, 28902\",\"phone\":\"916 112 627\",\"phoneAlt\":\"916 836 422\",\"email\":\"info@laramona.es\",\"web\":\"https://www.laramona.es/locales/getafe/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Ramona&query_place_id=ChIJ7zvRteEhQg0R5SlkDNN2Q1E\",\"rating\":4.1,\"reviews\":688,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":40,\"why\":\"688 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3119573,\"lng\":-3.7279556,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Ramona&query_place_id=ChIJ7zvRteEhQg0R5SlkDNN2Q1E\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.laramona.es/locales/getafe/\"}],\"hasPage\":true},{\"id\":29,\"name\":\"Bar restaurante El Rincón del Tío Eulogio\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. Rigoberta Menchú, 11,28903\",\"phone\":\"916 017 302\",\"phoneAlt\":\"\",\"email\":\"info@elrincondeltioeulogio.com\",\"web\":\"\",\"webInsecure\":true,\"certIssue\":true,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+El+Rinc%C3%B3n+del+T%C3%ADo+Eulogio&query_place_id=ChIJcZDx3M4gQg0R4cbNpFM8Lnk\",\"rating\":4.1,\"reviews\":3527,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":70,\"why\":\"sin web propia localizada, presencia digital media, 3527 reseñas en Google, email público\",\"lat\":40.3236663,\"lng\":-3.7168634,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+El+Rinc%C3%B3n+del+T%C3%ADo+Eulogio&query_place_id=ChIJcZDx3M4gQg0R4cbNpFM8Lnk\"},{\"label\":\"Instagram\",\"url\":\"https://www.instagram.com/el_rincon_del_tio_eulogio/\"}],\"hasPage\":true},{\"id\":30,\"name\":\"Taberna del Tarao\",\"sector\":\"Hostelería\",\"sub\":\"Taberna\",\"zone\":\"Centro\",\"address\":\"Av. Juan de la Cierva, 29,28901\",\"phone\":\"916 650 749\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Taberna+del+Tarao&query_place_id=ChIJ_wNLCZUgQg0RGtOjyMLQ5fc\",\"rating\":4.2,\"reviews\":929,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 929 reseñas en Google\",\"lat\":40.3083923,\"lng\":-3.7252834,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Taberna+del+Tarao&query_place_id=ChIJ_wNLCZUgQg0RGtOjyMLQ5fc\"}],\"hasPage\":false},{\"id\":31,\"name\":\"Bar Gallardo\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Centro norte\",\"address\":\"Calle Pizarro, 34, 28902\",\"phone\":\"916 829 973\",\"phoneAlt\":\"696 353 061\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Gallardo&query_place_id=ChIJpVd-5rwgQg0RX2moTNpgr8w\",\"rating\":4.6,\"reviews\":200,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3131174,\"lng\":-3.7315602,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Gallardo&query_place_id=ChIJpVd-5rwgQg0RX2moTNpgr8w\"}],\"hasPage\":false},{\"id\":32,\"name\":\"Los Hermanos\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Torrejón de Velasco, 8,28901\",\"phone\":\"912 285 690\",\"phoneAlt\":\"916 819 593\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Los+Hermanos&query_place_id=ChIJyxb2XJAgQg0R6zGdAiSZJLI\",\"rating\":4.7,\"reviews\":213,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3019517,\"lng\":-3.7318739,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Los+Hermanos&query_place_id=ChIJyxb2XJAgQg0R6zGdAiSZJLI\"}],\"hasPage\":false},{\"id\":33,\"name\":\"Bar La Antigua Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. de las Ciudades, 1,28903\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+La+Antigua+Getafe&query_place_id=ChIJHaVhWZchQg0RfUhF6yshQpc\",\"rating\":4,\"reviews\":118,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3193124,\"lng\":-3.7250922,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+La+Antigua+Getafe&query_place_id=ChIJHaVhWZchQg0RfUhF6yshQpc\"}],\"hasPage\":false},{\"id\":34,\"name\":\"Cerveceria La Caleta\",\"sector\":\"Hostelería\",\"sub\":\"Cervecería\",\"zone\":\"Centro\",\"address\":\"C. Arboleda, 24, 28901\",\"phone\":\"916 822 317\",\"phoneAlt\":\"\",\"email\":\"caletageta@hotmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Cerveceria+La+Caleta&query_place_id=ChIJz3paipMgQg0RHRC7tPCr41g\",\"rating\":4.5,\"reviews\":237,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital media, email público\",\"lat\":40.3050114,\"lng\":-3.7268203,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Cerveceria+La+Caleta&query_place_id=ChIJz3paipMgQg0RHRC7tPCr41g\"}],\"hasPage\":false},{\"id\":35,\"name\":\"Bar de Paco\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Loto, 4, 28903\",\"phone\":\"660 321 773\",\"phoneAlt\":\"602 517 214\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+de+Paco&query_place_id=ChIJGQML-AUhQg0R0-vVARnxWzk\",\"rating\":4.5,\"reviews\":76,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3176368,\"lng\":-3.7231317,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+de+Paco&query_place_id=ChIJGQML-AUhQg0R0-vVARnxWzk\"}],\"hasPage\":false},{\"id\":36,\"name\":\"Kaligula's\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Arboleda, 7, 28901\",\"phone\":\"616 509 440\",\"phoneAlt\":\"616 210 671\",\"email\":\"\",\"web\":\"https://kaligulas.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Kaligula%27s+Getafe&query_place_id=ChIJY0am0pUgQg0RNrq0NfeSfFs\",\"rating\":4.3,\"reviews\":956,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":35,\"why\":\"956 reseñas en Google, web sin reservas enlazadas\",\"lat\":40.3051187,\"lng\":-3.7291396,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Kaligula%27s+Getafe&query_place_id=ChIJY0am0pUgQg0RNrq0NfeSfFs\"},{\"label\":\"Web atribuida\",\"url\":\"https://kaligulas.es/\"}],\"hasPage\":true},{\"id\":37,\"name\":\"Enoteca El Castellar\",\"sector\":\"Hostelería\",\"sub\":\"Vinoteca / bar\",\"zone\":\"Centro norte\",\"address\":\"C. Carabanchel, 10, 28902\",\"phone\":\"647 947 453\",\"phoneAlt\":\"\",\"email\":\"susanaherrero77@hotmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Enoteca+El+Castellar&query_place_id=ChIJw-QD170gQg0RDMAyEQTtSnw\",\"rating\":4.4,\"reviews\":422,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital media, email público\",\"lat\":40.312248,\"lng\":-3.728457,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Enoteca+El+Castellar&query_place_id=ChIJw-QD170gQg0RDMAyEQTtSnw\"}],\"hasPage\":false},{\"id\":38,\"name\":\"Glu glu Bar\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"Calle Pizarro, 2, 28902\",\"phone\":\"655 326 247\",\"phoneAlt\":\"633 184 211\",\"email\":\"gluglubar20@gmail.com\",\"web\":\"https://gluglubargetafe.eatbu.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Glu+glu+Bar&query_place_id=ChIJLe7AviMhQg0RjWxB3XyOuUM\",\"rating\":4.4,\"reviews\":342,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":48,\"why\":\"presencia digital media, email público, web sin reservas enlazadas\",\"lat\":40.3128607,\"lng\":-3.7286709,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Glu+glu+Bar&query_place_id=ChIJLe7AviMhQg0RjWxB3XyOuUM\"},{\"label\":\"Web atribuida\",\"url\":\"https://gluglubargetafe.eatbu.com/\"}],\"hasPage\":true},{\"id\":39,\"name\":\"Cafetería Cervecería El Trébol\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. de los Depósitos, 1, 28903\",\"phone\":\"644 207 226\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Cervecer%C3%ADa+El+Tr%C3%A9bol&query_place_id=ChIJ94y3kr4gQg0R9qe-mwVZyGg\",\"rating\":4.1,\"reviews\":151,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":45,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.313491,\"lng\":-3.727064,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Cervecer%C3%ADa+El+Tr%C3%A9bol&query_place_id=ChIJ94y3kr4gQg0R9qe-mwVZyGg\"}],\"hasPage\":false},{\"id\":40,\"name\":\"Cervecería Castillo\",\"sector\":\"Hostelería\",\"sub\":\"Cervecería\",\"zone\":\"La Alhóndiga\",\"address\":\"C. Julián Daviñas, 4, 28904\",\"phone\":\"622 595 993\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Cervecer%C3%ADa+Castillo&query_place_id=ChIJoWiCJaYhQg0RWIpyH-7G0Qs\",\"rating\":4.4,\"reviews\":91,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.30889,\"lng\":-3.73774,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Cervecer%C3%ADa+Castillo&query_place_id=ChIJoWiCJaYhQg0RWIpyH-7G0Qs\"}],\"hasPage\":false},{\"id\":41,\"name\":\"Restaurante El Balcón del Parque\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"Parque de la Chopera, Av.Buenos Aires, S/N, 28907\",\"phone\":\"918 275 704\",\"phoneAlt\":\"\",\"email\":\"contacto@elbalcondelparque.com\",\"web\":\"https://parquebar.es/restaurante-el-balcon-del-parque/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+El+Balc%C3%B3n+del+Parque&query_place_id=ChIJqwropa4gQg0RqS87cSBhJDU\",\"rating\":4.1,\"reviews\":2243,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":40,\"why\":\"2243 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3253713,\"lng\":-3.7376159,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+El+Balc%C3%B3n+del+Parque&query_place_id=ChIJqwropa4gQg0RqS87cSBhJDU\"},{\"label\":\"Web atribuida\",\"url\":\"https://parquebar.es/restaurante-el-balcon-del-parque/\"}],\"hasPage\":true},{\"id\":42,\"name\":\"BaRRa de Pintxos ECI El Bercial\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Sector III\",\"address\":\"Av. Comandante JoséManuel Ripollés, 2, 28905\",\"phone\":\"918 029 245\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=BaRRa+de+Pintxos+ECI+El+Bercial&query_place_id=ChIJE8DVqF4hQg0RWQIvPIpPIVo\",\"rating\":4.1,\"reviews\":202,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":63,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3290545,\"lng\":-3.7274266,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=BaRRa+de+Pintxos+ECI+El+Bercial&query_place_id=ChIJE8DVqF4hQg0RWQIvPIpPIVo\"}],\"hasPage\":true},{\"id\":43,\"name\":\"Bar restaurante BUQUÉ\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"El Bercial\",\"address\":\"Av. Buenos Aires, 15, 28907\",\"phone\":\"622 824 651\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+BUQU%C3%89&query_place_id=ChIJhcJsX6chQg0RBQPcOB5Lm6U\",\"rating\":4.7,\"reviews\":106,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3272817,\"lng\":-3.7362403,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+BUQU%C3%89&query_place_id=ChIJhcJsX6chQg0RBQPcOB5Lm6U\"}],\"hasPage\":false},{\"id\":44,\"name\":\"La María bar restaurante\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"El Bercial\",\"address\":\"Av. Buenos Aires, 15,posterior, 28907\",\"phone\":\"919 957 732\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Mar%C3%ADa+bar+restaurante&query_place_id=ChIJw-LfAO0hQg0R30f4skmS7IM\",\"rating\":4.2,\"reviews\":322,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3272995,\"lng\":-3.7364664,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Mar%C3%ADa+bar+restaurante&query_place_id=ChIJw-LfAO0hQg0R30f4skmS7IM\"}],\"hasPage\":false},{\"id\":45,\"name\":\"Taberna Fuxión\",\"sector\":\"Hostelería\",\"sub\":\"Taberna\",\"zone\":\"El Bercial\",\"address\":\"Av. Buenos Aires, 17,posterior, 28907\",\"phone\":\"919 482 861\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Taberna+Fuxi%C3%B3n&query_place_id=ChIJL44LtFwhQg0R3dxwg6QBpxE\",\"rating\":4.1,\"reviews\":100,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":55,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3274225,\"lng\":-3.7365146,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Taberna+Fuxi%C3%B3n&query_place_id=ChIJL44LtFwhQg0R3dxwg6QBpxE\"}],\"hasPage\":false},{\"id\":46,\"name\":\"Bar El Bercial\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"El Bercial\",\"address\":\"C. Pilar Soler, 4, 28907\",\"phone\":\"658 597 495\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+El+Bercial&query_place_id=ChIJm28-ZaYgQg0RZ15gyHtzzkw\",\"rating\":3.6,\"reviews\":296,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":63,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3180377,\"lng\":-3.7391379,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+El+Bercial&query_place_id=ChIJm28-ZaYgQg0RZ15gyHtzzkw\"}],\"hasPage\":false},{\"id\":47,\"name\":\"DE BOCA EN BOCA\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"C. Guanabacoa, 5, 28907\",\"phone\":\"919 205 244\",\"phoneAlt\":\"655 873 919\",\"email\":\"debocaenbocaa@gmail.com\",\"web\":\"https://de-boca-en-boca.eatbu.com/?lang=en\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=DE+BOCA+EN+BOCA+%F0%9F%87%A6%F0%9F%87%B7&query_place_id=ChIJawyicmAhQg0RVgzsZ6kOSDs\",\"rating\":4.1,\"reviews\":393,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":43,\"why\":\"presencia digital media, email público, web sin reservas enlazadas\",\"lat\":40.321125,\"lng\":-3.740668,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=DE+BOCA+EN+BOCA+%F0%9F%87%A6%F0%9F%87%B7&query_place_id=ChIJawyicmAhQg0RVgzsZ6kOSDs\"},{\"label\":\"Web atribuida\",\"url\":\"https://de-boca-en-boca.eatbu.com/?lang=en\"}],\"hasPage\":true},{\"id\":48,\"name\":\"Bon appetit Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"Calle Camerún, 4, 28907\",\"phone\":\"911 547 734\",\"phoneAlt\":\"616 380 910\",\"email\":\"rachid616@yahoo.es\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bon+appetit+Getafe&query_place_id=ChIJ8bghhlohQg0R67_nZ-qD9us\",\"rating\":4.4,\"reviews\":445,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital media, email público\",\"lat\":40.3273609,\"lng\":-3.7307268,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bon+appetit+Getafe&query_place_id=ChIJ8bghhlohQg0R67_nZ-qD9us\"},{\"label\":\"Instagram\",\"url\":\"https://www.instagram.com/bonappetitgetafebercial/\"}],\"hasPage\":true},{\"id\":49,\"name\":\"VICIO Getafe | Restaurant\",\"sector\":\"Hostelería\",\"sub\":\"Hamburguesería\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. de las Trece Rosas, 6,28903\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=VICIO+Getafe+%7C+Restaurant&query_place_id=ChIJbzr_y_4hQg0RjgV8Wh1Ugto\",\"rating\":4.5,\"reviews\":638,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":10,\"why\":\"sin web propia localizada, 638 reseñas en Google, cadena, penalizado\",\"lat\":40.323335,\"lng\":-3.732776,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=VICIO+Getafe+%7C+Restaurant&query_place_id=ChIJbzr_y_4hQg0RjgV8Wh1Ugto\"}],\"hasPage\":true},{\"id\":50,\"name\":\"Restaurante Carpe Diem\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"Av. Salvador Allende, 8,28907\",\"phone\":\"914 914 607\",\"phoneAlt\":\"912 779 813\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Carpe+Diem&query_place_id=ChIJOcaMsZ8gQg0R7LO_AvMnGc0\",\"rating\":3.6,\"reviews\":173,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":45,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3202084,\"lng\":-3.7383537,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Carpe+Diem&query_place_id=ChIJOcaMsZ8gQg0R7LO_AvMnGc0\"}],\"hasPage\":false},{\"id\":51,\"name\":\"Restaurante La Pitanza del Sur\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"C. Icíar Bollaín, 4, 28902\",\"phone\":\"914 913 979\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://restaurantesgrupopitanza.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+La+Pitanza+del+Sur&query_place_id=ChIJoZVUGL2LQQ0RhP7Pt2QpRHI\",\"rating\":3.9,\"reviews\":1075,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":30,\"why\":\"1075 reseñas en Google, web sin reservas enlazadas\",\"lat\":40.3204194,\"lng\":-3.7363751,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+La+Pitanza+del+Sur&query_place_id=ChIJoZVUGL2LQQ0RhP7Pt2QpRHI\"},{\"label\":\"Web atribuida\",\"url\":\"https://restaurantesgrupopitanza.com/\"}],\"hasPage\":true},{\"id\":52,\"name\":\"Bar Restaurante El Rincón del Abuelo\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Emilia Pardo Bazán, 4,28903\",\"phone\":\"918 275 373\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Restaurante+El+Rinc%C3%B3n+del+Abuelo&query_place_id=ChIJq6ralckgQg0RTlH__U7lWWA\",\"rating\":4.3,\"reviews\":645,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 645 reseñas en Google\",\"lat\":40.3244544,\"lng\":-3.7214846,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Restaurante+El+Rinc%C3%B3n+del+Abuelo&query_place_id=ChIJq6ralckgQg0RTlH__U7lWWA\"},{\"label\":\"Facebook\",\"url\":\"https://www.facebook.com/100063789510072/\"}],\"hasPage\":false},{\"id\":53,\"name\":\"Asador el Bercial\",\"sector\":\"Hostelería\",\"sub\":\"Asador\",\"zone\":\"El Bercial\",\"address\":\"C. Dulce Chacón, 3, 28907\",\"phone\":\"914 911 140\",\"phoneAlt\":\"675 722 027\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Asador+el+Bercial&query_place_id=ChIJAzLqJ6kgQg0RCGZ55AsXTxE\",\"rating\":4.1,\"reviews\":261,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":43,\"why\":\"sin web propia localizada\",\"lat\":40.3222497,\"lng\":-3.7387505,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Asador+el+Bercial&query_place_id=ChIJAzLqJ6kgQg0RCGZ55AsXTxE\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/asador-el-bercial/H3cg0GSaUe2N9Utq1AgMxg\"}],\"hasPage\":false},{\"id\":54,\"name\":\"Gastrotaberna Cachito's\",\"sector\":\"Hostelería\",\"sub\":\"Taberna\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. Don Juan de Borbón, 1,28903\",\"phone\":\"638 207 971\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Gastrotaberna+Cachito%27s&query_place_id=ChIJ_1hD-sQgQg0RFaFryTwdBM8\",\"rating\":4.5,\"reviews\":1158,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 1158 reseñas en Google\",\"lat\":40.3181714,\"lng\":-3.7147317,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Gastrotaberna+Cachito%27s&query_place_id=ChIJ_1hD-sQgQg0RFaFryTwdBM8\"}],\"hasPage\":false},{\"id\":55,\"name\":\"Amazonia Açaí Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Açaí / saludable\",\"zone\":\"El Bercial\",\"address\":\"Av. Comandante JoséManuel Ripollés, 3, b, 28907\",\"phone\":\"914 307 436\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://amazoniacai.com/local/madrid-es/amazonia-acai-getafe/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Amazonia+A%C3%A7a%C3%AD+Getafe&query_place_id=ChIJ2_30rSMhQg0RRmI4CymaFww\",\"rating\":4.7,\"reviews\":3068,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":0,\"why\":\"3068 reseñas en Google, web sin reservas enlazadas, cadena, penalizado\",\"lat\":40.3286251,\"lng\":-3.730081,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Amazonia+A%C3%A7a%C3%AD+Getafe&query_place_id=ChIJ2_30rSMhQg0RRmI4CymaFww\"},{\"label\":\"Web atribuida\",\"url\":\"https://amazoniacai.com/local/madrid-es/amazonia-acai-getafe/\"}],\"hasPage\":true},{\"id\":56,\"name\":\"Q' Berraquera\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"Av. Juan de la Cierva, 31,28902\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Q%27+Berraquera&query_place_id=ChIJzYFWIAAhQg0RS5ma7QRrk00\",\"rating\":5,\"reviews\":21,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":55,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3090428,\"lng\":-3.7251575,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Q%27+Berraquera&query_place_id=ChIJzYFWIAAhQg0RS5ma7QRrk00\"}],\"hasPage\":false},{\"id\":57,\"name\":\"Bar Casa Laris\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Centro\",\"address\":\"Av. Juan de la Cierva, 3,28901\",\"phone\":\"666 963 240\",\"phoneAlt\":\"\",\"email\":\"ratiunelodorin@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Casa+Laris&query_place_id=ChIJXUQ4nZQgQg0R_U2sSBx1rUE\",\"rating\":3.7,\"reviews\":126,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital baja, email público\",\"lat\":40.3052916,\"lng\":-3.7251233,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Casa+Laris&query_place_id=ChIJXUQ4nZQgQg0R_U2sSBx1rUE\"}],\"hasPage\":false},{\"id\":58,\"name\":\"La Joya\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"Av. Juan de la Cierva, 43,28902\",\"phone\":\"916 817 170\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Joya&query_place_id=ChIJD0oDfJUgQg0R7lY6aq9hpcM\",\"rating\":4.2,\"reviews\":224,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":58,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3099965,\"lng\":-3.7254287,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Joya&query_place_id=ChIJD0oDfJUgQg0R7lY6aq9hpcM\"}],\"hasPage\":false},{\"id\":59,\"name\":\"Bar Bambi\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Centro norte\",\"address\":\"Av. Juan de la Cierva, 42,28902\",\"phone\":\"688 235 699\",\"phoneAlt\":\"655 394 913\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Bambi&query_place_id=ChIJG3_wpRohQg0RE1iPHnSfsHc\",\"rating\":4.1,\"reviews\":60,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":55,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3112587,\"lng\":-3.725634,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Bambi&query_place_id=ChIJG3_wpRohQg0RE1iPHnSfsHc\"}],\"hasPage\":false},{\"id\":60,\"name\":\"El cabrito bar restaurante parrilla\",\"sector\":\"Hostelería\",\"sub\":\"Parrilla\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"C. Brinell, 5, 28906\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=El+cabrito+bar+restaurante+parrilla&query_place_id=ChIJs6VkdwAhQg0RP3U4ioDJfng\",\"rating\":4.1,\"reviews\":106,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":30,\"why\":\"sin web propia localizada\",\"lat\":40.2994799,\"lng\":-3.7035741,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=El+cabrito+bar+restaurante+parrilla&query_place_id=ChIJs6VkdwAhQg0RP3U4ioDJfng\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es-en/store/el-cabrito-bar-restaurante-parrilla/2UFC32xfVdql08nJozpHAw\"}],\"hasPage\":false},{\"id\":61,\"name\":\"Bar restaurante el cerro\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"Pol. Ind. Los Angeles, C.Herreros, 16, 28906\",\"phone\":\"911 476 281\",\"phoneAlt\":\"\",\"email\":\"cucho1515@hotmail.es\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+el+cerro&query_place_id=ChIJeT6d6K4hQg0RiJ-H5edBA6w\",\"rating\":4.5,\"reviews\":209,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital media, email público\",\"lat\":40.3087497,\"lng\":-3.6992087,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+el+cerro&query_place_id=ChIJeT6d6K4hQg0RiJ-H5edBA6w\"}],\"hasPage\":true},{\"id\":62,\"name\":\"La verbena restaurant\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. San Vicente, 1, 28901\",\"phone\":\"918 313 309\",\"phoneAlt\":\"\",\"email\":\"laverbena@laverbenacocinabar.es\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+verbena+restaurant&query_place_id=ChIJlzRIiJQgQg0Reo92z4V8ois\",\"rating\":3.9,\"reviews\":1205,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":70,\"why\":\"sin web propia localizada, presencia digital media, 1205 reseñas en Google, email público\",\"lat\":40.3059496,\"lng\":-3.7257351,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+verbena+restaurant&query_place_id=ChIJlzRIiJQgQg0Reo92z4V8ois\"}],\"hasPage\":false},{\"id\":63,\"name\":\"Los Ángeles - New Bar\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"C. Torneros, 7-9, 28906\",\"phone\":\"625 802 899\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Los+%C3%81ngeles+-+New+Bar&query_place_id=ChIJXbm3exkhQg0RnM7w2WqD3IU\",\"rating\":4.7,\"reviews\":142,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3064405,\"lng\":-3.6956289,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Los+%C3%81ngeles+-+New+Bar&query_place_id=ChIJXbm3exkhQg0RnM7w2WqD3IU\"}],\"hasPage\":false},{\"id\":64,\"name\":\"Restaurante D'Angeluss\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Sector III\",\"address\":\"P.º de María Lejárraga,28905\",\"phone\":\"628 641 181\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+D%27Angeluss&query_place_id=ChIJ2_caCXCKQQ0RlwA1xulZUTQ\",\"rating\":4.4,\"reviews\":1438,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 1438 reseñas en Google\",\"lat\":40.2992755,\"lng\":-3.7529678,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+D%27Angeluss&query_place_id=ChIJ2_caCXCKQQ0RlwA1xulZUTQ\"}],\"hasPage\":false},{\"id\":65,\"name\":\"CABRERA'S\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Jardines, 4, 28901\",\"phone\":\"910 160 256\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://www.restaurantecabreras.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=CABRERA%27S&query_place_id=ChIJ5dPB_2EhQg0RZZwL-o4m2jY\",\"rating\":4.4,\"reviews\":508,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":35,\"why\":\"508 reseñas en Google, web sin reservas enlazadas\",\"lat\":40.3049018,\"lng\":-3.7309075,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=CABRERA%27S&query_place_id=ChIJ5dPB_2EhQg0RZZwL-o4m2jY\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.restaurantecabreras.com/\"}],\"hasPage\":true},{\"id\":66,\"name\":\"La Taberna de Pernales\",\"sector\":\"Hostelería\",\"sub\":\"Taberna\",\"zone\":\"Sector III\",\"address\":\"C. Islas Kuriles, 1, 28905\",\"phone\":\"916 846 539\",\"phoneAlt\":\"\",\"email\":\"info@latabernadepernales.com\",\"web\":\"https://latabernadepernales.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Taberna+de+Pernales&query_place_id=ChIJw4TsJ2KKQQ0R0WibWR7Z1u0\",\"rating\":4.1,\"reviews\":836,\"reservations\":\"web propia\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":30,\"why\":\"836 reseñas en Google, email público\",\"lat\":40.2905779,\"lng\":-3.7586097,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Taberna+de+Pernales&query_place_id=ChIJw4TsJ2KKQQ0R0WibWR7Z1u0\"},{\"label\":\"Web atribuida\",\"url\":\"https://latabernadepernales.com/\"},{\"label\":\"Reservas\",\"url\":\"https://latabernadepernales.com/contacto/\"}],\"hasPage\":true},{\"id\":67,\"name\":\"La Tabernita\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"C. San Vicente, 36, 28902\",\"phone\":\"916 651 002\",\"phoneAlt\":\"656 789 956\",\"email\":\"ricardolatabernita@gmail.com\",\"web\":\"https://latabernita.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Tabernita&query_place_id=ChIJvVSin5UgQg0RhTJqifM4Jk8\",\"rating\":4.5,\"reviews\":164,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":30,\"why\":\"email público, web sin reservas enlazadas\",\"lat\":40.3090924,\"lng\":-3.7258686,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Tabernita&query_place_id=ChIJvVSin5UgQg0RhTJqifM4Jk8\"},{\"label\":\"Web atribuida\",\"url\":\"https://latabernita.com/\"}],\"hasPage\":true},{\"id\":68,\"name\":\"Bar restaurante La Candela\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Esquina Avd De Aragón, C.Cáceres, 30, 28903\",\"phone\":\"683 143 176\",\"phoneAlt\":\"601 434 069\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+La+Candela&query_place_id=ChIJEYo8OcIgQg0R1rr9Htnqlr0\",\"rating\":4.1,\"reviews\":711,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":70,\"why\":\"sin web propia localizada, presencia digital baja, 711 reseñas en Google\",\"lat\":40.3124937,\"lng\":-3.7167675,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+restaurante+La+Candela&query_place_id=ChIJEYo8OcIgQg0R1rr9Htnqlr0\"}],\"hasPage\":true},{\"id\":69,\"name\":\"Bar El Molino\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"Av. del Ingenioso HiIdalgo, 5,28906\",\"phone\":\"636 223 909\",\"phoneAlt\":\"\",\"email\":\"a_amap@hotmail.com\",\"web\":\"https://bar-el-molino.eatbu.com/?lang=es\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+El+Molino&query_place_id=ChIJrafKn0shQg0RhNDSPJH_Ur8\",\"rating\":3.7,\"reviews\":547,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":40,\"why\":\"presencia digital media, 547 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3180219,\"lng\":-3.7040267,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+El+Molino&query_place_id=ChIJrafKn0shQg0RhNDSPJH_Ur8\"},{\"label\":\"Web atribuida\",\"url\":\"https://bar-el-molino.eatbu.com/?lang=es\"}],\"hasPage\":true},{\"id\":70,\"name\":\"La Nieta de Perales\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Perales del Río\",\"address\":\"C. de Groenlandia, 4, P1 P18,28909\",\"phone\":\"635 691 996\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://lanietadeperales.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Nieta+de+Perales&query_place_id=ChIJY1JboaQjQg0RJwaBaoMgC2w\",\"rating\":4.2,\"reviews\":506,\"reservations\":\"web propia\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":25,\"why\":\"506 reseñas en Google\",\"lat\":40.3235112,\"lng\":-3.6617298,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Nieta+de+Perales&query_place_id=ChIJY1JboaQjQg0RJwaBaoMgC2w\"},{\"label\":\"Web atribuida\",\"url\":\"https://lanietadeperales.com/\"},{\"label\":\"Reservas\",\"url\":\"https://lanietadeperales.com/\"}],\"hasPage\":true},{\"id\":71,\"name\":\"Asador de Perales\",\"sector\":\"Hostelería\",\"sub\":\"Asador\",\"zone\":\"Perales del Río\",\"address\":\"C. de Groenlandia, 4, 28909\",\"phone\":\"916 848 539\",\"phoneAlt\":\"\",\"email\":\"info@asadordeperales.es\",\"web\":\"https://asadordeperales.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Asador+de+Perales&query_place_id=ChIJwz3NauojQg0RLt9wU7EXIts\",\"rating\":4.2,\"reviews\":369,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":28,\"why\":\"email público, web sin reservas enlazadas\",\"lat\":40.3242701,\"lng\":-3.6622211,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Asador+de+Perales&query_place_id=ChIJwz3NauojQg0RLt9wU7EXIts\"},{\"label\":\"Web atribuida\",\"url\":\"https://asadordeperales.es/\"}],\"hasPage\":true},{\"id\":72,\"name\":\"Café Bar Cordero\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Perales del Río\",\"address\":\"C. de Jesús del Gran Poder,1, 28909\",\"phone\":\"910 930 505\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Caf%C3%A9+Bar+Cordero&query_place_id=ChIJ5dAU4PojQg0RH6x-cU9Qm7o\",\"rating\":4.2,\"reviews\":2077,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital baja, 2077 reseñas en Google\",\"lat\":40.3240964,\"lng\":-3.6547111,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Caf%C3%A9+Bar+Cordero&query_place_id=ChIJ5dAU4PojQg0RH6x-cU9Qm7o\"}],\"hasPage\":false},{\"id\":73,\"name\":\"Bar Ayuso\",\"sector\":\"Hostelería\",\"sub\":\"Bar\",\"zone\":\"Perales del Río\",\"address\":\"4, C. Juan de Mairena, 2,local 2, 28909\",\"phone\":\"916 849 794\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Ayuso&query_place_id=ChIJFZWIpfwjQg0RMAjVsCx_CU4\",\"rating\":4.1,\"reviews\":299,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":53,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3233182,\"lng\":-3.6576831,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Ayuso&query_place_id=ChIJFZWIpfwjQg0RMAjVsCx_CU4\"}],\"hasPage\":false},{\"id\":74,\"name\":\"La Rivera\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"C. Empleo, 28, PoligonoIndustrial los Olivos, 28906\",\"phone\":\"629 557 886\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Rivera&query_place_id=ChIJF_K2Yj8hQg0RXOcAT1IACWU\",\"rating\":4.4,\"reviews\":186,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3148693,\"lng\":-3.6826751,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Rivera&query_place_id=ChIJF_K2Yj8hQg0RXOcAT1IACWU\"}],\"hasPage\":false},{\"id\":75,\"name\":\"Perales del rio\",\"sector\":\"Hostelería\",\"sub\":\"Identidad pendiente\",\"zone\":\"Perales del Río\",\"address\":\"C. de José Echegaray, 1, 28909\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"\",\"rating\":null,\"reviews\":0,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"No evaluable\",\"score\":0,\"why\":\"Identidad hostelera no confirmada. No usar como prospecto.\",\"lat\":null,\"lng\":null,\"pending\":true,\"mapsOk\":false,\"sources\":[],\"hasPage\":false},{\"id\":76,\"name\":\"Cafetería Bar El Kiosko\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Perales del Río\",\"address\":\"C. de Groenlandia, 4, 28909\",\"phone\":\"916 848 742\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Bar+El+Kiosko&query_place_id=ChIJ6eA61lchQg0RhXS_kNT1pso\",\"rating\":4.4,\"reviews\":27,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.324,\"lng\":-3.6618081,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Bar+El+Kiosko&query_place_id=ChIJ6eA61lchQg0RhXS_kNT1pso\"}],\"hasPage\":false},{\"id\":77,\"name\":\"Pizza Sprint\",\"sector\":\"Hostelería\",\"sub\":\"Pizzería / italiano\",\"zone\":\"Perales del Río\",\"address\":\"C. de Groenlandia, 4, Loc1.04, 28909\",\"phone\":\"916 849 593\",\"phoneAlt\":\"\",\"email\":\"pizzasprint@hotmail.com\",\"web\":\"https://www.pizzasprintgetafe.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Pizza+Sprint&query_place_id=ChIJbysjV_0jQg0Ra-bQojbZPPs\",\"rating\":4.1,\"reviews\":83,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":15,\"why\":\"email público, web sin reservas enlazadas\",\"lat\":40.323752,\"lng\":-3.6620666,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Pizza+Sprint&query_place_id=ChIJbysjV_0jQg0Ra-bQojbZPPs\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.pizzasprintgetafe.com/\"}],\"hasPage\":true},{\"id\":78,\"name\":\"Restaurante El Legado\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"Avenida del IngeniosoHidalgo, 7, Local 3, 28906\",\"phone\":\"911 644 209\",\"phoneAlt\":\"652 342 248\",\"email\":\"contacto@ellegadorestaurante.es\",\"web\":\"https://ellegadorestaurante.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+El+Legado&query_place_id=ChIJP1ZvicghQg0RRmB1AgfQ3Yg\",\"rating\":4.6,\"reviews\":359,\"reservations\":\"web propia\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Alta\",\"score\":28,\"why\":\"email público\",\"lat\":40.3180513,\"lng\":-3.7027802,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+El+Legado&query_place_id=ChIJP1ZvicghQg0RRmB1AgfQ3Yg\"},{\"label\":\"Web atribuida\",\"url\":\"https://ellegadorestaurante.es/\"},{\"label\":\"Reservas\",\"url\":\"https://ellegadorestaurante.es/reservas\"}],\"hasPage\":true},{\"id\":79,\"name\":\"La Chancleta Bar\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"C. Progreso, 2, Loc 535,Poligono Industrial losOlivos, 28906\",\"phone\":\"614 418 279\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Chancleta+Bar&query_place_id=ChIJtZIES1ohQg0Rgo1pCT6SLGU\",\"rating\":4.9,\"reviews\":61,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3153951,\"lng\":-3.6903751,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Chancleta+Bar&query_place_id=ChIJtZIES1ohQg0Rgo1pCT6SLGU\"}],\"hasPage\":false},{\"id\":80,\"name\":\"Mr Doner Kebab\",\"sector\":\"Hostelería\",\"sub\":\"Kebab / doner\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Cl. Andalucia, 6, 28903\",\"phone\":\"916 839 140\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Mr+Doner+Kebab&query_place_id=ChIJ03JYBuogQg0RSBQTDwgFudM\",\"rating\":3.7,\"reviews\":342,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":63,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3102472,\"lng\":-3.7186804,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Mr+Doner+Kebab&query_place_id=ChIJ03JYBuogQg0RSBQTDwgFudM\"}],\"hasPage\":true},{\"id\":81,\"name\":\"Fessi Fast Food (Kebab & Fried ChickenGetafe)\",\"sector\":\"Hostelería\",\"sub\":\"Kebab / doner\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Madrid, 124, 28903\",\"phone\":\"604 339 152\",\"phoneAlt\":\"\",\"email\":\"alizeyfoods@hotmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Fessi+Fast+Food+%28Kebab+%26+Fried+Chicken+Getafe%29&query_place_id=ChIJa6zp7L4gQg0RpfP3aGeB0j0\",\"rating\":3.9,\"reviews\":440,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Baja\",\"score\":73,\"why\":\"sin web propia localizada, presencia digital baja, email público\",\"lat\":40.313925,\"lng\":-3.726983,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Fessi+Fast+Food+%28Kebab+%26+Fried+Chicken+Getafe%29&query_place_id=ChIJa6zp7L4gQg0RpfP3aGeB0j0\"}],\"hasPage\":true},{\"id\":82,\"name\":\"Kebab Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Kebab / doner\",\"zone\":\"Centro\",\"address\":\"C. Polvoranca, 20, 28901\",\"phone\":\"919 955 141\",\"phoneAlt\":\"632 404 306\",\"email\":\"\",\"web\":\"https://kebabgetafemd.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Kebab+Getafe&query_place_id=ChIJhaRkv5ohQg0RwGl_7dyt82Y\",\"rating\":4.1,\"reviews\":153,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":5,\"why\":\"web sin reservas enlazadas\",\"lat\":40.304687,\"lng\":-3.73498,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Kebab+Getafe&query_place_id=ChIJhaRkv5ohQg0RwGl_7dyt82Y\"},{\"label\":\"Web atribuida\",\"url\":\"https://kebabgetafemd.com/\"}],\"hasPage\":true},{\"id\":83,\"name\":\"Córdoba Kebab y Pizzería\",\"sector\":\"Hostelería\",\"sub\":\"Kebab / doner\",\"zone\":\"Centro norte\",\"address\":\"C. Madrid, 106, 28902\",\"phone\":\"916 956 833\",\"phoneAlt\":\"\",\"email\":\"admin@kebabcordoba.es\",\"web\":\"https://kebabcordoba.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=C%C3%B3rdoba+Kebab+y+Pizzer%C3%ADa&query_place_id=ChIJyzrs2DEhQg0R1Rq54y-qCus\",\"rating\":3,\"reviews\":209,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":23,\"why\":\"email público, web sin reservas enlazadas\",\"lat\":40.3122801,\"lng\":-3.7275189,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=C%C3%B3rdoba+Kebab+y+Pizzer%C3%ADa&query_place_id=ChIJyzrs2DEhQg0R1Rq54y-qCus\"},{\"label\":\"Web atribuida\",\"url\":\"https://kebabcordoba.es/\"}],\"hasPage\":true},{\"id\":84,\"name\":\"Doner Kebab Kebabish Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Kebab / doner\",\"zone\":\"Centro norte\",\"address\":\"C. Ramon y Cajal, 19, Loc,28902\",\"phone\":\"913 487 687\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Doner+Kebab+Kebabish+Getafe&query_place_id=ChIJVVtZ0JcgQg0Ru_VRf4NidiQ\",\"rating\":3.9,\"reviews\":650,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital media, 650 reseñas en Google\",\"lat\":40.3096118,\"lng\":-3.7313691,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Doner+Kebab+Kebabish+Getafe&query_place_id=ChIJVVtZ0JcgQg0Ru_VRf4NidiQ\"}],\"hasPage\":true},{\"id\":85,\"name\":\"Basant Doner Kebab & Pizzería\",\"sector\":\"Hostelería\",\"sub\":\"Kebab / doner\",\"zone\":\"El Bercial\",\"address\":\"C. Dulce Chacón, 3, 28907\",\"phone\":\"912 406 590\",\"phoneAlt\":\"625 062 588\",\"email\":\"bsantdonerpizzeria@gmail.com\",\"web\":\"https://basantdonerkebab.makro.bar/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Basant+Doner+Kebab+%26+Pizzer%C3%ADa&query_place_id=ChIJL6aFipchQg0RoF9hVVlfXWI\",\"rating\":3.8,\"reviews\":48,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":25,\"why\":\"presencia digital media, email público, web sin reservas enlazadas\",\"lat\":40.3222497,\"lng\":-3.7387505,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Basant+Doner+Kebab+%26+Pizzer%C3%ADa&query_place_id=ChIJL6aFipchQg0RoF9hVVlfXWI\"},{\"label\":\"Web atribuida\",\"url\":\"https://basantdonerkebab.makro.bar/\"}],\"hasPage\":true},{\"id\":86,\"name\":\"Real turkito\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Madrid, 19, 28901\",\"phone\":\"916 837 791\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://realturkitogetafe.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Real+turkito&query_place_id=ChIJCfswQc8hQg0RytFv6StBx4o\",\"rating\":2.8,\"reviews\":100,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":15,\"why\":\"web sin reservas enlazadas\",\"lat\":40.3061395,\"lng\":-3.731311,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Real+turkito&query_place_id=ChIJCfswQc8hQg0RytFv6StBx4o\"},{\"label\":\"Web atribuida\",\"url\":\"https://realturkitogetafe.com/\"}],\"hasPage\":true},{\"id\":87,\"name\":\"Oskar Burger Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Hamburguesería\",\"zone\":\"Centro\",\"address\":\"C. Madrid, 30, 28901\",\"phone\":\"910 531 738\",\"phoneAlt\":\"\",\"email\":\"mosba.sl@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Oskar+Burger+Getafe&query_place_id=ChIJeVRt2JYgQg0RF3DMK5eHli8\",\"rating\":4.4,\"reviews\":5165,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital media, 5165 reseñas en Google, email público\",\"lat\":40.30693,\"lng\":-3.73037,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Oskar+Burger+Getafe&query_place_id=ChIJeVRt2JYgQg0RF3DMK5eHli8\"}],\"hasPage\":false},{\"id\":88,\"name\":\"Pizzería Roma\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"Av. Juan de la Cierva, 5,28901\",\"phone\":\"910 700 897\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://www.barpizzeriaroma.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+Roma&query_place_id=ChIJkyxRg5QgQg0R4I6xeKcFLms\",\"rating\":4,\"reviews\":368,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":23,\"why\":\"web sin reservas enlazadas\",\"lat\":40.3055225,\"lng\":-3.7251561,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Pizzer%C3%ADa+Roma&query_place_id=ChIJkyxRg5QgQg0R4I6xeKcFLms\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.barpizzeriaroma.es/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/pizzeria-roma-getafe/SrIFFv3SQOihGuwdHyCTLg\"}],\"hasPage\":true},{\"id\":89,\"name\":\"Del Poble Pizzería Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"C. Ramon y Cajal, 10, 28902\",\"phone\":\"644 013 172\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://www.delpoblepizzeria.com/pizzerias/getafe\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Del+Poble+Pizzer%C3%ADa+Getafe&query_place_id=ChIJ6WwyNZAhQg0REgthQYmiw3o\",\"rating\":4.5,\"reviews\":1931,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":35,\"why\":\"1931 reseñas en Google, web sin reservas enlazadas\",\"lat\":40.3097614,\"lng\":-3.7307756,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Del+Poble+Pizzer%C3%ADa+Getafe&query_place_id=ChIJ6WwyNZAhQg0REgthQYmiw3o\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.delpoblepizzeria.com/pizzerias/getafe\"}],\"hasPage\":true},{\"id\":90,\"name\":\"Bar Yerevan Kebab\",\"sector\":\"Hostelería\",\"sub\":\"Kebab / doner\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Concha Espina, 3, 28903\",\"phone\":\"916 816 545\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Bar+Yerevan+Kebab&query_place_id=ChIJH4pK3rUgQg0R3ifLvyHv1YE\",\"rating\":4.3,\"reviews\":564,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 564 reseñas en Google\",\"lat\":40.3259471,\"lng\":-3.7249484,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Bar+Yerevan+Kebab&query_place_id=ChIJH4pK3rUgQg0R3ifLvyHv1YE\"},{\"label\":\"Instagram\",\"url\":\"https://www.instagram.com/getafe_bar_yerevan/\"}],\"hasPage\":false},{\"id\":91,\"name\":\"I Love Pizza\",\"sector\":\"Hostelería\",\"sub\":\"Pizzería / italiano\",\"zone\":\"La Alhóndiga\",\"address\":\"C. Canario, 8, 28904\",\"phone\":\"695 483 682\",\"phoneAlt\":\"688 780 241\",\"email\":\"ilovepizzagt@gmail.com\",\"web\":\"https://www.ilovepizzagetafe.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=I+Love+Pizza&query_place_id=ChIJxz4V9JggQg0R9Z4omZ1X_mc\",\"rating\":3,\"reviews\":116,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":15,\"why\":\"email público, web sin reservas enlazadas\",\"lat\":40.3046773,\"lng\":-3.7384518,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=I+Love+Pizza&query_place_id=ChIJxz4V9JggQg0R9Z4omZ1X_mc\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.ilovepizzagetafe.com/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es-en/store/i-love-pizza/Wyqz_SujTniXaG97buWkKA\"}],\"hasPage\":true},{\"id\":92,\"name\":\"Telepizza\",\"sector\":\"Hostelería\",\"sub\":\"Pizzería / italiano\",\"zone\":\"Sector III\",\"address\":\"Centro Comercial Getafe III,Av. Juan Carlos I, 3, 28905\",\"phone\":\"916 017 121\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Telepizza+Getafe%2C+Madrid+-+Comida+a+Domicilio&query_place_id=ChIJo4Kpor4gQg0R0cFco8rXaJc\",\"rating\":4.1,\"reviews\":572,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":10,\"why\":\"sin web propia localizada, 572 reseñas en Google, cadena, penalizado\",\"lat\":40.2967619,\"lng\":-3.7456375,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Telepizza+Getafe%2C+Madrid+-+Comida+a+Domicilio&query_place_id=ChIJo4Kpor4gQg0R0cFco8rXaJc\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/telepizza-getafe-i/e-e-kc90UdawxW89z2VhqQ\"}],\"hasPage\":false},{\"id\":93,\"name\":\"Goiko\",\"sector\":\"Hostelería\",\"sub\":\"Hamburguesería\",\"zone\":\"Centro norte\",\"address\":\"C. Ramon y Cajal, 4, 28902\",\"phone\":\"910 605 182\",\"phoneAlt\":\"910 609 682\",\"email\":\"\",\"web\":\"https://www.goiko.com/es/restaurante/hamburgueseria-ramon-y-cajal-8-getafe/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Goiko&query_place_id=ChIJc_ApADohQg0RZvukYbGPIRw\",\"rating\":4.5,\"reviews\":7292,\"reservations\":\"web propia\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":0,\"why\":\"7292 reseñas en Google, cadena, penalizado\",\"lat\":40.309683,\"lng\":-3.7304488,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Goiko&query_place_id=ChIJc_ApADohQg0RZvukYbGPIRw\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.goiko.com/es/restaurante/hamburgueseria-ramon-y-cajal-8-getafe/\"},{\"label\":\"Reservas\",\"url\":\"https://www.goiko.com/es/restaurante/hamburgueseria-ramon-y-cajal-8-getafe/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es-en/store/goiko-getafe/5Igne7znTyKnflEej-VirQ\"}],\"hasPage\":true},{\"id\":94,\"name\":\"Soul pizza\",\"sector\":\"Hostelería\",\"sub\":\"Pizzería / italiano\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Giralda, 4, 28903\",\"phone\":\"674 150 670\",\"phoneAlt\":\"\",\"email\":\"soulpizzagetafe@gmail.com\",\"web\":\"https://soulpizza.net/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Soul+pizza&query_place_id=ChIJqQX-pL0hQg0RRUYGNYrBhpk\",\"rating\":4.7,\"reviews\":564,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":35,\"why\":\"564 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3181045,\"lng\":-3.7144991,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Soul+pizza&query_place_id=ChIJqQX-pL0hQg0RRUYGNYrBhpk\"},{\"label\":\"Web atribuida\",\"url\":\"https://soulpizza.net/\"}],\"hasPage\":true},{\"id\":95,\"name\":\"La Jalea\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"C. Madrid, 9, 28901\",\"phone\":\"913 654 856\",\"phoneAlt\":\"\",\"email\":\"lajalea.getafe@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Jalea&query_place_id=ChIJX1vTcZUhQg0RgRLfjK5_DEs\",\"rating\":4.8,\"reviews\":1132,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital media, 1132 reseñas en Google, email público\",\"lat\":40.3058285,\"lng\":-3.7316379,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Jalea&query_place_id=ChIJX1vTcZUhQg0RgRLfjK5_DEs\"}],\"hasPage\":false},{\"id\":96,\"name\":\"Mastranto - Pastelería & Café\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. de los Depósitos, 2, 28903\",\"phone\":\"675 545 162\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Mastranto+-+Pasteler%C3%ADa+%26+Caf%C3%A9&query_place_id=ChIJoZNMMxUhQg0Rv2zh1ady8zY\",\"rating\":4.9,\"reviews\":132,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3132822,\"lng\":-3.7267223,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Mastranto+-+Pasteler%C3%ADa+%26+Caf%C3%A9&query_place_id=ChIJoZNMMxUhQg0Rv2zh1ady8zY\"}],\"hasPage\":false},{\"id\":97,\"name\":\"Cafetería Pastelería Elez - Pasteleríagourmet - Desayunos - Meriendas en Elez\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Sector III\",\"address\":\"P.º de Federico Melchor, 4,28905\",\"phone\":\"910 833 420\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Pasteler%C3%ADa+Elez+-+Pasteler%C3%ADa+gourmet+-+Desayunos+-+Meriendas+en+Elez&query_place_id=ChIJD03a9UyLQ\",\"rating\":4.5,\"reviews\":654,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 654 reseñas en Google\",\"lat\":40.3013176,\"lng\":-3.7541314,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Pasteler%C3%ADa+Elez+-+Pasteler%C3%ADa+gourmet+-+Desayunos+-+Meriendas+en+Elez&query_place_id=ChIJD03a9UyLQ\"},{\"label\":\"Instagram\",\"url\":\"https://www.instagram.com/pasteleriaelez/\"},{\"label\":\"Facebook\",\"url\":\"https://www.facebook.com/pasteleriaelez/\"}],\"hasPage\":true},{\"id\":98,\"name\":\"Lolita Café Brunch\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Centro\",\"address\":\"C. de la Magdalena, 16,28901\",\"phone\":\"919 479 416\",\"phoneAlt\":\"\",\"email\":\"info@lolitacafe.es\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"\",\"rating\":4.1,\"reviews\":622,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":70,\"why\":\"sin web propia localizada, presencia digital media, 622 reseñas en Google, email público\",\"lat\":40.3060131,\"lng\":-3.7294725,\"pending\":false,\"mapsOk\":true,\"sources\":[],\"hasPage\":true},{\"id\":99,\"name\":\"MOLLY COFFEE\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"El Bercial\",\"address\":\"Av. Comandante JoséManuel Ripollés, 4, 28907\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"hello@mollyscoffeeco.com\",\"web\":\"https://mollyscoffeeco.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=MOLLY+COFFEE&query_place_id=ChIJe8jHEf8hQg0RlPTN1jIOwnk\",\"rating\":4.9,\"reviews\":72,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":15,\"why\":\"email público, web sin reservas enlazadas\",\"lat\":40.3292014,\"lng\":-3.7307949,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=MOLLY+COFFEE&query_place_id=ChIJe8jHEf8hQg0RlPTN1jIOwnk\"},{\"label\":\"Web atribuida\",\"url\":\"https://mollyscoffeeco.com/\"}],\"hasPage\":false},{\"id\":100,\"name\":\"Al Grano Specialty Coffee\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. San Sebastián, 7, 28903\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Al+Grano+Specialty+Coffee&query_place_id=ChIJoRbRiCohQg0RuENPm6uLr6U\",\"rating\":4.5,\"reviews\":201,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":53,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3125426,\"lng\":-3.7266231,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Al+Grano+Specialty+Coffee&query_place_id=ChIJoRbRiCohQg0RuENPm6uLr6U\"}],\"hasPage\":true},{\"id\":101,\"name\":\"Tahona La Primitiva\",\"sector\":\"Hostelería\",\"sub\":\"Panadería / café\",\"zone\":\"El Bercial\",\"address\":\"C. Maestro Juan FranciscoGarci, 1, 28907\",\"phone\":\"914 910 294\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Tahona+La+Primitiva&query_place_id=ChIJrZd0KqQgQg0RRMyE3sjWtmc\",\"rating\":4.3,\"reviews\":831,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 831 reseñas en Google\",\"lat\":40.3174045,\"lng\":-3.7384675,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Tahona+La+Primitiva&query_place_id=ChIJrZd0KqQgQg0RRMyE3sjWtmc\"}],\"hasPage\":false},{\"id\":102,\"name\":\"Le Croissant\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería / bollería\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Cl. Andalucia, 12, 28903\",\"phone\":\"912 559 668\",\"phoneAlt\":\"695 360 240\",\"email\":\"lecroissantgetafe@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Le+Croissant&query_place_id=ChIJGe6UlTMhQg0R7mkdvopCorI\",\"rating\":4.6,\"reviews\":63,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital media, email público\",\"lat\":40.3102862,\"lng\":-3.7181163,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Le+Croissant&query_place_id=ChIJGe6UlTMhQg0R7mkdvopCorI\"}],\"hasPage\":false},{\"id\":103,\"name\":\"onlycafe\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Centro norte\",\"address\":\"C. Jacinto Benavente, 10,28902\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=onlycafe&query_place_id=ChIJb6yPgJohQg0R80l1CE7aX6Y\",\"rating\":4.9,\"reviews\":167,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":55,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3107637,\"lng\":-3.7318068,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=onlycafe&query_place_id=ChIJb6yPgJohQg0R80l1CE7aX6Y\"}],\"hasPage\":false},{\"id\":104,\"name\":\"O´Dreams Bubble Tea & Coffee Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Centro\",\"address\":\"C. Leganés, 2, 28901\",\"phone\":\"611 724 845\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=O%C2%B4Dreams+Bubble+Tea+%26+Coffee+Getafe&query_place_id=ChIJdQwblL0hQg0RPa61Sr-pM-w\",\"rating\":4.9,\"reviews\":255,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.306511,\"lng\":-3.7311785,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=O%C2%B4Dreams+Bubble+Tea+%26+Coffee+Getafe&query_place_id=ChIJdQwblL0hQg0RPa61Sr-pM-w\"}],\"hasPage\":false},{\"id\":105,\"name\":\"Pastelería Monroebakes\",\"sector\":\"Hostelería\",\"sub\":\"Pastelería\",\"zone\":\"El Bercial\",\"address\":\"Av. de La Paz, 21, Loc 1,28907\",\"phone\":\"916 019 950\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Pasteler%C3%ADa+Monroebakes&query_place_id=ChIJ_9mLSlghQg0RIc0bHaO0iXQ\",\"rating\":4.6,\"reviews\":460,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":48,\"why\":\"sin web propia localizada\",\"lat\":40.3214346,\"lng\":-3.7339967,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Pasteler%C3%ADa+Monroebakes&query_place_id=ChIJ_9mLSlghQg0RIc0bHaO0iXQ\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/pasteleria-monroebakes/JD8GzrRkWLq6x9ZrcFEI5w\"}],\"hasPage\":true},{\"id\":106,\"name\":\"Éclair & Pan\",\"sector\":\"Hostelería\",\"sub\":\"Pastelería\",\"zone\":\"Centro\",\"address\":\"Pl. Gral. Palacio, 4, 28901\",\"phone\":\"912 627 849\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=%C3%89clair+%26+Pan&query_place_id=ChIJuXrygDkhQg0Rw-esKe_NU5w\",\"rating\":4.6,\"reviews\":230,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":58,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3088701,\"lng\":-3.7282531,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=%C3%89clair+%26+Pan&query_place_id=ChIJuXrygDkhQg0Rw-esKe_NU5w\"}],\"hasPage\":true},{\"id\":107,\"name\":\"El Salon del Crepe\",\"sector\":\"Hostelería\",\"sub\":\"Crepería\",\"zone\":\"Centro\",\"address\":\"Calle Felipe Estevez, 13,28901\",\"phone\":\"916 010 291\",\"phoneAlt\":\"\",\"email\":\"elsalondelcrepe@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=El+Salon+del+Crepe&query_place_id=ChIJ13urtZcgQg0RQ1QVZ9CAM7A\",\"rating\":4.1,\"reviews\":1212,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":70,\"why\":\"sin web propia localizada, presencia digital media, 1212 reseñas en Google, email público\",\"lat\":40.3089191,\"lng\":-3.7309199,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=El+Salon+del+Crepe&query_place_id=ChIJ13urtZcgQg0RQ1QVZ9CAM7A\"}],\"hasPage\":false},{\"id\":108,\"name\":\"LA YAYA | PASTELERÍA EN GETAFE\",\"sector\":\"Hostelería\",\"sub\":\"Pastelería\",\"zone\":\"Centro norte\",\"address\":\"C. Madrid, 75, 28902\",\"phone\":\"639 103 969\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=LA+YAYA+%7C+PASTELER%C3%8DA+EN+GETAFE&query_place_id=ChIJ7XgVZWRT40MRitWQNyFn9EQ\",\"rating\":4.7,\"reviews\":34,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3092772,\"lng\":-3.7291559,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=LA+YAYA+%7C+PASTELER%C3%8DA+EN+GETAFE&query_place_id=ChIJ7XgVZWRT40MRitWQNyFn9EQ\"}],\"hasPage\":false},{\"id\":109,\"name\":\"Dolce Sira\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"Av. Caballero de la TristeFigura, 3, 28906\",\"phone\":\"622 539 814\",\"phoneAlt\":\"623 392 162\",\"email\":\"info@dolcesira.com\",\"web\":\"https://dolcesira.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Dolce+Sira&query_place_id=ChIJUzhnXfghQg0RUCSNg2GawWs\",\"rating\":4.6,\"reviews\":518,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":45,\"why\":\"518 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3180544,\"lng\":-3.6995756,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Dolce+Sira&query_place_id=ChIJUzhnXfghQg0RUCSNg2GawWs\"},{\"label\":\"Web atribuida\",\"url\":\"https://dolcesira.com/\"}],\"hasPage\":true},{\"id\":110,\"name\":\"Levaduramadre\",\"sector\":\"Hostelería\",\"sub\":\"Panadería\",\"zone\":\"El Bercial\",\"address\":\"Calle Camerún, 2, Loc 1,28907\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://levaduramadre.es/tiendas/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Levaduramadre&query_place_id=ChIJPdTBGO4hQg0RbQeSoW3AIYs\",\"rating\":4.4,\"reviews\":190,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":0,\"why\":\"cadena, penalizado\",\"lat\":40.326771,\"lng\":-3.729449,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Levaduramadre&query_place_id=ChIJPdTBGO4hQg0RbQeSoW3AIYs\"},{\"label\":\"Web atribuida\",\"url\":\"https://levaduramadre.es/tiendas/\"}],\"hasPage\":true},{\"id\":111,\"name\":\"Cafetería Cibelina\",\"sector\":\"Hostelería\",\"sub\":\"Cafetería\",\"zone\":\"Centro norte\",\"address\":\"C. Villaverde, 1, 28902\",\"phone\":\"916 652 538\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Cibelina&query_place_id=ChIJd9_lDJYgQg0RD94Jg8t7v9s\",\"rating\":4.1,\"reviews\":2504,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital media, 2504 reseñas en Google\",\"lat\":40.309026,\"lng\":-3.7288345,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Cafeter%C3%ADa+Cibelina&query_place_id=ChIJd9_lDJYgQg0RD94Jg8t7v9s\"},{\"label\":\"Facebook\",\"url\":\"https://www.facebook.com/lacibelina/\"}],\"hasPage\":false},{\"id\":112,\"name\":\"Hi Cream ECI El Bercial\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"Av. Comandante JoséManuel Ripollés, 2, 28907\",\"phone\":\"\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Hi+Cream+ECI+El+Bercial&query_place_id=ChIJN9i_6MIhQg0RjtoNDpIUkF4\",\"rating\":4.1,\"reviews\":98,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3293446,\"lng\":-3.7279131,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Hi+Cream+ECI+El+Bercial&query_place_id=ChIJN9i_6MIhQg0RjtoNDpIUkF4\"}],\"hasPage\":false},{\"id\":113,\"name\":\"Restaurante Asiático Tokio\",\"sector\":\"Hostelería\",\"sub\":\"Asiático\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Travesia de Castro, 2, 28903\",\"phone\":\"916 960 460\",\"phoneAlt\":\"\",\"email\":\"xiaopatricia123@gmail.com\",\"web\":\"https://www.restaurantetokio.eu/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Asi%C3%A1tico+Tokio&query_place_id=ChIJKwsxhbcgQg0RJTihtKNsCxg\",\"rating\":4.4,\"reviews\":2735,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"2735 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3209895,\"lng\":-3.7252125,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Asi%C3%A1tico+Tokio&query_place_id=ChIJKwsxhbcgQg0RJTihtKNsCxg\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.restaurantetokio.eu/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/restaurante-asiatico-tokio/_PdBeHb3VxewBPUhrXf_eg\"}],\"hasPage\":true},{\"id\":114,\"name\":\"Xing Long\",\"sector\":\"Hostelería\",\"sub\":\"Chino\",\"zone\":\"Centro norte\",\"address\":\"C. Villaverde, 35, 28902\",\"phone\":\"916 957 924\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://www.xinglong.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Xing+Long&query_place_id=ChIJZyLZJL4gQg0RV4XyZIWQkmM\",\"rating\":4.3,\"reviews\":1086,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":25,\"why\":\"1086 reseñas en Google, web sin reservas enlazadas\",\"lat\":40.3109285,\"lng\":-3.7265351,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Xing+Long&query_place_id=ChIJZyLZJL4gQg0RV4XyZIWQkmM\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.xinglong.es/\"}],\"hasPage\":true},{\"id\":115,\"name\":\"AsiaMix bar restaurant\",\"sector\":\"Hostelería\",\"sub\":\"Asiático\",\"zone\":\"Centro\",\"address\":\"C. San Eugenio, 1, 28901\",\"phone\":\"919 355 338\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=AsiaMix+bar+restaurant&query_place_id=ChIJvQHaKKIhQg0RK5LETocGwKM\",\"rating\":4.8,\"reviews\":227,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3076548,\"lng\":-3.729038,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=AsiaMix+bar+restaurant&query_place_id=ChIJvQHaKKIhQg0RK5LETocGwKM\"}],\"hasPage\":true},{\"id\":116,\"name\":\"Jusco Sushi\",\"sector\":\"Hostelería\",\"sub\":\"Sushi / japonés\",\"zone\":\"Centro norte\",\"address\":\"Av. General Palacio, 2,28902\",\"phone\":\"910 518 806\",\"phoneAlt\":\"\",\"email\":\"info@juscosushi.es\",\"web\":\"https://www.juscosushi.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Jusco+Sushi&query_place_id=ChIJc_NXTU0hQg0RNN-4uCJ8lB0\",\"rating\":4.5,\"reviews\":1257,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"1257 reseñas en Google, email público, web sin reservas enlazadas\",\"lat\":40.3085062,\"lng\":-3.7272734,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Jusco+Sushi&query_place_id=ChIJc_NXTU0hQg0RNN-4uCJ8lB0\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.juscosushi.es/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/restaurante-jusco-sushi/lq2qQg13XtCW15iMQwAxQQ\"}],\"hasPage\":true},{\"id\":117,\"name\":\"Ramen Shifu - Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Ramen / japonés\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Madrid, 122, 28903\",\"phone\":\"910 930 352\",\"phoneAlt\":\"914 017 730\",\"email\":\"hola@ramenshifu.com\",\"web\":\"https://www.ramenshifu.com/ramen-shifu-getafe/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Ramen+Shifu+-+Getafe&query_place_id=ChIJEXmN11YhQg0RZ1tkFn8oLdU\",\"rating\":4.7,\"reviews\":1917,\"reservations\":\"TheFork\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":0,\"why\":\"1917 reseñas en Google, email público, cadena, penalizado\",\"lat\":40.3135171,\"lng\":-3.7270562,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Ramen+Shifu+-+Getafe&query_place_id=ChIJEXmN11YhQg0RZ1tkFn8oLdU\"},{\"label\":\"Web atribuida\",\"url\":\"https://www.ramenshifu.com/ramen-shifu-getafe/\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/ramen-shifu-getafe-r754825\"}],\"hasPage\":true},{\"id\":118,\"name\":\"Dragon Kitchen Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Asiático\",\"zone\":\"La Alhóndiga\",\"address\":\"C. de Ramón Rubial, 11,28904\",\"phone\":\"917 650 262\",\"phoneAlt\":\"\",\"email\":\"getafe@dragonkitchen.es\",\"web\":\"https://dragonkitchen.es/dragon-kitchen-getafe-reserva/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Dragon+Kitchen+Getafe&query_place_id=ChIJUwEbi9ghQg0RlPRwYtyR9eo\",\"rating\":4.6,\"reviews\":1849,\"reservations\":\"web propia\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"1849 reseñas en Google, email público\",\"lat\":40.3167953,\"lng\":-3.7332379,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Dragon+Kitchen+Getafe&query_place_id=ChIJUwEbi9ghQg0RlPRwYtyR9eo\"},{\"label\":\"Web atribuida\",\"url\":\"https://dragonkitchen.es/dragon-kitchen-getafe-reserva/\"},{\"label\":\"Reservas\",\"url\":\"https://dragonkitchen.es/dragon-kitchen-getafe-reserva/\"}],\"hasPage\":true},{\"id\":119,\"name\":\"Restaurante Chang Ke's Storied\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"Av. Caballero de la TristeFigura, 7, 28906\",\"phone\":\"910 615 535\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chang+Ke%27s+Storied&query_place_id=ChIJC07ur90hQg0R5JrFp86U39A\",\"rating\":4.4,\"reviews\":323,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":58,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3181432,\"lng\":-3.6960122,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chang+Ke%27s+Storied&query_place_id=ChIJC07ur90hQg0R5JrFp86U39A\"}],\"hasPage\":true},{\"id\":120,\"name\":\"SUSHI SHAN // BUFFET A LA CARTA ENGETAFE\",\"sector\":\"Hostelería\",\"sub\":\"Sushi / japonés\",\"zone\":\"Los Ángeles / polígonos\",\"address\":\"C. Marconi, 18, 28906\",\"phone\":\"919 471 678\",\"phoneAlt\":\"\",\"email\":\"yamagashan@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=SUSHI+SHAN+%2F%2F+BUFFET+A+LA+CARTA+EN+GETAFE&query_place_id=ChIJlToYfbAhQg0Rd7B0vLkyL48\",\"rating\":4.5,\"reviews\":3891,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":75,\"why\":\"sin web propia localizada, presencia digital media, 3891 reseñas en Google, email público\",\"lat\":40.3030854,\"lng\":-3.6979453,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=SUSHI+SHAN+%2F%2F+BUFFET+A+LA+CARTA+EN+GETAFE&query_place_id=ChIJlToYfbAhQg0Rd7B0vLkyL48\"}],\"hasPage\":true},{\"id\":121,\"name\":\"Go! Sushing Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Sushi / japonés\",\"zone\":\"La Alhóndiga\",\"address\":\"P.º de La Estación, 13, PortalE, 28904 Madrid, Spain\",\"phone\":\"915 666 429\",\"phoneAlt\":\"\",\"email\":\"marketing@gosushing.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Go%21+Sushing+Getafe&query_place_id=ChIJB3l4pqchQg0Re4h-QdwCdxQ\",\"rating\":4.7,\"reviews\":2033,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":25,\"why\":\"sin web propia localizada, 2033 reseñas en Google, email público, cadena, penalizado\",\"lat\":40.3153228,\"lng\":-3.7313915,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Go%21+Sushing+Getafe&query_place_id=ChIJB3l4pqchQg0Re4h-QdwCdxQ\"}],\"hasPage\":false},{\"id\":122,\"name\":\"LAMEN MAGIC\",\"sector\":\"Hostelería\",\"sub\":\"Ramen / japonés\",\"zone\":\"Centro norte\",\"address\":\"C. Ramon y Cajal, 27, 28902\",\"phone\":\"623 367 667\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=LAMEN+MAGIC&query_place_id=ChIJsZVXRfUhQg0RXmHJsp3EnE4\",\"rating\":4.9,\"reviews\":578,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":65,\"why\":\"sin web propia localizada, presencia digital media, 578 reseñas en Google\",\"lat\":40.3097483,\"lng\":-3.7318413,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=LAMEN+MAGIC&query_place_id=ChIJsZVXRfUhQg0RXmHJsp3EnE4\"},{\"label\":\"Instagram\",\"url\":\"https://www.instagram.com/lamen.magic/\"},{\"label\":\"TikTok\",\"url\":\"https://www.tiktok.com/@lamen.magic\"}],\"hasPage\":false},{\"id\":123,\"name\":\"Japón toyama sushi & ramen toyamasushi.es\",\"sector\":\"Hostelería\",\"sub\":\"Sushi / japonés\",\"zone\":\"Centro norte\",\"address\":\"Calle Pizarro, 17, 28902\",\"phone\":\"919 126 877\",\"phoneAlt\":\"615 899 131\",\"email\":\"\",\"web\":\"\",\"webInsecure\":true,\"certIssue\":true,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Jap%C3%B3n+toyama+sushi+%26+ramen+toyamasushi.es&query_place_id=ChIJlSAAXMKPQQ0R8sjAzdLFkXM\",\"rating\":4.1,\"reviews\":341,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":63,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3129265,\"lng\":-3.730904,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Jap%C3%B3n+toyama+sushi+%26+ramen+toyamasushi.es&query_place_id=ChIJlSAAXMKPQQ0R8sjAzdLFkXM\"}],\"hasPage\":true},{\"id\":124,\"name\":\"Restaurante Jade Nassica\",\"sector\":\"Hostelería\",\"sub\":\"Chino\",\"zone\":\"Nassica / Los Ángeles\",\"address\":\"Av. Río Guadalquivir, 7,28906\",\"phone\":\"916 919 615\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Jade+Nassica&query_place_id=ChIJ2-3YkbUhQg0RLnYamGjq5W0\",\"rating\":4.1,\"reviews\":1571,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital media, 1571 reseñas en Google\",\"lat\":40.2725853,\"lng\":-3.6952845,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Jade+Nassica&query_place_id=ChIJ2-3YkbUhQg0RLnYamGjq5W0\"},{\"label\":\"Facebook\",\"url\":\"https://www.facebook.com/jadenassica/\"}],\"hasPage\":true},{\"id\":125,\"name\":\"Ok Sushi Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Sushi / japonés\",\"zone\":\"La Alhóndiga\",\"address\":\"C. Canario, 1, 28904\",\"phone\":\"910 181 920\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Ok+Sushi+Getafe&query_place_id=ChIJL-u_UNsgQg0RHz5nrwmN0-I\",\"rating\":4.5,\"reviews\":251,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Baja\",\"score\":68,\"why\":\"sin web propia localizada, presencia digital baja\",\"lat\":40.3044516,\"lng\":-3.7378635,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Ok+Sushi+Getafe&query_place_id=ChIJL-u_UNsgQg0RHz5nrwmN0-I\"}],\"hasPage\":true},{\"id\":126,\"name\":\"Ramen Kagura Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Ramen / japonés\",\"zone\":\"El Bercial\",\"address\":\"C. Alcalde Jesús Prieto, 3,28907\",\"phone\":\"912 512 304\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Ramen+Kagura+Getafe&query_place_id=ChIJ4_meq7khQg0RVuqrLeU_cgk\",\"rating\":4.4,\"reviews\":2032,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":55,\"why\":\"sin web propia localizada, 2032 reseñas en Google\",\"lat\":40.3276963,\"lng\":-3.7300178,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Ramen+Kagura+Getafe&query_place_id=ChIJ4_meq7khQg0RVuqrLeU_cgk\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es-en/store/ramen-kagura-getafe/M2_FXS_JR7C8JDkI8Llkmg\"}],\"hasPage\":true},{\"id\":127,\"name\":\"Restaurante Chino Asia\",\"sector\":\"Hostelería\",\"sub\":\"Chino\",\"zone\":\"Sector III\",\"address\":\"Av. Juan Carlos I, 16, 28905\",\"phone\":\"916 965 047\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://restaurante-chino-asia.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chino+Asia&query_place_id=ChIJrybzOHuKQQ0R30MkhjPMHwc\",\"rating\":4,\"reviews\":296,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":13,\"why\":\"web sin reservas enlazadas\",\"lat\":40.2954299,\"lng\":-3.7528972,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chino+Asia&query_place_id=ChIJrybzOHuKQQ0R30MkhjPMHwc\"},{\"label\":\"Web atribuida\",\"url\":\"https://restaurante-chino-asia.es/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/restaurante-chino-asia/xIdvP0J7WPOUztjZ0Vc7cQ\"}],\"hasPage\":true},{\"id\":128,\"name\":\"Chino de Inés rincón de juan el bueno\",\"sector\":\"Hostelería\",\"sub\":\"Chino\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Violeta, 2, 28903\",\"phone\":\"916 811 459\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Chino+de+In%C3%A9s+rinc%C3%B3n+de+juan+el+bueno&query_place_id=ChIJF4DAXVYhQg0R_zjoxUsKMII\",\"rating\":4.7,\"reviews\":120,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":50,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3180727,\"lng\":-3.7239024,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Chino+de+In%C3%A9s+rinc%C3%B3n+de+juan+el+bueno&query_place_id=ChIJF4DAXVYhQg0R_zjoxUsKMII\"}],\"hasPage\":false},{\"id\":129,\"name\":\"Restaurante Dinastía Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Sector III\",\"address\":\"C. Einstein, s/n, 28905\",\"phone\":\"916 822 221\",\"phoneAlt\":\"637 836 333\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Dinast%C3%ADa+Getafe&query_place_id=ChIJvVg2cqcgQg0Riw2I9gfY7og\",\"rating\":4,\"reviews\":1884,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":60,\"why\":\"sin web propia localizada, presencia digital media, 1884 reseñas en Google\",\"lat\":40.316846,\"lng\":-3.7424487,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Dinast%C3%ADa+Getafe&query_place_id=ChIJvVg2cqcgQg0Riw2I9gfY7og\"}],\"hasPage\":false},{\"id\":130,\"name\":\"Restaurante Chino Fa\",\"sector\":\"Hostelería\",\"sub\":\"Chino\",\"zone\":\"Centro norte\",\"address\":\"Av. General Palacio, 8,28902\",\"phone\":\"916 810 833\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://restaurantechinofa.es/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chino+Fa&query_place_id=ChIJS86Zo5UgQg0RUSLyCzkGDck\",\"rating\":4.1,\"reviews\":769,\"reservations\":\"\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":20,\"why\":\"769 reseñas en Google, web sin reservas enlazadas\",\"lat\":40.308669,\"lng\":-3.7263445,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chino+Fa&query_place_id=ChIJS86Zo5UgQg0RUSLyCzkGDck\"},{\"label\":\"Web atribuida\",\"url\":\"https://restaurantechinofa.es/\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es-en/store/restaurante-chino-fa/yAmAGFzrSWKKLh1njTPubg\"}],\"hasPage\":true},{\"id\":131,\"name\":\"Restaurante Chang Xing Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Chino\",\"zone\":\"Centro\",\"address\":\"C. Jardines, 8, 28901\",\"phone\":\"916 812 557\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chang+Xing+Getafe&query_place_id=ChIJi_JCK5EgQg0Rh6zD8B3fFDQ\",\"rating\":3.7,\"reviews\":224,\"reservations\":\"\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media\",\"score\":53,\"why\":\"sin web propia localizada, presencia digital media\",\"lat\":40.3049527,\"lng\":-3.7305709,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Chang+Xing+Getafe&query_place_id=ChIJi_JCK5EgQg0Rh6zD8B3fFDQ\"}],\"hasPage\":true},{\"id\":132,\"name\":\"La Venganza de Malinche\",\"sector\":\"Hostelería\",\"sub\":\"Mexicano\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Ricardo de la Vega, 1,28903\",\"phone\":\"914 495 515\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"https://lavenganzademalinche.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Venganza+De+Malinche+%7C+Restaurante+Mexicano+%7C+Getafe&query_place_id=ChIJdw0pF5cgQg0RsaGaRlUjEPs\",\"rating\":4.1,\"reviews\":2432,\"reservations\":\"TheFork (listado)\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":20,\"why\":\"2432 reseñas en Google\",\"lat\":40.3068542,\"lng\":-3.7302005,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Venganza+De+Malinche+%7C+Restaurante+Mexicano+%7C+Getafe&query_place_id=ChIJdw0pF5cgQg0RsaGaRlUjEPs\"},{\"label\":\"Web atribuida\",\"url\":\"https://lavenganzademalinche.com/\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurantes/getafe-c187443\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es-en/store/la-venganza-de-malinche-getafe/T2jK717ZRfGckTBWGIUJvA\"}],\"hasPage\":true},{\"id\":133,\"name\":\"El Venezolano\",\"sector\":\"Hostelería\",\"sub\":\"Venezolano\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"Av. de los Ángeles, 49,28903\",\"phone\":\"919 123 668\",\"phoneAlt\":\"\",\"email\":\"barreinapepiada2023@gmail.com\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=El+Venezolano&query_place_id=ChIJO6kbkCEhQg0Rpd4X_Flzicg\",\"rating\":4.8,\"reviews\":1549,\"reservations\":\"CoverManager\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":65,\"why\":\"sin web propia localizada, 1549 reseñas en Google, email público\",\"lat\":40.309592,\"lng\":-3.7179819,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=El+Venezolano&query_place_id=ChIJO6kbkCEhQg0Rpd4X_Flzicg\"},{\"label\":\"Reservas\",\"url\":\"https://restaurante.covermanager.com/reservas-venezolano/\"}],\"hasPage\":false},{\"id\":134,\"name\":\"La Burratina Trattoria Pizzería\",\"sector\":\"Hostelería\",\"sub\":\"Italiano\",\"zone\":\"Nassica / Los Ángeles\",\"address\":\"CC Nassica, Av. RíoGuadalquivir, 13, 28906\",\"phone\":\"910 528 294\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Burratina+-+Ristorante+Italiano&query_place_id=ChIJFQFlLKQhQg0R4li28vqhHNk\",\"rating\":3.9,\"reviews\":2130,\"reservations\":\"TheFork (listado)\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":50,\"why\":\"sin web propia localizada, 2130 reseñas en Google\",\"lat\":40.2727604,\"lng\":-3.6954128,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Burratina+-+Ristorante+Italiano&query_place_id=ChIJFQFlLKQhQg0R4li28vqhHNk\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurantes/getafe-c187443\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/burratina/doZaTABtRumthojY4_4u6w\"}],\"hasPage\":true},{\"id\":135,\"name\":\"Xatafy\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"C. Madrid, 77, 28902\",\"phone\":\"916 836 867\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Xatafy+%7C+Restaurante+en+Getafe&query_place_id=ChIJI1s0t48hQg0RrD3rP5BE-1Q\",\"rating\":3.8,\"reviews\":601,\"reservations\":\"TheFork\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":50,\"why\":\"sin web propia localizada, 601 reseñas en Google\",\"lat\":40.3093588,\"lng\":-3.729071,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Xatafy+%7C+Restaurante+en+Getafe&query_place_id=ChIJI1s0t48hQg0RrD3rP5BE-1Q\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/xatafy-restaurante-getafe-r658545\"}],\"hasPage\":true},{\"id\":136,\"name\":\"Sabor Imperial RestoBar\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro norte\",\"address\":\"C. Capellanes, 3, 28902\",\"phone\":\"915 393 667\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Sabor+Imperial+RestoBar&query_place_id=ChIJW-oZDmEhQg0RfcAZX8dzNl4\",\"rating\":4.5,\"reviews\":91,\"reservations\":\"TheFork (listado)\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":40,\"why\":\"sin web propia localizada\",\"lat\":40.3091667,\"lng\":-3.7275,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Sabor+Imperial+RestoBar&query_place_id=ChIJW-oZDmEhQg0RfcAZX8dzNl4\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurantes/getafe-c187443\"}],\"hasPage\":false},{\"id\":137,\"name\":\"Restaurante El Libanés\",\"sector\":\"Hostelería\",\"sub\":\"Libanés\",\"zone\":\"Las Margaritas / Getafe Norte\",\"address\":\"C. Córdoba, 6, 28903\",\"phone\":\"641 313 303\",\"phoneAlt\":\"\",\"email\":\"ellibanesgetafe@gmail.com\",\"web\":\"https://ellibanesgetafe.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+El+Liban%C3%A9s&query_place_id=ChIJZ0CuoBUhQg0Rcnr4j8huz0A\",\"rating\":4.7,\"reviews\":507,\"reservations\":\"CoverManager\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":35,\"why\":\"507 reseñas en Google, email público\",\"lat\":40.3101316,\"lng\":-3.716438,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+El+Liban%C3%A9s&query_place_id=ChIJZ0CuoBUhQg0Rcnr4j8huz0A\"},{\"label\":\"Web atribuida\",\"url\":\"https://ellibanesgetafe.com/\"},{\"label\":\"Reservas\",\"url\":\"https://restaurante.covermanager.com/restaurante-el-libanes/\"}],\"hasPage\":true},{\"id\":138,\"name\":\"¡Órale pues!\",\"sector\":\"Hostelería\",\"sub\":\"Mexicano\",\"zone\":\"Centro\",\"address\":\"C. Leoncio Rojas, 14, 28901\",\"phone\":\"916 018 999\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=%C2%A1%C3%93rale+pues%21&query_place_id=ChIJ_aQUBochQg0RJbNzIR6gXRU\",\"rating\":4.8,\"reviews\":151,\"reservations\":\"TheFork\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":40,\"why\":\"sin web propia localizada\",\"lat\":40.3020215,\"lng\":-3.7311449,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=%C2%A1%C3%93rale+pues%21&query_place_id=ChIJ_aQUBochQg0RJbNzIR6gXRU\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/orale-pues-r861733\"}],\"hasPage\":true},{\"id\":139,\"name\":\"Errazki (asador)\",\"sector\":\"Hostelería\",\"sub\":\"Asador\",\"zone\":\"Centro norte\",\"address\":\"C. Manzana, 28902\",\"phone\":\"916 830 916\",\"phoneAlt\":\"630 740 207\",\"email\":\"info@asadorerrazki.com\",\"web\":\"https://asadorerrazki.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Errazki&query_place_id=ChIJh9kD1JUgQg0RMpY-JVnNsaU\",\"rating\":4.2,\"reviews\":2304,\"reservations\":\"TheFork\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Alta\",\"score\":40,\"why\":\"2304 reseñas en Google, email público\",\"lat\":40.3075488,\"lng\":-3.7279097,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Errazki&query_place_id=ChIJh9kD1JUgQg0RMpY-JVnNsaU\"},{\"label\":\"Web atribuida\",\"url\":\"https://asadorerrazki.com/\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/asador-errazki-r10232\"}],\"hasPage\":true},{\"id\":140,\"name\":\"Basant Indian Restaurant\",\"sector\":\"Hostelería\",\"sub\":\"Indio\",\"zone\":\"El Bercial\",\"address\":\"C. Guanabacoa, 9, 28907\",\"phone\":\"914 911 546\",\"phoneAlt\":\"675 026 008\",\"email\":\"info@basant.es\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Basant+Indian+Restaurant&query_place_id=ChIJZ-oe3qggQg0RzDqGX7_Rqvc\",\"rating\":4.3,\"reviews\":992,\"reservations\":\"TheFork\",\"orders\":\"\",\"whatsapp\":\"anunciado\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":65,\"why\":\"sin web propia localizada, 992 reseñas en Google, email público\",\"lat\":40.3223114,\"lng\":-3.7396667,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Basant+Indian+Restaurant&query_place_id=ChIJZ-oe3qggQg0RzDqGX7_Rqvc\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/basant-r73522\"}],\"hasPage\":true},{\"id\":141,\"name\":\"Brasayleña Nassica\",\"sector\":\"Hostelería\",\"sub\":\"Brasa / parrilla\",\"zone\":\"Nassica / Los Ángeles\",\"address\":\"CC Nassica, Av. RíoGuadalquivir, 13, 28906\",\"phone\":\"915 461 105\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Brasayle%C3%B1a+Nassica&query_place_id=ChIJqz78d7YhQg0RtxiRe-BAIHc\",\"rating\":3.8,\"reviews\":5945,\"reservations\":\"TheFork (listado)\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":true,\"presence\":\"Cadena\",\"score\":10,\"why\":\"sin web propia localizada, 5945 reseñas en Google, cadena, penalizado\",\"lat\":40.272522,\"lng\":-3.6952803,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Restaurante+Brasayle%C3%B1a+Nassica&query_place_id=ChIJqz78d7YhQg0RtxiRe-BAIHc\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurantes/getafe-c187443\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/brasaylena-nassica-getafe/E2FvZS_NSB2y1QOemGoKLQ\"}],\"hasPage\":true},{\"id\":142,\"name\":\"Asador los Madroños\",\"sector\":\"Hostelería\",\"sub\":\"Asador\",\"zone\":\"El Bercial\",\"address\":\"C. Einstein, 3, 28907\",\"phone\":\"916 018 107\",\"phoneAlt\":\"\",\"email\":\"info@restaurantelosmadronos.com\",\"web\":\"https://restaurantelosmadronos.com/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Asador+los+Madro%C3%B1os&query_place_id=ChIJRzWSC6cgQg0RF7SGNo2h2Uc\",\"rating\":3.9,\"reviews\":432,\"reservations\":\"TheFork\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":23,\"why\":\"email público\",\"lat\":40.316898,\"lng\":-3.742245,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Asador+los+Madro%C3%B1os&query_place_id=ChIJRzWSC6cgQg0RF7SGNo2h2Uc\"},{\"label\":\"Web atribuida\",\"url\":\"https://restaurantelosmadronos.com/\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/los-madronos-restaurante-asador-r860329\"}],\"hasPage\":true},{\"id\":143,\"name\":\"La Andaluza Getafe\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"Av. Buenos Aires, 25, 28907\",\"phone\":\"912 273 338\",\"phoneAlt\":\"618 280 861\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=La+Andaluza+Getafe&query_place_id=ChIJCRvZcHQhQg0RpbfC4In80O4\",\"rating\":3.6,\"reviews\":255,\"reservations\":\"TheFork (listado)\",\"orders\":\"\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":43,\"why\":\"sin web propia localizada\",\"lat\":40.3280058,\"lng\":-3.736395,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=La+Andaluza+Getafe&query_place_id=ChIJCRvZcHQhQg0RpbfC4In80O4\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurantes/getafe-c187443\"}],\"hasPage\":true},{\"id\":144,\"name\":\"Yakizakaya\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"El Bercial\",\"address\":\"Av. Comandante JoséManuel Ripollés, 3, 28907\",\"phone\":\"919 958 064\",\"phoneAlt\":\"\",\"email\":\"info@yakizakaya.com\",\"web\":\"https://yakizakaya.com/en/\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Yakizakaya+%28Neotaberna+Japonesa%29&query_place_id=ChIJ33AcYgAhQg0Rge0HbotWdBI\",\"rating\":null,\"reviews\":0,\"reservations\":\"TheFork\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Alta\",\"score\":15,\"why\":\"email público\",\"lat\":null,\"lng\":null,\"pending\":false,\"mapsOk\":false,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Yakizakaya+%28Neotaberna+Japonesa%29&query_place_id=ChIJ33AcYgAhQg0Rge0HbotWdBI\"},{\"label\":\"Web atribuida\",\"url\":\"https://yakizakaya.com/en/\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/yakizakaya-r838393\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es-en/store/yakizakaya/pulC4JOpQSmmkifbJWpmCQ\"}],\"hasPage\":true},{\"id\":145,\"name\":\"Felino\",\"sector\":\"Hostelería\",\"sub\":\"Restaurante / bar\",\"zone\":\"Centro\",\"address\":\"P.º Pablo Iglesias, 4, 28901\",\"phone\":\"604 904 873\",\"phoneAlt\":\"\",\"email\":\"\",\"web\":\"\",\"webInsecure\":false,\"certIssue\":false,\"maps\":\"https://www.google.com/maps/search/?api=1&query=Felino&query_place_id=ChIJSwl_lHYhQg0RjKjnLRewerg\",\"rating\":4.5,\"reviews\":29,\"reservations\":\"TheFork\",\"orders\":\"Uber Eats\",\"whatsapp\":\"sin-dato\",\"chain\":false,\"presence\":\"Media-alta\",\"score\":40,\"why\":\"sin web propia localizada\",\"lat\":40.3086935,\"lng\":-3.7313079,\"pending\":false,\"mapsOk\":true,\"sources\":[{\"label\":\"Ficha de Google Maps\",\"url\":\"https://www.google.com/maps/search/?api=1&query=Felino&query_place_id=ChIJSwl_lHYhQg0RjKjnLRewerg\"},{\"label\":\"Reservas\",\"url\":\"https://www.thefork.es/restaurante/felino-r844863\"},{\"label\":\"Pedidos\",\"url\":\"https://www.ubereats.com/es/store/felino/43rWHch6Wv6UahDGwsc5pg\"}],\"hasPage\":true}]");
+var SECTORS = [
+	{
+		id: "todos",
+		label: "Todos",
+		ticket: null,
+		investigated: true
+	},
+	{
+		id: "hosteleria",
+		label: "Hostelería",
+		ticket: "low",
+		investigated: true
+	},
+	{
+		id: "peluqueria",
+		label: "Peluquerías",
+		ticket: "low",
+		investigated: false
+	},
+	{
+		id: "gimnasio",
+		label: "Gimnasios",
+		ticket: "low",
+		investigated: false
+	},
+	{
+		id: "clinica",
+		label: "Clínicas",
+		ticket: "high",
+		investigated: false
+	},
+	{
+		id: "estetica",
+		label: "Medicina estética",
+		ticket: "high",
+		investigated: false
+	},
+	{
+		id: "vet",
+		label: "Clínicas veterinarias",
+		ticket: "medium",
+		investigated: false
+	},
+	{
+		id: "inmobiliaria",
+		label: "Inmobiliarias",
+		ticket: "high",
+		investigated: false
+	},
+	{
+		id: "gestion",
+		label: "Gestión de pisos",
+		ticket: "medium",
+		investigated: false
+	},
+	{
+		id: "taller",
+		label: "Talleres",
+		ticket: "medium",
+		investigated: false
+	},
+	{
+		id: "asesoria",
+		label: "Asesorías",
+		ticket: "medium",
+		investigated: false
+	},
+	{
+		id: "academia",
+		label: "Academias",
+		ticket: "medium",
+		investigated: false
+	},
+	{
+		id: "escuela",
+		label: "Escuelas",
+		ticket: "high",
+		investigated: false
+	},
+	{
+		id: "abogado",
+		label: "Abogados",
+		ticket: "medium",
+		investigated: false
+	},
+	{
+		id: "arquitectura",
+		label: "Arquitectura",
+		ticket: "high",
+		investigated: false
+	},
+	{
+		id: "hotel",
+		label: "Hoteles",
+		ticket: "medium",
+		investigated: false
+	},
+	{
+		id: "concesionario",
+		label: "Concesionarios",
+		ticket: "high",
+		investigated: false
+	},
+	{
+		id: "alquiler",
+		label: "Alquiler de coches",
+		ticket: "low",
+		investigated: false
+	},
+	{
+		id: "agencia",
+		label: "Agencias de viaje",
+		ticket: "medium",
+		investigated: false
+	}
+];
+var TOWNS = [
+	{
+		id: "getafe",
+		name: "Getafe",
+		ready: true
+	},
+	{
+		id: "leganes",
+		name: "Leganés",
+		ready: false
+	},
+	{
+		id: "pinto",
+		name: "Pinto",
+		ready: false
+	},
+	{
+		id: "fuenlabrada",
+		name: "Fuenlabrada",
+		ready: false
+	},
+	{
+		id: "alcorcon",
+		name: "Alcorcón",
+		ready: false
+	},
+	{
+		id: "mostoles",
+		name: "Móstoles",
+		ready: false
+	},
+	{
+		id: "parla",
+		name: "Parla",
+		ready: false
+	},
+	{
+		id: "valdemoro",
+		name: "Valdemoro",
+		ready: false
+	},
+	{
+		id: "humanes",
+		name: "Humanes de Madrid",
+		ready: false
+	},
+	{
+		id: "madrid",
+		name: "Madrid",
+		ready: false
+	}
+];
+var SIT = /* @__PURE__ */ new Set([
+	"Restaurante / bar",
+	"Bar",
+	"Cervecería",
+	"Mesón",
+	"Gastrobar",
+	"Asador",
+	"Taberna",
+	"Brasa / parrilla",
+	"Parrilla",
+	"Peruano",
+	"Italiano",
+	"Mexicano",
+	"Libanés",
+	"Indio",
+	"Venezolano",
+	"Chino",
+	"Asiático",
+	"Sushi / japonés",
+	"Ramen / japonés",
+	"Pizzería / italiano",
+	"Vinoteca / bar"
+]);
+var CATALOG = getafe_default.map((r) => ({
+	id: r.id,
+	city: "getafe",
+	sectorId: "hosteleria",
+	name: r.name,
+	sectorLabel: "Hostelería",
+	sub: r.sub,
+	zone: r.zone,
+	address: r.address,
+	phone: r.phone,
+	phoneAlt: r.phoneAlt,
+	email: r.email,
+	web: r.web,
+	hasPage: r.hasPage,
+	certIssue: r.certIssue,
+	rating: r.rating,
+	reviews: r.reviews,
+	reservations: r.reservations,
+	orders: r.orders,
+	whatsapp: r.whatsapp,
+	chain: r.chain,
+	presence: r.presence,
+	why: r.why,
+	lat: r.lat,
+	lng: r.lng,
+	pending: r.pending,
+	mapsOk: r.mapsOk,
+	sources: r.sources ?? [],
+	imported: false,
+	origin: "informe"
+}));
+function sectorById(id) {
+	return SECTORS.find((s) => s.id === id) ?? SECTORS[0];
+}
+function townById(id) {
+	return TOWNS.find((t) => t.id === id) ?? TOWNS[0];
+}
+function buildOffers(b) {
+	if (b.pending) return [];
+	if (originOf(b) === "osm") return osmOffers(b);
+	return informeOffers(b);
+}
+function osmOffers(b) {
+	const offers = [];
+	if (!b.hasPage) offers.push({
+		id: "web",
+		title: "Web nueva",
+		short: "web no consta en el mapa",
+		detail: "OpenStreetMap no trae página. No localizado no significa inexistente. Márcala solo si lo compruebas.",
+		a: 800,
+		b: 1500,
+		m: 0,
+		evidenced: false
+	});
+	if (!b.reservations && !b.chain && (SIT.has(b.sub) || b.sub === "Restaurante" || b.sub === "Cafetería")) offers.push({
+		id: "res",
+		title: "Web de reservas",
+		short: "reserva no consta en el mapa",
+		detail: "La ficha de mapa no trae reservas. Puede existir fuera. No es un hueco del informe.",
+		a: 500,
+		b: 1500,
+		m: 30,
+		evidenced: false
+	});
+	offers.push({
+		id: "qr",
+		title: "Carta digital (SaaS)",
+		short: "sin comprobar",
+		detail: "Actívala solo si lo ves en el local.",
+		a: 0,
+		b: 0,
+		m: 49,
+		evidenced: false
+	}, {
+		id: "wa",
+		title: "Agente de WhatsApp",
+		short: "sin verificar",
+		detail: "Un teléfono del mapa no implica WhatsApp.",
+		a: 350,
+		b: 900,
+		m: 45,
+		evidenced: false
+	}, {
+		id: "camp",
+		title: "Campañas por WhatsApp",
+		short: "sin base verificada",
+		detail: "No hay lista de contactos comprobada.",
+		a: 200,
+		b: 350,
+		m: 60,
+		evidenced: false
+	});
+	return offers;
+}
+function informeOffers(b) {
+	const offers = [];
+	if (!b.hasPage) offers.push({
+		id: "web",
+		title: "Web nueva",
+		short: "sin página propia localizada",
+		detail: "La investigación no atribuyó una página propia. No localizado no significa inexistente.",
+		a: 800,
+		b: 1500,
+		m: 0,
+		evidenced: true
+	});
+	if (b.certIssue) offers.push({
+		id: "https",
+		title: "Candado https",
+		short: "error de certificado anotado",
+		detail: "El informe del 6 nov 2026 anotó un error de certificado en un dominio asociado. No es una auditoría nueva.",
+		a: 400,
+		b: 900,
+		m: 0,
+		evidenced: true
+	});
+	if (!b.reservations && !b.chain && SIT.has(b.sub)) offers.push({
+		id: "res",
+		title: "Web de reservas",
+		short: "reserva online no localizada",
+		detail: "No hay enlace de reserva atribuido. Puede existir fuera de las fuentes leídas.",
+		a: 500,
+		b: 1500,
+		m: 30,
+		evidenced: true
+	});
+	if (b.orders && !b.chain) offers.push({
+		id: "app",
+		title: "App de pedidos",
+		short: "pedidos enlazados en plataforma",
+		detail: `Pedido enlazado: ${b.orders}. Que pague comisión es una hipótesis comercial, no un dato del informe.`,
+		a: 1500,
+		b: 3500,
+		m: 0,
+		evidenced: true
+	});
+	offers.push({
+		id: "qr",
+		title: "Carta digital (SaaS)",
+		short: "carta con QR, sin comprobar",
+		detail: "La investigación no auditó carta con QR. Actívala solo si lo ves en el local.",
+		a: 0,
+		b: 0,
+		m: 49,
+		evidenced: false
+	}, {
+		id: "wa",
+		title: "Agente de WhatsApp",
+		short: "WhatsApp no verificado como canal",
+		detail: b.whatsapp === "anunciado" ? "WhatsApp anunciado por el negocio. Un agente es una idea, no una carencia demostrada." : "WhatsApp no aparece anunciado. Un móvil no implica WhatsApp.",
+		a: 350,
+		b: 900,
+		m: 45,
+		evidenced: false
+	}, {
+		id: "camp",
+		title: "Campañas por WhatsApp",
+		short: "promos, sin base verificada",
+		detail: "Avisos a clientes. No hay lista de contactos comprobada.",
+		a: 200,
+		b: 350,
+		m: 60,
+		evidenced: false
+	});
+	return offers;
+}
+function emptyPref() {
+	return {
+		on: [],
+		off: []
+	};
+}
+function offerOn(o, pref) {
+	return o.evidenced ? !pref.off.includes(o.id) : pref.on.includes(o.id);
+}
+function totals(offers, pref) {
+	let a = 0;
+	let b = 0;
+	let m = 0;
+	for (const o of offers) {
+		if (!offerOn(o, pref)) continue;
+		a += o.a;
+		b += o.b;
+		m += o.m;
+	}
+	return {
+		a,
+		b,
+		m
+	};
+}
+function heatOf(max) {
+	if (max > 3500) return "high";
+	if (max >= 1500) return "mid";
+	return "low";
+}
+function euro(n) {
+	return `${Math.round(n).toLocaleString("es-ES")} €`;
+}
+function moneyLine(o) {
+	const span = o.a === 0 && o.b === 0 ? "" : o.a === o.b ? euro(o.a) : `${euro(o.a)} – ${euro(o.b)}`;
+	const month = o.m ? `${o.m.toLocaleString("es-ES")} €/mes` : "";
+	if (span && month) return `${span} + ${month}`;
+	return span || month;
+}
+function telHref(phone) {
+	const d = (phone || "").replace(/\D/g, "");
+	if (d.length === 9) return `tel:+34${d}`;
+	if (d.startsWith("34") && d.length >= 11) return `tel:+${d}`;
+	if (!d) return "";
+	return `tel:+${d}`;
+}
+function gapLine(b, offers, pref) {
+	if (b.pending) return "Identidad hostelera pendiente. No es un prospecto.";
+	if (originOf(b) === "osm") return b.phone ? "Contacto público en OpenStreetMap. Sin auditar." : "En el mapa, sin teléfono publicado.";
+	if (originOf(b) === "archivo") {
+		const active = offers.filter((o) => o.evidenced && offerOn(o, pref));
+		if (active.length === 0) return "Lista importada. Sin hueco marcado.";
+		return `${active[0].title}: ${active[0].short}`;
+	}
+	const active = offers.filter((o) => o.evidenced && offerOn(o, pref));
+	if (b.chain && active.length === 0) return "Cadena: la decisión puede no ser local.";
+	if (active.length === 0) return "Sin hueco evidenciado en el informe.";
+	return `${active[0].title}: ${active[0].short}`;
+}
+function channels(b) {
+	const list = [];
+	if (b.hasPage || b.web) list.push("Web");
+	if (b.reservations) list.push("Reservas");
+	if (b.orders) list.push("Pedidos");
+	if (b.email) list.push("Email");
+	if (b.whatsapp === "anunciado") list.push("WhatsApp");
+	if (b.phone) list.push("Teléfono");
+	return list;
+}
+function researchBrief(sectorLabel, town) {
+	return `Elabora un catálogo de ${sectorLabel.toLowerCase()} de ${town} con presencia digital y contacto público empresarial. Fecha de consulta: hoy.
+
+LISTA BASE
+1. Busca por categoría y zona en Google Maps y recorre los resultados por barrios.
+2. Complementa con listados municipales, directorios locales y, si es un centro sanitario, el registro oficial accesible.
+3. Registra nombre y dirección de cada candidato. No presentes la lista como censo exhaustivo.
+
+VERIFICACIÓN, NEGOCIO A NEGOCIO
+4. Busca cada nombre junto con su dirección. Contrasta teléfono y dirección (homónimos, cadenas de otro municipio).
+5. Atribuye identidad, contacto y canales desde las fuentes del propio negocio; después directorios; por último, datos sin confirmar. Anota las fuentes rechazadas.
+6. Web: comprueba HTTP y HTTPS por separado. Reservas o cita: distingue directorio de página propia. No contactes, no reserves y no pidas cita. WhatsApp solo si el negocio lo anuncia. No inventes emails.
+7. Un canal ausente se registra como «no encontrado» con fecha, no como inexistente.
+
+SALIDA
+CSV con punto y coma y estas columnas:
+nombre;sector;subtipo;direccion;telefono;email;web;zona;lat;lng;reservas;pedidos;fuente_url
+El sector debe ser uno de: ${SECTORS.filter((s) => s.id !== "todos").map((s) => s.label).join(", ")}.
+
+LÍMITES
+Sin proyecciones de precios, demanda o ingresos. Sin contactar con los negocios. No localizado no significa inexistente.`;
+}
+function norm(s) {
+	return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "");
+}
+var nameKey = norm;
+function originOf(b) {
+	if (b.origin) return b.origin;
+	return b.imported ? "archivo" : "informe";
+}
+function sectorIdFromLabel(label) {
+	const n = norm(label);
+	const hit = SECTORS.find((s) => s.id !== "todos" && (norm(s.label) === n || norm(s.id) === n));
+	if (hit) return hit.id;
+	if (/restaur|bar|cafeter|hosteler|taberna/.test(n)) return "hosteleria";
+	if (/pelu|barber|belleza/.test(n)) return "peluqueria";
+	if (/gym|gimnas|fitness/.test(n)) return "gimnasio";
+	if (/veter/.test(n)) return "vet";
+	if (/estet/.test(n)) return "estetica";
+	if (/clinic|dental|fisio|medic/.test(n)) return "clinica";
+	if (/inmob/.test(n)) return "inmobiliaria";
+	if (/taller|mecan/.test(n)) return "taller";
+	if (/asesor|gestor/.test(n)) return "asesoria";
+	if (/academ/.test(n)) return "academia";
+	if (/escuel/.test(n)) return "escuela";
+	if (/abog/.test(n)) return "abogado";
+	if (/arquit/.test(n)) return "arquitectura";
+	if (/hotel/.test(n)) return "hotel";
+	if (/conces/.test(n)) return "concesionario";
+	if (/alquiler|rent/.test(n)) return "alquiler";
+	if (/agencia|viaje/.test(n)) return "agencia";
+	return "hosteleria";
+}
+function splitCsv(line, sep) {
+	const out = [];
+	let cur = "";
+	let q = false;
+	for (let i = 0; i < line.length; i++) {
+		const ch = line[i];
+		if (ch === "\"") {
+			if (q && line[i + 1] === "\"") {
+				cur += "\"";
+				i++;
+			} else q = !q;
+		} else if (ch === sep && !q) {
+			out.push(cur);
+			cur = "";
+		} else cur += ch;
+	}
+	out.push(cur);
+	return out;
+}
+function parseImport(text, city) {
+	const lines = text.trim().split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+	if (!lines.length) return {
+		rows: [],
+		skipped: 0
+	};
+	const sep = lines[0].includes(";") ? ";" : ",";
+	const header = splitCsv(lines[0], sep).map(norm);
+	const idx = (name) => header.indexOf(norm(name));
+	const rows = [];
+	let skipped = 0;
+	lines.slice(1).forEach((line, n) => {
+		const cells = splitCsv(line, sep).map((c) => c.trim());
+		const get = (key) => {
+			const i = idx(key);
+			return i >= 0 ? cells[i] || "" : "";
+		};
+		const name = get("nombre") || get("name");
+		if (!name) {
+			skipped++;
+			return;
+		}
+		const sectorId = sectorIdFromLabel(get("sector") || get("tipo") || "Hostelería");
+		const sector = sectorById(sectorId);
+		const lat = Number(String(get("lat") || get("latitud")).replace(",", "."));
+		const lng = Number(String(get("lng") || get("longitud") || get("lon")).replace(",", "."));
+		const web = get("web");
+		const fuente = get("fuente_url") || get("fuente");
+		rows.push({
+			id: 2e5 + n + Math.floor(Math.random() * 1e3),
+			city,
+			sectorId,
+			name: name.slice(0, 120),
+			sectorLabel: sector?.label ?? "Otro",
+			sub: (get("subtipo") || get("subsector") || "Sin subtipo").slice(0, 60),
+			zone: (get("zona") || "").slice(0, 60),
+			address: (get("direccion") || "").slice(0, 160),
+			phone: (get("telefono") || "").slice(0, 30),
+			phoneAlt: (get("telefono2") || get("telefono_alt") || "").slice(0, 30),
+			email: get("email").includes("@") ? get("email").slice(0, 120) : "",
+			web: /^https?:\/\//i.test(web) ? web.slice(0, 200) : "",
+			hasPage: /^https?:\/\//i.test(web),
+			certIssue: false,
+			rating: null,
+			reviews: 0,
+			reservations: get("reservas").slice(0, 80),
+			orders: get("pedidos").slice(0, 80),
+			whatsapp: "sin-dato",
+			chain: false,
+			presence: "Importado",
+			why: "Importado desde una lista pegada. Sin verificar en esta app.",
+			lat: Number.isFinite(lat) && lat > 35 && lat < 45 ? lat : null,
+			lng: Number.isFinite(lng) && lng > -10 && lng < 5 ? lng : null,
+			pending: false,
+			mapsOk: false,
+			sources: /^https?:\/\//i.test(fuente) ? [{
+				label: "Fuente de la lista",
+				url: fuente.slice(0, 300)
+			}] : [],
+			imported: true,
+			origin: "archivo"
+		});
+	});
+	return {
+		rows,
+		skipped
+	};
+}
+var TOWN_GEO = [
+	{
+		id: "getafe",
+		name: "Getafe",
+		lat: 40.3071,
+		lon: -3.7332,
+		radiusKm: 7,
+		aliases: ["getafe"],
+		west: -3.7617,
+		south: 40.2664,
+		east: -3.5701,
+		north: 40.3347
+	},
+	{
+		id: "leganes",
+		name: "Leganés",
+		lat: 40.3282,
+		lon: -3.7653,
+		radiusKm: 6,
+		aliases: ["leganes"],
+		west: -3.8184,
+		south: 40.2925,
+		east: -3.7209,
+		north: 40.3655
+	},
+	{
+		id: "pinto",
+		name: "Pinto",
+		lat: 40.241,
+		lon: -3.7005,
+		radiusKm: 8,
+		aliases: ["pinto"],
+		west: -3.7413,
+		south: 40.1989,
+		east: -3.6225,
+		north: 40.2929
+	},
+	{
+		id: "fuenlabrada",
+		name: "Fuenlabrada",
+		lat: 40.2825,
+		lon: -3.7923,
+		radiusKm: 6,
+		aliases: ["fuenlabrada"],
+		west: -3.844,
+		south: 40.2496,
+		east: -3.7393,
+		north: 40.3277
+	},
+	{
+		id: "alcorcon",
+		name: "Alcorcón",
+		lat: 40.3493,
+		lon: -3.8284,
+		radiusKm: 6,
+		aliases: ["alcorcon"],
+		west: -3.8788,
+		south: 40.3239,
+		east: -3.7879,
+		north: 40.4031
+	},
+	{
+		id: "mostoles",
+		name: "Móstoles",
+		lat: 40.3239,
+		lon: -3.8649,
+		radiusKm: 7,
+		aliases: ["mostoles"],
+		west: -3.9454,
+		south: 40.2858,
+		east: -3.8409,
+		north: 40.3541
+	},
+	{
+		id: "parla",
+		name: "Parla",
+		lat: 40.2374,
+		lon: -3.7719,
+		radiusKm: 5,
+		aliases: ["parla"],
+		west: -3.8074,
+		south: 40.2012,
+		east: -3.7338,
+		north: 40.2565
+	},
+	{
+		id: "valdemoro",
+		name: "Valdemoro",
+		lat: 40.1887,
+		lon: -3.6706,
+		radiusKm: 8,
+		aliases: ["valdemoro"],
+		west: -3.7182,
+		south: 40.1327,
+		east: -3.5916,
+		north: 40.2296
+	},
+	{
+		id: "humanes",
+		name: "Humanes de Madrid",
+		lat: 40.2509,
+		lon: -3.8271,
+		radiusKm: 4,
+		aliases: ["humanesdemadrid", "humanes"],
+		west: -3.8534,
+		south: 40.2271,
+		east: -3.7964,
+		north: 40.2775
+	},
+	{
+		id: "madrid",
+		name: "Madrid",
+		lat: 40.4168,
+		lon: -3.7038,
+		radiusKm: 12,
+		aliases: ["madrid"],
+		west: -3.889,
+		south: 40.312,
+		east: -3.518,
+		north: 40.643
+	}
+];
+var SECTOR_QUERIES = {
+	hosteleria: [
+		"restaurante",
+		"bar",
+		"cafeteria"
+	],
+	peluqueria: ["peluqueria", "barberia"],
+	gimnasio: ["gimnasio"],
+	clinica: ["clinica", "dentista"],
+	estetica: ["estetica", "centro de belleza"],
+	vet: ["veterinario"],
+	inmobiliaria: ["inmobiliaria"],
+	gestion: ["gestion de pisos"],
+	taller: ["taller mecanico"],
+	asesoria: ["asesoria", "gestoria"],
+	academia: ["academia"],
+	escuela: ["colegio", "escuela"],
+	abogado: ["abogado"],
+	arquitectura: ["arquitecto"],
+	hotel: ["hotel"],
+	concesionario: ["concesionario"],
+	alquiler: ["alquiler de coches"],
+	agencia: ["agencia de viajes"]
+};
+var SUB = {
+	restaurant: "Restaurante",
+	bar: "Bar",
+	cafe: "Cafetería",
+	fast_food: "Comida rápida",
+	pub: "Bar",
+	ice_cream: "Heladería",
+	hairdresser: "Peluquería",
+	beauty: "Estética",
+	fitness_centre: "Gimnasio",
+	clinic: "Clínica",
+	doctors: "Clínica",
+	dentist: "Clínica dental",
+	veterinary: "Veterinaria",
+	estate_agent: "Inmobiliaria",
+	car_repair: "Taller",
+	school: "Escuela",
+	kindergarten: "Escuela",
+	college: "Escuela",
+	hotel: "Hotel",
+	guest_house: "Hotel",
+	hostel: "Hotel",
+	car: "Concesionario",
+	car_rental: "Alquiler",
+	travel_agency: "Agencia",
+	lawyer: "Abogado",
+	architect: "Arquitectura",
+	tax_advisor: "Asesoría",
+	accountant: "Asesoría"
+};
+function townGeo(id) {
+	return TOWN_GEO.find((t) => t.id === id) ?? TOWN_GEO[0];
+}
+function km(aLat, aLon, bLat, bLon) {
+	const r = 6371;
+	const dLat = (bLat - aLat) * Math.PI / 180;
+	const dLon = (bLon - aLon) * Math.PI / 180;
+	const s = Math.sin(dLat / 2) ** 2 + Math.cos(aLat * Math.PI / 180) * Math.cos(bLat * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+	return 2 * r * Math.asin(Math.sqrt(s));
+}
+function cityMatches(raw, town, lat, lon) {
+	const key = nameKey(raw || "");
+	if (key && town.aliases.some((a) => key === a || key.startsWith(a))) return true;
+	if (key) return false;
+	return km(lat, lon, town.lat, town.lon) <= town.radiusKm;
+}
+function osmUrl(osmType, osmId) {
+	return `https://www.openstreetmap.org/${osmType === "W" || osmType === "way" ? "way" : osmType === "R" || osmType === "relation" ? "relation" : "node"}/${osmId}`;
+}
+function bizId(osmType, osmId) {
+	const s = `${osmType}:${osmId}`;
+	let h = 2166136261;
+	for (let i = 0; i < s.length; i++) {
+		h ^= s.charCodeAt(i);
+		h = Math.imul(h, 16777619);
+	}
+	return 3e8 + (h >>> 0) % 9e7;
+}
+function cleanWeb(raw) {
+	const s = raw.trim();
+	if (!s || /^(no|none|null|-)$/i.test(s)) return "";
+	if (/^https?:\/\//i.test(s)) return s.slice(0, 200);
+	if (/^[\w.-]+\.[a-z]{2,}([/?#].*)?$/i.test(s)) return `https://${s}`.slice(0, 200);
+	return "";
+}
+function pickPhone(tags) {
+	return (tags.phone || tags["contact:phone"] || tags["contact:mobile"] || tags.mobile || "").slice(0, 40);
+}
+function toBiz(place, cityId, sectorId) {
+	const town = townGeo(cityId);
+	if (!place.name.trim()) return null;
+	if (!Number.isFinite(place.lat) || !Number.isFinite(place.lon)) return null;
+	if (!cityMatches(place.city, town, place.lat, place.lon)) return null;
+	const tags = place.tags ?? {};
+	const sector = sectorById(sectorId);
+	const web = cleanWeb(tags.website || tags["contact:website"] || tags.url || "");
+	const phone = pickPhone(tags);
+	const email = (tags.email || tags["contact:email"] || "").includes("@") ? (tags.email || tags["contact:email"]).slice(0, 120) : "";
+	const sub = SUB[place.osmValue || ""] || sector.label;
+	const address = [
+		place.street,
+		place.housenumber,
+		place.postcode
+	].filter(Boolean).join(", ");
+	return {
+		id: bizId(place.osmType, place.osmId),
+		city: cityId,
+		sectorId,
+		name: place.name.trim().slice(0, 120),
+		sectorLabel: sector.label,
+		sub,
+		zone: (place.district || "").slice(0, 60),
+		address: address.slice(0, 160),
+		phone,
+		phoneAlt: "",
+		email,
+		web,
+		hasPage: Boolean(web),
+		certIssue: false,
+		rating: null,
+		reviews: 0,
+		reservations: "",
+		orders: "",
+		whatsapp: "sin-dato",
+		chain: false,
+		presence: "Mapa",
+		why: "Ficha pública de OpenStreetMap. No es el informe del 6 nov 2026 y no está auditada.",
+		lat: place.lat,
+		lng: place.lon,
+		pending: false,
+		mapsOk: false,
+		sources: [{
+			label: "OpenStreetMap",
+			url: osmUrl(place.osmType, place.osmId)
+		}],
+		imported: false,
+		origin: "osm"
+	};
+}
+//#endregion
+export { townGeo as C, townById as S, researchBrief as _, buildOffers as a, toBiz as b, emptyPref as c, heatOf as d, moneyLine as f, parseImport as g, originOf as h, TOWNS as i, euro as l, offerOn as m, SECTORS as n, channels as o, nameKey as p, SECTOR_QUERIES as r, cityMatches as s, CATALOG as t, gapLine as u, sectorById as v, totals as x, telHref as y };

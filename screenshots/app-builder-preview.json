@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Radar AsExIA",
+      "hasCanvas": false,
+      "bodyTextLen": 21092,
+      "bodyTextHash": "1cb842624a87ce0ecee0a9eb86747ad0d981593b70aba26f025f8060c3b2a949",
+      "bodyTextPrefix": "RADAR · ASEXIA ¿A quién le preparas una propuesta? +3.500 € 1.50",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Radar AsExIA",
+      "hasCanvas": false,
+      "bodyTextLen": 21126,
+      "bodyTextHash": "6f638f3123ff752d8b2880e6579b89ee4df61a3010bd813ff72dfde41103016b",
+      "bodyTextPrefix": "RADAR · ASEXIA ¿A quién le preparas una propuesta? Leaflet | © O",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}
