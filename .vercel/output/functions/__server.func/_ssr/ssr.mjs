@@ -103,7 +103,7 @@ var HEADERS = { TSS_SHELL: "X-TSS_SHELL" };
 * the dev styles URL for route-scoped CSS collection.
 */
 async function getStartManifest(matchedRoutes) {
-	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-CQm1GWKd.mjs");
+	const { tsrStartManifest } = await import("../_tanstack-start-manifest_v-D5yRy1lM.mjs");
 	const startManifest = tsrStartManifest();
 	let routes = startManifest.routes;
 	routes[rootRouteId];
@@ -122,10 +122,16 @@ async function getStartManifest(matchedRoutes) {
 		routes: manifestRoutes
 	};
 }
-var manifest = { "7558de16b2ae04204a8ee48e09bb157babdc355e46e04af4a81dc908f52a0bb3": {
-	functionName: "searchSector_createServerFn_handler",
-	importer: () => import("./search-Byd_wuPn.mjs")
-} };
+var manifest = {
+	"7558de16b2ae04204a8ee48e09bb157babdc355e46e04af4a81dc908f52a0bb3": {
+		functionName: "searchSector_createServerFn_handler",
+		importer: () => import("./search-Bs-GIEEB.mjs")
+	},
+	"a48c5685df01995c7132b76b9d4ec95741f9c93fba631f11bb5dd4fce342aaf8": {
+		functionName: "searchBusiness_createServerFn_handler",
+		importer: () => import("./search-Bs-GIEEB.mjs")
+	}
+};
 async function getServerFnById(id, access) {
 	const serverFnInfo = manifest[id];
 	if (!serverFnInfo) throw new Error("Server function info not found for " + id);
@@ -1528,7 +1534,7 @@ var getBaseManifest = getProdBaseManifest;
 var createEarlyHintsForRequest = createEarlyHintsCollector;
 async function loadEntries() {
 	const [routerEntry, startEntry, pluginAdapters] = await Promise.all([
-		import("./router-C6YZyVEm.mjs").then((n) => n.t),
+		import("./router-Bij9WIGR.mjs").then((n) => n.t),
 		import("./start-5Z2QO8AU.mjs"),
 		import("./empty-plugin-adapters-D9UWiqvJ.mjs")
 	]);

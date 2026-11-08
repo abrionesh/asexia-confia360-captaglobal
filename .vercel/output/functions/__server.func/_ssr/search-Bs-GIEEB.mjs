@@ -1,6 +1,6 @@
 import { n as TSS_SERVER_FUNCTION, t as createServerFn } from "./ssr.mjs";
 import { C as townGeo, b as toBiz, p as nameKey, r as SECTOR_QUERIES, s as cityMatches } from "./places-BJ7DURjs.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/search-Byd_wuPn.js
+//#region node_modules/.nitro/vite/services/ssr/assets/search-Bs-GIEEB.js
 var createServerRpc = (serverFnMeta, splitImportFn) => {
 	const url = "/_serverFn/" + serverFnMeta.id;
 	return Object.assign(splitImportFn, {
@@ -166,6 +166,108 @@ async function runSearch(cityId, sectorId, force = false) {
 		at
 	};
 }
+function contactOf(tags) {
+	const t = tags ?? {};
+	const phone = (t.phone || t["contact:phone"] || t["contact:mobile"] || t.mobile || "").trim().slice(0, 40);
+	const emailRaw = (t.email || t["contact:email"] || "").trim();
+	const email = emailRaw.includes("@") ? emailRaw.slice(0, 120) : "";
+	const webRaw = (t.website || t["contact:website"] || t.url || "").trim();
+	let web = "";
+	if (/^https?:\/\//i.test(webRaw)) web = webRaw.slice(0, 200);
+	else if (/^[\w.-]+\.[a-z]{2,}/i.test(webRaw)) web = `https://${webRaw}`.slice(0, 200);
+	return {
+		phone,
+		email,
+		web
+	};
+}
+function osmLink(osmType, osmId) {
+	return `https://www.openstreetmap.org/${osmType === "W" || osmType === "way" ? "way" : osmType === "R" || osmType === "relation" ? "relation" : "node"}/${osmId}`;
+}
+async function runSearchOne(cityId, name) {
+	const town = townGeo(cityId);
+	const q = `${name} ${town.name}`.slice(0, 160);
+	const candidates = [];
+	const add = (place) => {
+		if (place?.name) candidates.push(place);
+	};
+	await Promise.allSettled([(async () => {
+		const url = new URL("https://photon.komoot.io/api/");
+		url.searchParams.set("q", q);
+		url.searchParams.set("limit", "8");
+		url.searchParams.set("lat", String(town.lat));
+		url.searchParams.set("lon", String(town.lon));
+		const body = await grab(url.toString());
+		for (const feature of body.features ?? []) add(fromPhoton(feature));
+	})(), (async () => {
+		const url = new URL("https://nominatim.openstreetmap.org/search");
+		url.searchParams.set("q", q);
+		url.searchParams.set("format", "jsonv2");
+		url.searchParams.set("limit", "5");
+		url.searchParams.set("addressdetails", "1");
+		url.searchParams.set("extratags", "1");
+		url.searchParams.set("countrycodes", "es");
+		const body = await grab(url.toString());
+		if (Array.isArray(body)) for (const row of body) add(fromNominatim(row));
+	})()]);
+	const want = nameKey(name);
+	const best = candidates.map((place) => {
+		const got = nameKey(place.name);
+		return {
+			place,
+			score: got === want ? 3 : got.includes(want) || want.includes(got) ? 2 : 0
+		};
+	}).filter((row) => row.score > 0).sort((a, b) => b.score - a.score)[0]?.place;
+	if (!best) return {
+		ok: false,
+		error: "Este negocio no aparece en el mapa."
+	};
+	let tags = { ...best.tags ?? {} };
+	try {
+		const kind = best.osmType === "W" || best.osmType === "way" ? "W" : best.osmType === "R" || best.osmType === "relation" ? "R" : "N";
+		const url = new URL("https://nominatim.openstreetmap.org/lookup");
+		url.searchParams.set("osm_ids", `${kind}${best.osmId}`);
+		url.searchParams.set("format", "jsonv2");
+		url.searchParams.set("extratags", "1");
+		const body = await grab(url.toString());
+		const row = Array.isArray(body) ? body.find((item) => item.osm_id === best.osmId) : void 0;
+		if (row?.extratags) tags = {
+			...row.extratags,
+			...tags
+		};
+	} catch {}
+	const contact = contactOf(tags);
+	const address = [
+		best.street,
+		best.housenumber,
+		best.postcode,
+		best.city
+	].filter(Boolean).join(", ");
+	return {
+		ok: true,
+		name: best.name,
+		phone: contact.phone,
+		email: contact.email,
+		web: contact.web,
+		address: address.slice(0, 160),
+		sourceUrl: osmLink(best.osmType, best.osmId)
+	};
+}
+var searchBusiness_createServerFn_handler = createServerRpc({
+	id: "a48c5685df01995c7132b76b9d4ec95741f9c93fba631f11bb5dd4fce342aaf8",
+	name: "searchBusiness",
+	filename: "src/data/search.ts"
+}, (opts) => searchBusiness.__executeServer(opts));
+var searchBusiness = createServerFn({ method: "POST" }).validator((input) => {
+	const cityId = String(input?.cityId || "");
+	const name = String(input?.name || "").trim().slice(0, 120);
+	if (!TOWN_OK.has(cityId)) throw new Error("Municipio no admitido");
+	if (name.length < 2) throw new Error("Falta el nombre");
+	return {
+		cityId,
+		name
+	};
+}).handler(searchBusiness_createServerFn_handler, async ({ data }) => runSearchOne(data.cityId, data.name));
 var searchSector_createServerFn_handler = createServerRpc({
 	id: "7558de16b2ae04204a8ee48e09bb157babdc355e46e04af4a81dc908f52a0bb3",
 	name: "searchSector",
@@ -183,4 +285,4 @@ var searchSector = createServerFn({ method: "POST" }).validator((input) => {
 	};
 }).handler(searchSector_createServerFn_handler, async ({ data }) => runSearch(data.cityId, data.sectorId, data.force));
 //#endregion
-export { searchSector_createServerFn_handler };
+export { searchBusiness_createServerFn_handler, searchSector_createServerFn_handler };

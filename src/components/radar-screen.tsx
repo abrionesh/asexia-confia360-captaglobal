@@ -54,7 +54,7 @@ import {
   type Pref,
   type Sector,
 } from "@/data/model";
-import { searchSector } from "@/data/search";
+import { searchBusiness, searchSector } from "@/data/search";
 import { townGeo } from "@/data/places";
 
 const KEY = "asexia-radar-municipio-v1";
@@ -62,6 +62,7 @@ const FOUND_KEY = "asexia-radar-busqueda-v2";
 const FRESH = 12 * 60 * 60 * 1000;
 
 type Found = Record<string, { at: number; rows: Biz[]; note: string }>;
+type ContactPatch = { phone?: string; email?: string; phoneAlt?: string; web?: string; address?: string };
 
 const ICONS: Record<string, LucideIcon> = {
   todos: LayoutGrid,
@@ -115,6 +116,8 @@ export function RadarScreen() {
   const [extras, setExtras] = useState<Record<number, Pref>>({});
   const [imported, setImported] = useState<Biz[]>([]);
   const [found, setFound] = useState<Found>({});
+  const [patches, setPatches] = useState<Record<number, ContactPatch>>({});
+  const [refreshingId, setRefreshingId] = useState<number | null>(null);
   const [booted, setBooted] = useState(false);
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState("");
@@ -129,9 +132,15 @@ export function RadarScreen() {
     try {
       const raw = localStorage.getItem(KEY);
       if (raw) {
-        const data = JSON.parse(raw) as { imported?: Biz[]; extras?: Record<number, Pref>; city?: string };
+        const data = JSON.parse(raw) as {
+          imported?: Biz[];
+          extras?: Record<number, Pref>;
+          city?: string;
+          patches?: Record<number, ContactPatch>;
+        };
         if (Array.isArray(data.imported)) setImported(data.imported);
         if (data.extras) setExtras(data.extras);
+        if (data.patches) setPatches(data.patches);
         if (data.city && TOWNS.some((t) => t.id === data.city)) setCity(data.city);
       }
       const saved = localStorage.getItem(FOUND_KEY);
@@ -147,8 +156,8 @@ export function RadarScreen() {
 
   useEffect(() => {
     if (!booted) return;
-    localStorage.setItem(KEY, JSON.stringify({ imported, extras, city }));
-  }, [imported, extras, city, booted]);
+    localStorage.setItem(KEY, JSON.stringify({ imported, extras, city, patches }));
+  }, [imported, extras, city, patches, booted]);
 
   useEffect(() => {
     if (!booted) return;
@@ -216,6 +225,24 @@ export function RadarScreen() {
     return [...base, ...fromFile, ...fromMap];
   }, [city, imported, found]);
 
+  const patched = useMemo(
+    () =>
+      pool.map((b) => {
+        const p = patches[b.id];
+        if (!p) return b;
+        return {
+          ...b,
+          phone: p.phone ?? b.phone,
+          email: p.email ?? b.email,
+          phoneAlt: p.phoneAlt ?? b.phoneAlt,
+          web: p.web ?? b.web,
+          address: p.address ?? b.address,
+          hasPage: p.web ? true : b.hasPage,
+        };
+      }),
+    [pool, patches],
+  );
+
   const counts = useMemo(() => {
     const map: Record<string, number> = { todos: pool.length };
     for (const s of SECTORS) if (s.id !== "todos") map[s.id] = 0;
@@ -232,7 +259,7 @@ export function RadarScreen() {
 
   const visible = useMemo(() => {
     const query = q.trim().toLowerCase();
-    const list = pool.filter((b) => {
+    const list = patched.filter((b) => {
       if (sector !== "todos" && b.sectorId !== sector) return false;
       if (sub && b.sub !== sub) return false;
       if (phoneOnly && !(b.phone || "").trim() && !(b.phoneAlt || "").trim()) return false;
@@ -248,7 +275,7 @@ export function RadarScreen() {
       return mb - ma || (b.reviews || 0) - (a.reviews || 0);
     });
     return list;
-  }, [pool, sector, sub, phoneOnly, q, sort, extras]);
+  }, [patched, sector, sub, phoneOnly, q, sort, extras]);
 
   const points = useMemo(
     () =>
@@ -259,15 +286,45 @@ export function RadarScreen() {
     [visible, extras],
   );
 
-  const withPhone = pool.filter((b) => (b.phone || "").trim() || (b.phoneAlt || "").trim()).length;
+  const withPhone = patched.filter((b) => (b.phone || "").trim() || (b.phoneAlt || "").trim()).length;
   const searchPack = sector === "todos" ? undefined : found[`${city}:${sector}`];
-  const hiddenPhones = pool.filter((b) => {
+  const hiddenPhones = patched.filter((b) => {
     if (sector !== "todos" && b.sectorId !== sector) return false;
     return !(b.phone || "").trim() && !(b.phoneAlt || "").trim();
   }).length;
 
   function scrollSectors(dir: number) {
     scroller.current?.scrollBy({ left: dir * 220, behavior: "smooth" });
+  }
+
+  function setContact(id: number, field: "phone" | "email" | "phoneAlt", value: string) {
+    setPatches((prev) => ({ ...prev, [id]: { ...prev[id], [field]: value.slice(0, 120) } }));
+  }
+
+  async function refreshBiz(b: Biz) {
+    setRefreshingId(b.id);
+    try {
+      const res = await searchBusiness({ data: { cityId: b.city || city, name: b.name } });
+      if (!res.ok) {
+        setToast(res.error);
+        return;
+      }
+      setPatches((prev) => {
+        const cur = prev[b.id] ?? {};
+        const next = { ...cur };
+        if (res.phone) next.phone = res.phone;
+        if (res.email) next.email = res.email;
+        if (res.web) next.web = res.web;
+        if (res.address) next.address = res.address;
+        return { ...prev, [b.id]: next };
+      });
+      const bits = [res.phone && "teléfono", res.email && "correo", res.web && "web"].filter(Boolean);
+      setToast(bits.length ? `Actualizado: ${bits.join(", ")}` : "Sigue sin teléfono ni correo en el mapa");
+    } catch {
+      setToast("No se ha podido repetir la búsqueda");
+    } finally {
+      setRefreshingId(null);
+    }
   }
 
   function toggleOffer(b: Biz, id: string, evidenced: boolean) {
@@ -712,15 +769,98 @@ export function RadarScreen() {
               {open ? (
                 <div className="border-t border-line px-4 pt-3 pb-4">
                   <p className="text-sm text-muted">{b.address || "Dirección no consignada"}</p>
-                  {b.phoneAlt ? <p className="mt-1 text-sm text-muted">Otro teléfono público: {b.phoneAlt}</p> : null}
                   {b.rating ? (
                     <p className="mt-1 text-sm text-muted">
                       Google {String(b.rating).replace(".", ",")} · {b.reviews.toLocaleString("es-ES")} reseñas · presencia {b.presence || "sin dato"}
                     </p>
                   ) : null}
-                  {!b.mapsOk && !b.imported ? (
+                  {!b.mapsOk && !b.imported && originOf(b) === "informe" ? (
                     <p className="mt-2 text-sm text-rose">La ficha de Maps no se reconfirmó en la consulta nueva.</p>
                   ) : null}
+                  {b.why ? (
+                    <p className="mt-2 text-sm text-muted">
+                      <span className="text-ink">Nota: </span>
+                      {b.why}
+                    </p>
+                  ) : null}
+                  {b.sources.length ? (
+                    <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
+                      {b.sources.map((s) => (
+                        <li key={s.url}>
+                          <a href={s.url} target="_blank" rel="noreferrer" className="text-lime underline-offset-2">
+                            {s.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+
+                  <label className="mt-3 block">
+                    <span className="text-xs text-muted">Teléfono</span>
+                    <input
+                      value={b.phone}
+                      onChange={(e) => setContact(b.id, "phone", e.target.value)}
+                      inputMode="tel"
+                      autoComplete="off"
+                      placeholder="Añadir teléfono"
+                      className="mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm"
+                    />
+                  </label>
+                  {b.phoneAlt || patches[b.id]?.phoneAlt !== undefined ? (
+                    <label className="mt-2 block">
+                      <span className="text-xs text-muted">Otro teléfono</span>
+                      <input
+                        value={b.phoneAlt}
+                        onChange={(e) => setContact(b.id, "phoneAlt", e.target.value)}
+                        inputMode="tel"
+                        autoComplete="off"
+                        className="mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm"
+                      />
+                    </label>
+                  ) : null}
+                  <label className="mt-2 block">
+                    <span className="text-xs text-muted">Correo</span>
+                    <input
+                      value={b.email}
+                      onChange={(e) => setContact(b.id, "email", e.target.value)}
+                      type="email"
+                      autoComplete="off"
+                      placeholder="Añadir correo"
+                      className="mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm"
+                    />
+                  </label>
+
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {call ? (
+                      <a href={call} className="flex min-h-11 items-center justify-center gap-2 rounded-2xl bg-surface px-4 font-semibold">
+                        <Phone className="size-4" aria-hidden /> Llamar
+                      </a>
+                    ) : null}
+                    {callAlt && callAlt !== call ? (
+                      <a href={callAlt} className="flex min-h-11 items-center justify-center rounded-2xl border border-line px-4">
+                        Otro tel.
+                      </a>
+                    ) : null}
+                    {b.email.includes("@") ? (
+                      <a href={`mailto:${b.email}`} className="flex min-h-11 items-center justify-center rounded-2xl border border-line px-4">
+                        Email
+                      </a>
+                    ) : null}
+                    {b.web ? (
+                      <a href={b.web} target="_blank" rel="noreferrer" className="flex min-h-11 items-center justify-center rounded-2xl border border-line px-4">
+                        Ver web
+                      </a>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => void refreshBiz(b)}
+                      disabled={refreshingId === b.id}
+                      className="min-h-11 rounded-2xl bg-lime px-4 font-semibold text-bg disabled:opacity-60"
+                    >
+                      {refreshingId === b.id ? "Buscando…" : "Repetir búsqueda"}
+                    </button>
+                  </div>
+
                   <ul className="mt-3 flex flex-col gap-2">
                     {offers.map((o) => {
                       const on = offerOn(o, pref);
@@ -743,50 +883,6 @@ export function RadarScreen() {
                       );
                     })}
                   </ul>
-                  {b.why ? (
-                    <p className="mt-3 text-sm text-muted">
-                      <span className="text-ink">Nota del catálogo (hipótesis previa): </span>
-                      {b.why}
-                    </p>
-                  ) : null}
-                  {b.sources.length ? (
-                    <ul className="mt-3 flex flex-col gap-1 text-sm">
-                      {b.sources.map((s) => (
-                        <li key={s.url}>
-                          <a href={s.url} target="_blank" rel="noreferrer" className="text-lime underline-offset-2">
-                            {s.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                  <div className="mt-3 flex gap-2">
-                    {call ? (
-                      <a href={call} className="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-2xl bg-surface font-semibold">
-                        <Phone className="size-4" aria-hidden /> Llamar
-                      </a>
-                    ) : null}
-                    {callAlt && callAlt !== call ? (
-                      <a href={callAlt} className="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-2xl border border-line">
-                        Otro tel.
-                      </a>
-                    ) : null}
-                    {b.web ? (
-                      <a
-                        href={b.web}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="flex min-h-11 flex-1 items-center justify-center gap-2 rounded-2xl border border-line"
-                      >
-                        Ver web
-                      </a>
-                    ) : null}
-                    {b.email ? (
-                      <a href={`mailto:${b.email}`} className="flex min-h-11 flex-1 items-center justify-center rounded-2xl border border-line">
-                        Email
-                      </a>
-                    ) : null}
-                  </div>
                 </div>
               ) : null}
             </article>

@@ -3,7 +3,7 @@ import { b as require_jsx_runtime, q as require_react } from "../_libs/@tanstack
 import { C as ChevronLeft, D as Briefcase, E as Building2, S as ChevronRight, T as CarFront, _ as Hotel, a as Stethoscope, b as Dumbbell, c as School, d as Plane, f as Phone, g as KeyRound, h as LayoutGrid, l as Scale, m as MapPin, n as UtensilsCrossed, o as Sparkles, p as PawPrint, r as Upload, s as Scissors, t as Wrench, u as Ruler, v as GraduationCap, w as ChevronDown, x as Download, y as Flame } from "../_libs/lucide-react.mjs";
 import { n as TSS_SERVER_FUNCTION, r as getServerFnById, t as createServerFn } from "./ssr.mjs";
 import { C as townGeo, S as townById, _ as researchBrief, a as buildOffers, c as emptyPref, d as heatOf, f as moneyLine, g as parseImport, h as originOf, i as TOWNS, l as euro, m as offerOn, n as SECTORS, o as channels, p as nameKey, r as SECTOR_QUERIES, t as CATALOG, u as gapLine, v as sectorById, x as totals, y as telHref } from "./places-BJ7DURjs.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-mbdJ_JHW.js
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-FSC9pum3.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var COLOR = {
@@ -123,6 +123,16 @@ var TOWN_OK = /* @__PURE__ */ new Set([
 	"humanes",
 	"madrid"
 ]);
+var searchBusiness = createServerFn({ method: "POST" }).validator((input) => {
+	const cityId = String(input?.cityId || "");
+	const name = String(input?.name || "").trim().slice(0, 120);
+	if (!TOWN_OK.has(cityId)) throw new Error("Municipio no admitido");
+	if (name.length < 2) throw new Error("Falta el nombre");
+	return {
+		cityId,
+		name
+	};
+}).handler(createSsrRpc("a48c5685df01995c7132b76b9d4ec95741f9c93fba631f11bb5dd4fce342aaf8"));
 var searchSector = createServerFn({ method: "POST" }).validator((input) => {
 	const cityId = String(input?.cityId || "");
 	const sectorId = String(input?.sectorId || "");
@@ -189,6 +199,8 @@ function RadarScreen() {
 	const [extras, setExtras] = (0, import_react.useState)({});
 	const [imported, setImported] = (0, import_react.useState)([]);
 	const [found, setFound] = (0, import_react.useState)({});
+	const [patches, setPatches] = (0, import_react.useState)({});
+	const [refreshingId, setRefreshingId] = (0, import_react.useState)(null);
 	const [booted, setBooted] = (0, import_react.useState)(false);
 	const [searching, setSearching] = (0, import_react.useState)(false);
 	const [searchError, setSearchError] = (0, import_react.useState)("");
@@ -205,6 +217,7 @@ function RadarScreen() {
 				const data = JSON.parse(raw);
 				if (Array.isArray(data.imported)) setImported(data.imported);
 				if (data.extras) setExtras(data.extras);
+				if (data.patches) setPatches(data.patches);
 				if (data.city && TOWNS.some((t) => t.id === data.city)) setCity(data.city);
 			}
 			const saved = localStorage.getItem(FOUND_KEY);
@@ -220,12 +233,14 @@ function RadarScreen() {
 		localStorage.setItem(KEY, JSON.stringify({
 			imported,
 			extras,
-			city
+			city,
+			patches
 		}));
 	}, [
 		imported,
 		extras,
 		city,
+		patches,
 		booted
 	]);
 	(0, import_react.useEffect)(() => {
@@ -305,6 +320,19 @@ function RadarScreen() {
 		imported,
 		found
 	]);
+	const patched = (0, import_react.useMemo)(() => pool.map((b) => {
+		const p = patches[b.id];
+		if (!p) return b;
+		return {
+			...b,
+			phone: p.phone ?? b.phone,
+			email: p.email ?? b.email,
+			phoneAlt: p.phoneAlt ?? b.phoneAlt,
+			web: p.web ?? b.web,
+			address: p.address ?? b.address,
+			hasPage: p.web ? true : b.hasPage
+		};
+	}), [pool, patches]);
 	const counts = (0, import_react.useMemo)(() => {
 		const map = { todos: pool.length };
 		for (const s of SECTORS) if (s.id !== "todos") map[s.id] = 0;
@@ -319,7 +347,7 @@ function RadarScreen() {
 	}, [pool, sector]);
 	const visible = (0, import_react.useMemo)(() => {
 		const query = q.trim().toLowerCase();
-		const list = pool.filter((b) => {
+		const list = patched.filter((b) => {
 			if (sector !== "todos" && b.sectorId !== sector) return false;
 			if (sub && b.sub !== sub) return false;
 			if (phoneOnly && !(b.phone || "").trim() && !(b.phoneAlt || "").trim()) return false;
@@ -335,7 +363,7 @@ function RadarScreen() {
 		});
 		return list;
 	}, [
-		pool,
+		patched,
 		sector,
 		sub,
 		phoneOnly,
@@ -347,9 +375,9 @@ function RadarScreen() {
 		biz,
 		heat: heatOf(totals(buildOffers(biz), extras[biz.id] ?? emptyPref()).b)
 	})), [visible, extras]);
-	const withPhone = pool.filter((b) => (b.phone || "").trim() || (b.phoneAlt || "").trim()).length;
+	const withPhone = patched.filter((b) => (b.phone || "").trim() || (b.phoneAlt || "").trim()).length;
 	const searchPack = sector === "todos" ? void 0 : found[`${city}:${sector}`];
-	const hiddenPhones = pool.filter((b) => {
+	const hiddenPhones = patched.filter((b) => {
 		if (sector !== "todos" && b.sectorId !== sector) return false;
 		return !(b.phone || "").trim() && !(b.phoneAlt || "").trim();
 	}).length;
@@ -358,6 +386,49 @@ function RadarScreen() {
 			left: dir * 220,
 			behavior: "smooth"
 		});
+	}
+	function setContact(id, field, value) {
+		setPatches((prev) => ({
+			...prev,
+			[id]: {
+				...prev[id],
+				[field]: value.slice(0, 120)
+			}
+		}));
+	}
+	async function refreshBiz(b) {
+		setRefreshingId(b.id);
+		try {
+			const res = await searchBusiness({ data: {
+				cityId: b.city || city,
+				name: b.name
+			} });
+			if (!res.ok) {
+				setToast(res.error);
+				return;
+			}
+			setPatches((prev) => {
+				const next = { ...prev[b.id] ?? {} };
+				if (res.phone) next.phone = res.phone;
+				if (res.email) next.email = res.email;
+				if (res.web) next.web = res.web;
+				if (res.address) next.address = res.address;
+				return {
+					...prev,
+					[b.id]: next
+				};
+			});
+			const bits = [
+				res.phone && "teléfono",
+				res.email && "correo",
+				res.web && "web"
+			].filter(Boolean);
+			setToast(bits.length ? `Actualizado: ${bits.join(", ")}` : "Sigue sin teléfono ni correo en el mapa");
+		} catch {
+			setToast("No se ha podido repetir la búsqueda");
+		} finally {
+			setRefreshingId(null);
+		}
 	}
 	function toggleOffer(b, id, evidenced) {
 		setExtras((prev) => {
@@ -894,10 +965,6 @@ function RadarScreen() {
 									className: "text-sm text-muted",
 									children: b.address || "Dirección no consignada"
 								}),
-								b.phoneAlt ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "mt-1 text-sm text-muted",
-									children: ["Otro teléfono público: ", b.phoneAlt]
-								}) : null,
 								b.rating ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 									className: "mt-1 text-sm text-muted",
 									children: [
@@ -909,10 +976,105 @@ function RadarScreen() {
 										b.presence || "sin dato"
 									]
 								}) : null,
-								!b.mapsOk && !b.imported ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								!b.mapsOk && !b.imported && originOf(b) === "informe" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "mt-2 text-sm text-rose",
 									children: "La ficha de Maps no se reconfirmó en la consulta nueva."
 								}) : null,
+								b.why ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+									className: "mt-2 text-sm text-muted",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-ink",
+										children: "Nota: "
+									}), b.why]
+								}) : null,
+								b.sources.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+									className: "mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm",
+									children: b.sources.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+										href: s.url,
+										target: "_blank",
+										rel: "noreferrer",
+										className: "text-lime underline-offset-2",
+										children: s.label
+									}) }, s.url))
+								}) : null,
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+									className: "mt-3 block",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-xs text-muted",
+										children: "Teléfono"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+										value: b.phone,
+										onChange: (e) => setContact(b.id, "phone", e.target.value),
+										inputMode: "tel",
+										autoComplete: "off",
+										placeholder: "Añadir teléfono",
+										className: "mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm"
+									})]
+								}),
+								b.phoneAlt || patches[b.id]?.phoneAlt !== void 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+									className: "mt-2 block",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-xs text-muted",
+										children: "Otro teléfono"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+										value: b.phoneAlt,
+										onChange: (e) => setContact(b.id, "phoneAlt", e.target.value),
+										inputMode: "tel",
+										autoComplete: "off",
+										className: "mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm"
+									})]
+								}) : null,
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+									className: "mt-2 block",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-xs text-muted",
+										children: "Correo"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+										value: b.email,
+										onChange: (e) => setContact(b.id, "email", e.target.value),
+										type: "email",
+										autoComplete: "off",
+										placeholder: "Añadir correo",
+										className: "mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm"
+									})]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "mt-3 flex flex-wrap gap-2",
+									children: [
+										call ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
+											href: call,
+											className: "flex min-h-11 items-center justify-center gap-2 rounded-2xl bg-surface px-4 font-semibold",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, {
+												className: "size-4",
+												"aria-hidden": true
+											}), " Llamar"]
+										}) : null,
+										callAlt && callAlt !== call ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+											href: callAlt,
+											className: "flex min-h-11 items-center justify-center rounded-2xl border border-line px-4",
+											children: "Otro tel."
+										}) : null,
+										b.email.includes("@") ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+											href: `mailto:${b.email}`,
+											className: "flex min-h-11 items-center justify-center rounded-2xl border border-line px-4",
+											children: "Email"
+										}) : null,
+										b.web ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+											href: b.web,
+											target: "_blank",
+											rel: "noreferrer",
+											className: "flex min-h-11 items-center justify-center rounded-2xl border border-line px-4",
+											children: "Ver web"
+										}) : null,
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+											type: "button",
+											onClick: () => void refreshBiz(b),
+											disabled: refreshingId === b.id,
+											className: "min-h-11 rounded-2xl bg-lime px-4 font-semibold text-bg disabled:opacity-60",
+											children: refreshingId === b.id ? "Buscando…" : "Repetir búsqueda"
+										})
+									]
+								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
 									className: "mt-3 flex flex-col gap-2",
 									children: offers.map((o) => {
@@ -943,53 +1105,6 @@ function RadarScreen() {
 											]
 										}) }, o.id);
 									})
-								}),
-								b.why ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-									className: "mt-3 text-sm text-muted",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-ink",
-										children: "Nota del catálogo (hipótesis previa): "
-									}), b.why]
-								}) : null,
-								b.sources.length ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-									className: "mt-3 flex flex-col gap-1 text-sm",
-									children: b.sources.map((s) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-										href: s.url,
-										target: "_blank",
-										rel: "noreferrer",
-										className: "text-lime underline-offset-2",
-										children: s.label
-									}) }, s.url))
-								}) : null,
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "mt-3 flex gap-2",
-									children: [
-										call ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-											href: call,
-											className: "flex min-h-11 flex-1 items-center justify-center gap-2 rounded-2xl bg-surface font-semibold",
-											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, {
-												className: "size-4",
-												"aria-hidden": true
-											}), " Llamar"]
-										}) : null,
-										callAlt && callAlt !== call ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-											href: callAlt,
-											className: "flex min-h-11 flex-1 items-center justify-center gap-2 rounded-2xl border border-line",
-											children: "Otro tel."
-										}) : null,
-										b.web ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-											href: b.web,
-											target: "_blank",
-											rel: "noreferrer",
-											className: "flex min-h-11 flex-1 items-center justify-center gap-2 rounded-2xl border border-line",
-											children: "Ver web"
-										}) : null,
-										b.email ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-											href: `mailto:${b.email}`,
-											className: "flex min-h-11 flex-1 items-center justify-center rounded-2xl border border-line",
-											children: "Email"
-										}) : null
-									]
 								})
 							]
 						}) : null]

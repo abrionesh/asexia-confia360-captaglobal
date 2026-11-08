@@ -169,6 +169,103 @@ export async function runSearch(cityId: string, sectorId: string, force = false)
   return { ok: true as const, rows, note, at };
 }
 
+function contactOf(tags: Record<string, string> | undefined) {
+  const t = tags ?? {};
+  const phone = (t.phone || t["contact:phone"] || t["contact:mobile"] || t.mobile || "").trim().slice(0, 40);
+  const emailRaw = (t.email || t["contact:email"] || "").trim();
+  const email = emailRaw.includes("@") ? emailRaw.slice(0, 120) : "";
+  const webRaw = (t.website || t["contact:website"] || t.url || "").trim();
+  let web = "";
+  if (/^https?:\/\//i.test(webRaw)) web = webRaw.slice(0, 200);
+  else if (/^[\w.-]+\.[a-z]{2,}/i.test(webRaw)) web = `https://${webRaw}`.slice(0, 200);
+  return { phone, email, web };
+}
+
+function osmLink(osmType: string, osmId: number) {
+  const kind = osmType === "W" || osmType === "way" ? "way" : osmType === "R" || osmType === "relation" ? "relation" : "node";
+  return `https://www.openstreetmap.org/${kind}/${osmId}`;
+}
+
+export async function runSearchOne(cityId: string, name: string) {
+  const town = townGeo(cityId);
+  const q = `${name} ${town.name}`.slice(0, 160);
+  const candidates: RawPlace[] = [];
+  const add = (place: RawPlace | null) => {
+    if (place?.name) candidates.push(place);
+  };
+
+  await Promise.allSettled([
+    (async () => {
+      const url = new URL("https://photon.komoot.io/api/");
+      url.searchParams.set("q", q);
+      url.searchParams.set("limit", "8");
+      url.searchParams.set("lat", String(town.lat));
+      url.searchParams.set("lon", String(town.lon));
+      const body = (await grab(url.toString())) as { features?: PhotonFeature[] };
+      for (const feature of body.features ?? []) add(fromPhoton(feature));
+    })(),
+    (async () => {
+      const url = new URL("https://nominatim.openstreetmap.org/search");
+      url.searchParams.set("q", q);
+      url.searchParams.set("format", "jsonv2");
+      url.searchParams.set("limit", "5");
+      url.searchParams.set("addressdetails", "1");
+      url.searchParams.set("extratags", "1");
+      url.searchParams.set("countrycodes", "es");
+      const body = (await grab(url.toString())) as NominatimHit[];
+      if (Array.isArray(body)) for (const row of body) add(fromNominatim(row));
+    })(),
+  ]);
+
+  const want = nameKey(name);
+  const best = candidates
+    .map((place) => {
+      const got = nameKey(place.name);
+      const score = got === want ? 3 : got.includes(want) || want.includes(got) ? 2 : 0;
+      return { place, score };
+    })
+    .filter((row) => row.score > 0)
+    .sort((a, b) => b.score - a.score)[0]?.place;
+
+  if (!best) return { ok: false as const, error: "Este negocio no aparece en el mapa." };
+
+  let tags = { ...(best.tags ?? {}) };
+  try {
+    const kind = best.osmType === "W" || best.osmType === "way" ? "W" : best.osmType === "R" || best.osmType === "relation" ? "R" : "N";
+    const url = new URL("https://nominatim.openstreetmap.org/lookup");
+    url.searchParams.set("osm_ids", `${kind}${best.osmId}`);
+    url.searchParams.set("format", "jsonv2");
+    url.searchParams.set("extratags", "1");
+    const body = (await grab(url.toString())) as NominatimHit[];
+    const row = Array.isArray(body) ? body.find((item) => item.osm_id === best.osmId) : undefined;
+    if (row?.extratags) tags = { ...row.extratags, ...tags };
+  } catch {
+    /* seguimos con lo que ya había */
+  }
+
+  const contact = contactOf(tags);
+  const address = [best.street, best.housenumber, best.postcode, best.city].filter(Boolean).join(", ");
+  return {
+    ok: true as const,
+    name: best.name,
+    phone: contact.phone,
+    email: contact.email,
+    web: contact.web,
+    address: address.slice(0, 160),
+    sourceUrl: osmLink(best.osmType, best.osmId),
+  };
+}
+
+export const searchBusiness = createServerFn({ method: "POST" })
+  .validator((input: { cityId: string; name: string }) => {
+    const cityId = String(input?.cityId || "");
+    const name = String(input?.name || "").trim().slice(0, 120);
+    if (!TOWN_OK.has(cityId)) throw new Error("Municipio no admitido");
+    if (name.length < 2) throw new Error("Falta el nombre");
+    return { cityId, name };
+  })
+  .handler(async ({ data }) => runSearchOne(data.cityId, data.name));
+
 export const searchSector = createServerFn({ method: "POST" })
   .validator((input: { cityId: string; sectorId: string; force?: boolean }) => {
     const cityId = String(input?.cityId || "");
