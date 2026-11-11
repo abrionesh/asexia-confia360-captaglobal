@@ -92,6 +92,48 @@ function km(aLat: number, aLon: number, bLat: number, bLon: number) {
   return 2 * r * Math.asin(Math.sqrt(s));
 }
 
+export function nearTown(lat: number, lon: number, town: TownGeo, factor = 1) {
+  return km(lat, lon, town.lat, town.lon) <= town.radiusKm * factor;
+}
+
+const VALUE_SECTOR: Record<string, string> = {
+  restaurant: "hosteleria",
+  bar: "hosteleria",
+  cafe: "hosteleria",
+  fast_food: "hosteleria",
+  pub: "hosteleria",
+  ice_cream: "hosteleria",
+  hairdresser: "peluqueria",
+  beauty: "estetica",
+  fitness_centre: "gimnasio",
+  clinic: "clinica",
+  doctors: "clinica",
+  dentist: "clinica",
+  veterinary: "vet",
+  estate_agent: "inmobiliaria",
+  car_repair: "taller",
+  school: "escuela",
+  kindergarten: "escuela",
+  college: "escuela",
+  hotel: "hotel",
+  guest_house: "hotel",
+  hostel: "hotel",
+  car: "concesionario",
+  car_rental: "alquiler",
+  travel_agency: "agencia",
+  lawyer: "abogado",
+  architect: "arquitectura",
+  tax_advisor: "asesoria",
+  accountant: "asesoria",
+};
+
+export function sectorForPlace(osmValue: string | undefined, fallback: string) {
+  const hit = osmValue ? VALUE_SECTOR[osmValue] : "";
+  if (hit) return hit;
+  if (fallback && fallback !== "todos" && SECTOR_QUERIES[fallback]) return fallback;
+  return "hosteleria";
+}
+
 export function cityMatches(raw: string | undefined, town: TownGeo, lat: number, lon: number) {
   const key = nameKey(raw || "");
   if (key && town.aliases.some((a) => key === a || key.startsWith(a))) return true;

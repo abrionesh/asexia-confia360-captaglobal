@@ -62,7 +62,7 @@ export type Biz = {
   mapsOk: boolean;
   sources: Source[];
   imported: boolean;
-  origin?: "informe" | "osm" | "archivo";
+  origin?: "informe" | "osm" | "archivo" | "web";
 };
 
 export type Offer = {
@@ -186,18 +186,19 @@ export function townById(id: string) {
 
 export function buildOffers(b: Biz): Offer[] {
   if (b.pending) return [];
-  if (originOf(b) === "osm") return osmOffers(b);
+  if (originOf(b) === "osm" || originOf(b) === "web") return looseOffers(b);
   return informeOffers(b);
 }
 
-function osmOffers(b: Biz): Offer[] {
+function looseOffers(b: Biz): Offer[] {
+  const where = b.origin === "web" ? "la web" : "el mapa";
   const offers: Offer[] = [];
   if (!b.hasPage) {
     offers.push({
       id: "web",
       title: "Web nueva",
-      short: "web no consta en el mapa",
-      detail: "OpenStreetMap no trae página. No localizado no significa inexistente. Márcala solo si lo compruebas.",
+      short: `web no consta en ${where}`,
+      detail: `La ficha de ${where} no trae página propia. No localizado no significa inexistente. Márcala solo si lo compruebas.`,
       a: 800,
       b: 1500,
       m: 0,
@@ -208,8 +209,8 @@ function osmOffers(b: Biz): Offer[] {
     offers.push({
       id: "res",
       title: "Web de reservas",
-      short: "reserva no consta en el mapa",
-      detail: "La ficha de mapa no trae reservas. Puede existir fuera. No es un hueco del informe.",
+      short: `reserva no consta en ${where}`,
+      detail: `La ficha de ${where} no trae reservas. Puede existir fuera. No es un hueco del informe.`,
       a: 500,
       b: 1500,
       m: 30,
@@ -231,7 +232,7 @@ function osmOffers(b: Biz): Offer[] {
       id: "wa",
       title: "Agente de WhatsApp",
       short: "sin verificar",
-      detail: "Un teléfono del mapa no implica WhatsApp.",
+      detail: "Un teléfono de esta ficha no implica WhatsApp.",
       a: 350,
       b: 900,
       m: 45,
@@ -454,7 +455,7 @@ export function norm(s: string) {
 
 export const nameKey = norm;
 
-export function originOf(b: Biz): "informe" | "osm" | "archivo" {
+export function originOf(b: Biz): "informe" | "osm" | "archivo" | "web" {
   if (b.origin) return b.origin;
   return b.imported ? "archivo" : "informe";
 }

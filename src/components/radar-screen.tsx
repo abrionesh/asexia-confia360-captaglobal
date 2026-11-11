@@ -54,12 +54,11 @@ import {
   type Pref,
   type Sector,
 } from "@/data/model";
-import { searchBusiness, searchSector } from "@/data/search";
+import { searchBusiness, searchNamed, searchSector } from "@/data/search";
 import { townGeo } from "@/data/places";
 
 const KEY = "asexia-radar-municipio-v1";
 const FOUND_KEY = "asexia-radar-busqueda-v2";
-const FRESH = 12 * 60 * 60 * 1000;
 
 type Found = Record<string, { at: number; rows: Biz[]; note: string }>;
 type ContactPatch = { phone?: string; email?: string; phoneAlt?: string; web?: string; address?: string };
@@ -126,6 +125,9 @@ export function RadarScreen() {
   const [briefOpen, setBriefOpen] = useState(false);
   const [paste, setPaste] = useState("");
   const [toast, setToast] = useState("");
+  const [nameBusy, setNameBusy] = useState(false);
+  const [webHits, setWebHits] = useState<{ title: string; url: string }[]>([]);
+  const [webNote, setWebNote] = useState("");
   foundRef.current = found;
 
   useEffect(() => {
@@ -174,7 +176,7 @@ export function RadarScreen() {
     const bypass = force.current;
     force.current = false;
     const cached = foundRef.current[key];
-    if (!bypass && cached && Date.now() - cached.at < FRESH) {
+    if (!bypass && cached) {
       setSearchError("");
       return;
     }
@@ -324,6 +326,67 @@ export function RadarScreen() {
       setToast("No se ha podido repetir la búsqueda");
     } finally {
       setRefreshingId(null);
+    }
+  }
+
+  function inRecords(query: string) {
+    const want = nameKey(query);
+    if (want.length < 2) return [];
+    return pool.filter((b) => {
+      const got = nameKey(b.name);
+      return got === want || (want.length >= 4 && got.includes(want));
+    });
+  }
+
+  async function lookupName() {
+    const query = q.trim();
+    if (query.length < 2) {
+      setToast("Escribe el nombre");
+      return;
+    }
+    setWebHits([]);
+    setWebNote("");
+    const local = inRecords(query);
+    if (local.length) {
+      const want = nameKey(query);
+      const exact = local.filter((b) => nameKey(b.name) === want);
+      const pickFrom = exact.length ? exact : local;
+      const first = pickFrom.find((b) => sector === "todos" || b.sectorId === sector) ?? pickFrom[0];
+      setSub("");
+      if (first.sectorId !== sector) setSector(first.sectorId);
+      if (!(first.phone || first.phoneAlt)) setPhoneOnly(false);
+      setOpenId(first.id);
+      setToast(exact.length ? "Está en tus registros" : `${local.length} coincidencias en tus registros`);
+      return;
+    }
+    setNameBusy(true);
+    try {
+      const res = await searchNamed({ data: { cityId: city, name: query, sectorId: sector } });
+      if (res.biz) {
+        const biz = res.biz;
+        const key = `${city}:nombre`;
+        setFound((prev) => {
+          const cur = prev[key]?.rows ?? [];
+          const rows = [biz, ...cur.filter((row) => nameKey(row.name) !== nameKey(biz.name) && row.id !== biz.id)];
+          return { ...prev, [key]: { at: Date.now(), rows, note: "Búsqueda por nombre" } };
+        });
+        setSub("");
+        setSector(biz.sectorId);
+        if (!biz.phone && !biz.phoneAlt) setPhoneOnly(false);
+        setQ(biz.name);
+        setOpenId(biz.id);
+        const fromWeb = biz.origin === "web";
+        setToast(fromWeb ? "Ficha incorporada desde la web" : "Ficha incorporada desde el mapa");
+        setWebHits(fromWeb ? biz.sources.filter((s) => s.url).map((s) => ({ title: s.label, url: s.url })) : []);
+        setWebNote(fromWeb ? biz.why : "");
+      } else {
+        setWebHits(res.web);
+        setWebNote("No está en tus registros, ni en el mapa, ni en las páginas que he podido leer. Abre la búsqueda. Puede existir igualmente.");
+      }
+    } catch {
+      setToast("No se ha podido buscar");
+    } finally {
+      setNameBusy(false);
     }
   }
 
@@ -591,16 +654,33 @@ export function RadarScreen() {
         </div>
       ) : null}
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
+      <form
+        className="mt-4 flex flex-wrap items-center gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          void lookupName();
+        }}
+      >
         <label className="min-w-0 flex-1">
-          <span className="sr-only">Buscar</span>
+          <span className="sr-only">Buscar negocio</span>
           <input
             value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Nombre, zona o subtipo"
+            onChange={(e) => {
+              setQ(e.target.value);
+              setWebHits([]);
+              setWebNote("");
+            }}
+            placeholder="Nombre del negocio"
             className="min-h-11 w-full rounded-xl border border-line bg-card px-3 text-sm"
           />
         </label>
+        <button
+          type="submit"
+          disabled={nameBusy || q.trim().length < 2}
+          className="min-h-11 shrink-0 rounded-xl bg-lime px-4 text-sm font-semibold text-bg disabled:opacity-50"
+        >
+          {nameBusy ? "Buscando…" : "Buscar"}
+        </button>
         <label className="min-h-11">
           <span className="sr-only">Ordenar</span>
           <select
@@ -613,7 +693,22 @@ export function RadarScreen() {
             <option value="name">Nombre</option>
           </select>
         </label>
-      </div>
+      </form>
+
+      {webNote ? (
+        <section className="mt-3 rounded-2xl border border-line bg-card p-3">
+          <h2 className="text-sm font-semibold">{webNote}</h2>
+          <ul className="mt-2 space-y-2">
+            {webHits.map((hit) => (
+              <li key={hit.url}>
+                <a href={hit.url} target="_blank" rel="noopener noreferrer" className="text-sm text-lime underline-offset-2 hover:underline">
+                  {hit.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
 
       <div className="mt-3 flex items-center justify-between gap-2">
         <button
@@ -744,7 +839,7 @@ export function RadarScreen() {
                     {b.chain ? <span className="rounded-full bg-surface px-2 py-1 text-xs text-amber">Cadena</span> : null}
                     {b.pending ? <span className="rounded-full bg-surface px-2 py-1 text-xs text-rose">Pendiente</span> : null}
                     <span className="rounded-full bg-surface px-2 py-1 text-xs text-muted">
-                      {originOf(b) === "osm" ? "Mapa" : originOf(b) === "archivo" ? "Archivo" : "Informe"}
+                      {originOf(b) === "osm" ? "Mapa" : originOf(b) === "archivo" ? "Archivo" : originOf(b) === "web" ? "Web" : "Informe"}
                     </span>
                   </button>
                   <span className="inline-flex items-center gap-2 text-sm text-muted">
@@ -771,7 +866,7 @@ export function RadarScreen() {
                   <p className="text-sm text-muted">{b.address || "Dirección no consignada"}</p>
                   {b.rating ? (
                     <p className="mt-1 text-sm text-muted">
-                      Google {String(b.rating).replace(".", ",")} · {b.reviews.toLocaleString("es-ES")} reseñas · presencia {b.presence || "sin dato"}
+                      {b.presence || "Nota"} {String(b.rating).replace(".", ",")} · {b.reviews.toLocaleString("es-ES")} reseñas
                     </p>
                   ) : null}
                   {!b.mapsOk && !b.imported && originOf(b) === "informe" ? (
@@ -782,17 +877,6 @@ export function RadarScreen() {
                       <span className="text-ink">Nota: </span>
                       {b.why}
                     </p>
-                  ) : null}
-                  {b.sources.length ? (
-                    <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-sm">
-                      {b.sources.map((s) => (
-                        <li key={s.url}>
-                          <a href={s.url} target="_blank" rel="noreferrer" className="text-lime underline-offset-2">
-                            {s.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
                   ) : null}
 
                   <label className="mt-3 block">
@@ -851,6 +935,17 @@ export function RadarScreen() {
                         Ver web
                       </a>
                     ) : null}
+                    {b.sources.map((s) => (
+                      <a
+                        key={s.url}
+                        href={s.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex min-h-11 items-center justify-center rounded-2xl border border-line px-4"
+                      >
+                        {s.label}
+                      </a>
+                    ))}
                     <button
                       type="button"
                       onClick={() => void refreshBiz(b)}
