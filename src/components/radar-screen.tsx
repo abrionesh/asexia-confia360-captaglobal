@@ -29,6 +29,8 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { RadarMap } from "@/components/radar-map";
+import { CrmScreen } from "@/components/crm-screen";
+import { loadCrm, openExpediente, saveCrm, type Expediente } from "@/data/crm";
 import {
   CATALOG,
   SECTORS,
@@ -128,6 +130,10 @@ export function RadarScreen() {
   const [nameBusy, setNameBusy] = useState(false);
   const [webHits, setWebHits] = useState<{ title: string; url: string }[]>([]);
   const [webNote, setWebNote] = useState("");
+  const [desk, setDesk] = useState<"radar" | "crm">("radar");
+  const [crm, setCrm] = useState<Expediente[]>([]);
+  const [crmFocus, setCrmFocus] = useState<string | null>(null);
+  const [crmReady, setCrmReady] = useState(false);
   foundRef.current = found;
 
   useEffect(() => {
@@ -154,6 +160,8 @@ export function RadarScreen() {
       /* ignore broken local copy */
     }
     setBooted(true);
+    setCrm(loadCrm());
+    setCrmReady(true);
   }, []);
 
   useEffect(() => {
@@ -169,6 +177,11 @@ export function RadarScreen() {
       /* quota */
     }
   }, [found, booted]);
+
+  useEffect(() => {
+    if (!crmReady) return;
+    saveCrm(crm);
+  }, [crm, crmReady]);
 
   useEffect(() => {
     if (!booted || sector === "todos") return;
@@ -514,12 +527,46 @@ export function RadarScreen() {
 
   const showResearch = visible.length === 0 && !q;
 
+  function follow(b: Biz) {
+    setCrm((prev) => openExpediente(prev, b));
+    setCrmFocus(String(b.id));
+    setDesk("crm");
+  }
+
+  if (desk === "crm") {
+    return (
+      <main className="safe-pad mx-auto min-h-screen max-w-lg px-4 pb-16 pt-4">
+        <p className="text-xs font-semibold tracking-widest text-lime uppercase">Radar · AsExIA</p>
+        <CrmScreen
+          rows={crm}
+          focusId={crmFocus}
+          onChange={setCrm}
+          onBack={() => {
+            setCrmFocus(null);
+            setDesk("radar");
+          }}
+          onOpenRadar={(id) => {
+            setCrmFocus(null);
+            setOpenId(id);
+            setDesk("radar");
+          }}
+        />
+      </main>
+    );
+  }
+
   return (
     <main className="safe-pad mx-auto min-h-screen max-w-lg px-4 pb-16 pt-4">
       <p className="text-xs font-semibold tracking-widest text-lime uppercase">Radar · AsExIA</p>
       <h1 className="mt-1 font-display text-3xl leading-none font-extrabold tracking-tight">
         ¿A quién le preparas una propuesta?
       </h1>
+      <div className="mt-3 flex gap-2">
+        <span className="inline-flex min-h-11 items-center rounded-full bg-lime px-4 text-sm font-semibold text-bg">Radar</span>
+        <button type="button" onClick={() => setDesk("crm")} className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm font-semibold">
+          CRM {crm.length}
+        </button>
+      </div>
 
       <section className="relative mt-4 overflow-hidden rounded-3xl border border-line">
         <RadarMap
@@ -841,6 +888,9 @@ export function RadarScreen() {
                     <span className="rounded-full bg-surface px-2 py-1 text-xs text-muted">
                       {originOf(b) === "osm" ? "Mapa" : originOf(b) === "archivo" ? "Archivo" : originOf(b) === "web" ? "Web" : "Informe"}
                     </span>
+                    {crm.some((row) => row.bizId === b.id) ? (
+                      <span className="rounded-full bg-surface px-2 py-1 text-xs text-lime">En CRM</span>
+                    ) : null}
                   </button>
                   <span className="inline-flex items-center gap-2 text-sm text-muted">
                     {sum.m > 0 ? <span>+{sum.m} €/mes</span> : null}
@@ -946,6 +996,13 @@ export function RadarScreen() {
                         {s.label}
                       </a>
                     ))}
+                    <button
+                      type="button"
+                      onClick={() => follow(b)}
+                      className="min-h-11 rounded-2xl border border-lime px-4 font-semibold text-lime"
+                    >
+                      {crm.some((row) => row.bizId === b.id) ? "Ver seguimiento" : "Seguimiento"}
+                    </button>
                     <button
                       type="button"
                       onClick={() => void refreshBiz(b)}
