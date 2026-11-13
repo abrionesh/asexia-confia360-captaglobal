@@ -30,7 +30,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { RadarMap } from "@/components/radar-map";
 import { CrmScreen } from "@/components/crm-screen";
-import { loadCrm, openExpediente, saveCrm, type Expediente } from "@/data/crm";
+import { loadCrm, openExpediente, saveCrm, applyRadarUpdate, type Expediente } from "@/data/crm";
 import {
   CATALOG,
   SECTORS,
@@ -44,6 +44,7 @@ import {
   moneyLine,
   nameKey,
   offerOn,
+  offerScore,
   originOf,
   parseImport,
   researchBrief,
@@ -562,6 +563,35 @@ export function RadarScreen() {
             setCrmFocus(null);
             setOpenId(id);
             setDesk("radar");
+          }}
+          onUpdateFromRadar={(bizId) => {
+            const biz =
+              patched.find((item) => item.id === bizId) ||
+              CATALOG.find((item) => item.id === bizId) ||
+              imported.find((item) => item.id === bizId) ||
+              Object.values(found)
+                .flatMap((pack) => pack.rows)
+                .find((item) => item.id === bizId);
+            if (!biz) return "No está en el radar de esta sesión.";
+            let note = "";
+            setCrm((prev) => {
+              const result = applyRadarUpdate(
+                prev,
+                String(bizId),
+                buildOffers(biz).map((offer) => ({
+                  id: offer.id,
+                  title: offer.title,
+                  short: offer.short,
+                  detail: offer.detail,
+                  money: moneyLine(offer),
+                  evidenced: offer.evidenced,
+                  score: offerScore(offer),
+                })),
+              );
+              note = result.note;
+              return result.rows;
+            });
+            return note;
           }}
         />
       </main>

@@ -385,6 +385,11 @@ export function moneyLine(o: Offer) {
   return span || month;
 }
 
+export function offerScore(o: Offer) {
+  const money = Math.max(o.a, o.b) + o.m * 12;
+  return (o.evidenced ? 100000 : 0) + money;
+}
+
 export function telHref(phone: string | undefined) {
   const d = (phone || "").replace(/\D/g, "");
   if (d.length === 9) return `tel:+34${d}`;

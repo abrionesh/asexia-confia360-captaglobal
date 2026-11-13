@@ -55,12 +55,14 @@ export function CrmScreen({
   onChange,
   onBack,
   onOpenRadar,
+  onUpdateFromRadar,
 }: {
   rows: Expediente[];
   focusId: string | null;
   onChange: (rows: Expediente[]) => void;
   onBack: () => void;
   onOpenRadar: (bizId: number) => void;
+  onUpdateFromRadar: (bizId: number) => string;
 }) {
   const [view, setView] = useState<ViewId>("tablero");
   const [openId, setOpenId] = useState<string | null>(focusId);
@@ -106,6 +108,7 @@ export function CrmScreen({
             setView("actuar");
             setOpenId(null);
           }}
+          onUpdateFromRadar={onUpdateFromRadar}
         />
       ) : view === "tablero" ? (
         <Board rows={rows} onOpen={setOpenId} onMove={(id, stage) => onChange(moveStage(rows, id, stage))} />
@@ -258,6 +261,7 @@ function Ficha({
   onClose,
   onOpenRadar,
   onOpenAction,
+  onUpdateFromRadar,
 }: {
   row: Expediente;
   rows: Expediente[];
@@ -265,6 +269,7 @@ function Ficha({
   onClose: () => void;
   onOpenRadar: (bizId: number) => void;
   onOpenAction: () => void;
+  onUpdateFromRadar: (bizId: number) => string;
 }) {
   const [draft, setDraft] = useState("");
   const [citaAt, setCitaAt] = useState("");
@@ -282,7 +287,10 @@ function Ficha({
   const [commChannel, setCommChannel] = useState<Channel>("llamada");
   const [commMedium, setCommMedium] = useState("");
   const [commDetail, setCommDetail] = useState("");
-  const opportunities = [...row.opportunities].sort((a, b) => a.priority - b.priority || b.stageAt.localeCompare(a.stageAt));
+  const [updateNote, setUpdateNote] = useState("");
+  const opportunities = [...row.opportunities].sort(
+    (a, b) => (b.score || 0) - (a.score || 0) || a.priority - b.priority || a.title.localeCompare(b.title, "es"),
+  );
   const field = "mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-3 text-sm text-ink";
 
   return (
@@ -408,13 +416,24 @@ function Ficha({
         />
       </label>
 
-      <h3 className="mt-5 text-sm font-semibold">Informe estratégico</h3>
+      <div className="mt-5">
+        <button
+          type="button"
+          onClick={() => setUpdateNote(onUpdateFromRadar(row.bizId))}
+          className="min-h-11 rounded-xl bg-lime px-4 text-sm font-semibold text-bg"
+        >
+          Actualizar desde el radar
+        </button>
+        {updateNote ? <p className="mt-2 text-sm text-muted">{updateNote}</p> : null}
+      </div>
+
+      <h3 className="mt-4 text-sm font-semibold">Informe estratégico</h3>
       <textarea
         value={row.strategy}
         onChange={(e) =>
           onChange(
             patchExpediente(rows, row.id, {
-              strategy: e.target.value.slice(0, 2000),
+              strategy: e.target.value.slice(0, 4000),
               strategyAt: e.target.value.trim() ? new Date().toISOString().slice(0, 10) : "",
             }),
           )
@@ -426,43 +445,10 @@ function Ficha({
       {row.strategyAt ? <p className="mt-1 text-xs text-muted">Fecha de la propuesta: {row.strategyAt}</p> : null}
 
       <h3 className="mt-5 text-sm font-semibold">Oportunidades</h3>
-      <p className="mt-1 text-xs text-muted">Todas se quedan. El estado de cada una no es el estado del negocio.</p>
+      <p className="mt-1 text-xs text-muted">Todas se quedan, de mayor a menor probabilidad estimada. El estado de cada una no es el estado del negocio.</p>
       <ul className="mt-2 flex flex-col gap-3">
-        {opportunities.map((item) => (
-          <li key={item.id} className="rounded-xl bg-surface p-3">
-            <p className="font-semibold">{item.title}</p>
-            <p className="mt-1 text-xs text-muted">
-              Prioridad {item.priority} · {oppLabel(item.stage)} desde {item.stageAt}
-            </p>
-            <div className="mt-2 flex gap-2">
-              <select
-                value={item.priority}
-                onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { priority: Number(e.target.value) as 1 | 2 | 3 }))}
-                className="min-h-11 flex-1 rounded-xl border border-line bg-card px-2 text-sm"
-              >
-                <option value={1}>Prioridad 1</option>
-                <option value={2}>Prioridad 2</option>
-                <option value={3}>Prioridad 3</option>
-              </select>
-              <select
-                value={item.stage}
-                onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { stage: e.target.value as OppStage }))}
-                className="min-h-11 flex-1 rounded-xl border border-line bg-card px-2 text-sm"
-              >
-                {OPP_STAGES.map((stage) => (
-                  <option key={stage.id} value={stage.id}>
-                    {stage.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <textarea
-              value={item.comment}
-              onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { comment: e.target.value.slice(0, 400) }))}
-              rows={2}
-              className="mt-2 w-full rounded-xl border border-line bg-card px-3 py-2 text-sm"
-            />
-          </li>
+        {opportunities.map((item, index) => (
+          <OppCard key={item.id} index={index} item={item} row={row} rows={rows} onChange={onChange} />
         ))}
       </ul>
       <form
@@ -817,6 +803,105 @@ function Guiones({
         </div>
       ))}
     </div>
+  );
+}
+
+function OppCard({
+  index,
+  item,
+  row,
+  rows,
+  onChange,
+}: {
+  index: number;
+  item: Expediente["opportunities"][number];
+  row: Expediente;
+  rows: Expediente[];
+  onChange: (rows: Expediente[]) => void;
+}) {
+  const [kind, setKind] = useState<Accion["kind"]>("llamada");
+  const [result, setResult] = useState("");
+  return (
+    <li className="rounded-xl bg-surface p-3">
+      <p className="text-xs text-muted">{index + 1}. {item.evidenced ? "Localizado" : "Hipótesis"}{item.money ? ` · ${item.money}` : ""}</p>
+      <p className="font-semibold">{item.title}</p>
+      <p className="mt-1 text-xs text-muted">
+        Prioridad {item.priority} · {oppLabel(item.stage)} desde {item.stageAt}
+      </p>
+      <div className="mt-2 flex gap-2">
+        <select
+          value={item.priority}
+          onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { priority: Number(e.target.value) as 1 | 2 | 3 }))}
+          className="min-h-11 flex-1 rounded-xl border border-line bg-card px-2 text-sm"
+        >
+          <option value={1}>Prioridad 1</option>
+          <option value={2}>Prioridad 2</option>
+          <option value={3}>Prioridad 3</option>
+        </select>
+        <select
+          value={item.stage}
+          onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { stage: e.target.value as OppStage }))}
+          className="min-h-11 flex-1 rounded-xl border border-line bg-card px-2 text-sm"
+        >
+          {OPP_STAGES.map((stage) => (
+            <option key={stage.id} value={stage.id}>
+              {stage.label}
+            </option>
+          ))}
+        </select>
+      </div>
+      <label className="mt-2 block text-xs text-muted">
+        Detalle
+        <textarea
+          value={item.detail}
+          onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { detail: e.target.value.slice(0, 500) }))}
+          rows={3}
+          className="mt-1 w-full rounded-xl border border-line bg-card px-3 py-2 text-sm text-ink"
+        />
+      </label>
+      <label className="mt-2 block text-xs text-muted">
+        Comentario
+        <textarea
+          value={item.comment}
+          onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { comment: e.target.value.slice(0, 400) }))}
+          rows={2}
+          className="mt-1 w-full rounded-xl border border-line bg-card px-3 py-2 text-sm text-ink"
+        />
+      </label>
+      <form
+        className="mt-2 flex flex-col gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (!result.trim()) return;
+          onChange(
+            addAction(rows, row.id, {
+              kind,
+              at: new Date().toISOString(),
+              by: row.assigned,
+              result: `${item.title}: ${result}`.slice(0, 400),
+            }),
+          );
+          setResult("");
+        }}
+      >
+        <div className="flex gap-2">
+          <select value={kind} onChange={(e) => setKind(e.target.value as Accion["kind"])} className="min-h-11 flex-1 rounded-xl border border-line bg-card px-2 text-sm">
+            <option value="llamada">Llamada</option>
+            <option value="visita">Visita</option>
+            <option value="nota">Nota</option>
+          </select>
+          <input
+            value={result}
+            onChange={(e) => setResult(e.target.value)}
+            placeholder="Qué se hizo"
+            className="min-h-11 min-w-0 flex-1 rounded-xl border border-line bg-card px-3 text-sm"
+          />
+        </div>
+        <button type="submit" className="min-h-11 rounded-xl border border-line text-sm font-semibold">
+          Llevar la acción al CRM
+        </button>
+      </form>
+    </li>
   );
 }
 

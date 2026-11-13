@@ -42,11 +42,26 @@ export type OppStage = "abierta" | "en-curso" | "ganada" | "pausada" | "perdida"
 
 export type Oportunidad = {
   id: string;
+  offerId: string;
   title: string;
   priority: 1 | 2 | 3;
+  score: number;
+  money: string;
+  evidenced: boolean;
   stage: OppStage;
   stageAt: string;
+  detail: string;
   comment: string;
+};
+
+export type OfferSeed = {
+  id: string;
+  title: string;
+  short: string;
+  detail: string;
+  money: string;
+  evidenced: boolean;
+  score: number;
 };
 
 export type RutaWhen = "ahora" | "despues" | "luego";
@@ -182,7 +197,14 @@ function normalize(row: Expediente): Expediente {
     strategy: row.strategy || "",
     strategyAt: row.strategyAt || "",
     contacts: Array.isArray(row.contacts) ? row.contacts : [],
-    opportunities: Array.isArray(row.opportunities) ? row.opportunities : [],
+    opportunities: (Array.isArray(row.opportunities) ? row.opportunities : []).map((item) => ({
+      ...item,
+      offerId: item.offerId || "",
+      detail: item.detail || "",
+      score: item.score || 0,
+      money: item.money || "",
+      evidenced: Boolean(item.evidenced),
+    })),
     route: Array.isArray(row.route) ? row.route : [],
     actions: Array.isArray(row.actions) ? row.actions : [],
     communications: Array.isArray(row.communications) ? row.communications : [],
@@ -352,10 +374,15 @@ export function addOpportunity(rows: Expediente[], id: string, title: string, pr
   const at = new Date().toISOString();
   const item: Oportunidad = {
     id: uid(),
+    offerId: "",
     title: clean.slice(0, 120),
     priority,
+    score: 0,
+    money: "",
+    evidenced: false,
     stage: "abierta",
     stageAt: at.slice(0, 10),
+    detail: "",
     comment: comment.trim().slice(0, 400),
   };
   return rows.map((row) =>
@@ -373,7 +400,7 @@ export function patchOpportunity(
   rows: Expediente[],
   id: string,
   oppId: string,
-  patch: Partial<Pick<Oportunidad, "priority" | "stage" | "comment" | "title">>,
+  patch: Partial<Pick<Oportunidad, "priority" | "stage" | "comment" | "title" | "detail">>,
 ): Expediente[] {
   const at = new Date().toISOString();
   return rows.map((row) => {
@@ -388,6 +415,83 @@ export function patchOpportunity(
       }),
     };
   });
+}
+
+export function applyRadarUpdate(rows: Expediente[], id: string, offers: OfferSeed[]): { rows: Expediente[]; note: string } {
+  const row = rows.find((item) => item.id === id);
+  if (!row) return { rows, note: "No está la ficha." };
+  const ranked = [...offers].sort((a, b) => b.score - a.score || a.title.localeCompare(b.title, "es"));
+  const known = new Set(row.opportunities.map((item) => item.offerId).filter(Boolean));
+  const at = new Date().toISOString();
+  let added = 0;
+  const opportunities = row.opportunities.map((item) => {
+    const seed = ranked.find((offer) => offer.id === item.offerId);
+    if (!seed) return item;
+    return {
+      ...item,
+      score: seed.score,
+      money: seed.money,
+      evidenced: seed.evidenced,
+      detail: item.detail.trim() ? item.detail : seed.detail,
+    };
+  });
+  ranked.forEach((seed, index) => {
+    if (known.has(seed.id)) return;
+    added += 1;
+    opportunities.push({
+      id: uid(),
+      offerId: seed.id,
+      title: seed.title.slice(0, 120),
+      priority: index < 2 ? 1 : index < 4 ? 2 : 3,
+      score: seed.score,
+      money: seed.money,
+      evidenced: seed.evidenced,
+      stage: "abierta",
+      stageAt: at.slice(0, 10),
+      detail: seed.detail.slice(0, 500),
+      comment: "",
+    });
+  });
+  const missing = ranked.filter((offer) => !row.strategy.includes(offer.title));
+  let strategy = row.strategy;
+  if (missing.length > 0) {
+    const lines = missing
+      .map(
+        (offer) =>
+          `${offer.title}: ${offer.short}${offer.money ? ` (${offer.money})` : ""}. ${offer.evidenced ? "Hueco localizado." : "Hipótesis, confirmar en el local."}`,
+      )
+      .join("\n");
+    const head = row.strategy.trim()
+      ? `\n\nAñadido el ${at.slice(0, 10)}:\n`
+      : `Propuesta para ${row.name}. Se puede corregir. Empieza por lo localizado.${row.chain ? " Es cadena: la decisión puede no ser local." : ""}\n`;
+    strategy = `${row.strategy.trim()}${head}${lines}`.slice(0, 4000);
+  }
+  if (added === 0 && strategy === row.strategy) {
+    return { rows, note: "Nada nuevo. Lo escrito se mantiene." };
+  }
+  const note = [
+    added ? `${added} oportunidades nuevas` : "",
+    strategy !== row.strategy ? "el informe suma lo que faltaba" : "",
+  ]
+    .filter(Boolean)
+    .join(". ");
+  return {
+    note: `${note}. Lo que ya estaba escrito no se ha tocado.`,
+    rows: rows.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            strategy,
+            strategyAt: strategy.trim() ? at.slice(0, 10) : item.strategyAt,
+            opportunities,
+            events:
+              added > 0
+                ? [{ id: uid(), at, kind: "nota" as const, text: `Radar: ${added} oportunidades nuevas` }, ...item.events]
+                : item.events,
+          }
+        : item,
+    ),
+  };
 }
 
 export function addRoute(rows: Expediente[], id: string, when: RutaWhen, text: string): Expediente[] {
