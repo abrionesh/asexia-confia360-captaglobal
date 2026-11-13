@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   OPP_STAGES,
-  STAGES,
   addAction,
   addCita,
   addCommunication,
@@ -17,7 +16,6 @@ import {
   patchModulo,
   patchOpportunity,
   rutaLabel,
-  stageLabel,
   toggleCita,
   type Accion,
   type Channel,
@@ -27,7 +25,9 @@ import {
   type StageId,
 } from "@/data/crm";
 import { draftScripts, mailHref, waHref, type Scripts } from "@/data/pitches";
+import { loadAdmin, saveAdmin, type MotorAdmin, type StageConf } from "@/motor/admin";
 import { moduloLabel, renewalDue, type ModuloEstado } from "@/motor/cuenta";
+import { buildMando } from "@/motor/mando";
 
 function when(iso: string) {
   const date = new Date(iso);
@@ -45,6 +45,8 @@ const VIEWS = [
   { id: "tablero", label: "Tablero" },
   { id: "actuar", label: "Actuar" },
   { id: "agenda", label: "Agenda" },
+  { id: "mando", label: "Mando" },
+  { id: "admin", label: "Admin" },
 ] as const;
 
 type ViewId = (typeof VIEWS)[number]["id"];
@@ -66,8 +68,14 @@ export function CrmScreen({
 }) {
   const [view, setView] = useState<ViewId>("tablero");
   const [openId, setOpenId] = useState<string | null>(focusId);
+  const [admin, setAdmin] = useState<MotorAdmin>(() => loadAdmin());
   const open = rows.find((row) => row.id === openId) ?? null;
   const due = rows.filter((row) => row.nextWhat && row.nextAt && row.nextAt <= new Date().toISOString().slice(0, 10)).length;
+
+  function commitAdmin(next: MotorAdmin) {
+    saveAdmin(next);
+    setAdmin(next);
+  }
 
   return (
     <section className="mt-4">
@@ -77,7 +85,7 @@ export function CrmScreen({
           Volver al radar
         </button>
       </div>
-      <div className="mt-3 flex gap-2">
+      <div className="scroll-x mt-3 flex gap-2 pb-1">
         {VIEWS.map((item) => (
           <button
             key={item.id}
@@ -87,7 +95,7 @@ export function CrmScreen({
               setOpenId(null);
             }}
             className={
-              "min-h-11 flex-1 rounded-full border text-sm font-semibold " +
+              "min-h-11 shrink-0 rounded-full border px-4 text-sm font-semibold " +
               (view === item.id && !open ? "border-lime bg-lime text-bg" : "border-line")
             }
           >
@@ -109,13 +117,19 @@ export function CrmScreen({
             setOpenId(null);
           }}
           onUpdateFromRadar={onUpdateFromRadar}
+          stages={admin.stages}
+          commercials={admin.commercials}
         />
       ) : view === "tablero" ? (
-        <Board rows={rows} onOpen={setOpenId} onMove={(id, stage) => onChange(moveStage(rows, id, stage))} />
+        <Board rows={rows} stages={admin.stages} onOpen={setOpenId} onMove={(id, stage) => onChange(moveStage(rows, id, stage))} />
       ) : view === "actuar" ? (
         <Actuar rows={rows} onOpen={setOpenId} onDone={(id) => onChange(closeAlarm(rows, id))} />
-      ) : (
+      ) : view === "agenda" ? (
         <Agenda rows={rows} onOpen={setOpenId} onToggle={(id, citaId) => onChange(toggleCita(rows, id, citaId))} />
+      ) : view === "mando" ? (
+        <Mando rows={rows} stages={admin.stages} onActuar={() => setView("actuar")} />
+      ) : (
+        <AdminPanel admin={admin} onChange={commitAdmin} />
       )}
     </section>
   );
@@ -123,17 +137,19 @@ export function CrmScreen({
 
 function Board({
   rows,
+  stages,
   onOpen,
   onMove,
 }: {
   rows: Expediente[];
+  stages: StageConf[];
   onOpen: (id: string) => void;
   onMove: (id: string, stage: StageId) => void;
 }) {
   if (rows.length === 0) return <Empty />;
   return (
     <div className="scroll-x mt-4 flex items-start gap-3 pb-2">
-      {STAGES.map((stage) => {
+      {stages.map((stage) => {
         const list = rows.filter((row) => row.stage === stage.id);
         return (
           <section key={stage.id} className="w-64 shrink-0 rounded-2xl border border-line bg-surface p-2">
@@ -157,7 +173,7 @@ function Board({
                       onChange={(e) => onMove(row.id, e.target.value as StageId)}
                       className="mt-1 min-h-11 w-full rounded-xl border border-line bg-surface px-2 text-sm text-ink"
                     >
-                      {STAGES.map((item) => (
+                      {stages.map((item) => (
                         <option key={item.id} value={item.id}>
                           {item.label}
                         </option>
@@ -254,6 +270,137 @@ function Agenda({
   );
 }
 
+function Mando({
+  rows,
+  stages,
+  onActuar,
+}: {
+  rows: Expediente[];
+  stages: StageConf[];
+  onActuar: () => void;
+}) {
+  const mando = buildMando(rows, stages);
+  return (
+    <div className="mt-4 flex flex-col gap-3">
+      <p className="text-sm text-muted">Números de estas fichas. No predicen nada.</p>
+      <div className="grid grid-cols-2 gap-2">
+        <Tile label="Expedientes" value={String(mando.total)} />
+        <button type="button" onClick={onActuar} className="rounded-2xl border border-line bg-card p-3 text-left">
+          <span className="block text-xs text-muted">Vencidas</span>
+          <span className="mt-1 block font-display text-2xl font-extrabold">{mando.overdue}</span>
+        </button>
+        <Tile label="Sin siguiente paso" value={String(mando.withoutNext)} />
+        <Tile label="Citas de hoy" value={String(mando.citasToday)} />
+      </div>
+      <section className="rounded-2xl border border-line bg-card p-3">
+        <h2 className="text-sm font-semibold">Por estado</h2>
+        <ul className="mt-2 flex flex-col gap-1">
+          {mando.byStage.map((stage) => (
+            <li key={stage.id} className="flex justify-between text-sm">
+              <span>{stage.label}</span>
+              <span className="font-semibold">{stage.count}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section className="rounded-2xl border border-line bg-card p-3">
+        <h2 className="text-sm font-semibold">Por comercial</h2>
+        <ul className="mt-2 flex flex-col gap-1">
+          {mando.byCommercial.map((item) => (
+            <li key={item.name} className="flex justify-between text-sm">
+              <span>{item.name}</span>
+              <span className="font-semibold">{item.count}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </div>
+  );
+}
+
+function Tile({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-line bg-card p-3">
+      <span className="block text-xs text-muted">{label}</span>
+      <span className="mt-1 block font-display text-2xl font-extrabold">{value}</span>
+    </div>
+  );
+}
+
+function AdminPanel({ admin, onChange }: { admin: MotorAdmin; onChange: (next: MotorAdmin) => void }) {
+  const [name, setName] = useState("");
+  function move(index: number, delta: number) {
+    const next = [...admin.stages];
+    const target = index + delta;
+    if (target < 0 || target >= next.length) return;
+    const [item] = next.splice(index, 1);
+    next.splice(target, 0, item);
+    onChange({ ...admin, stages: next });
+  }
+  return (
+    <div className="mt-4 flex flex-col gap-4">
+      <p className="text-sm text-muted">Cambia cómo se llaman las etapas y quién puede llevar un expediente. No borra fichas.</p>
+      <section>
+        <h2 className="text-sm font-semibold">Etapas</h2>
+        <ul className="mt-2 flex flex-col gap-2">
+          {admin.stages.map((stage, index) => (
+            <li key={stage.id} className="flex items-center gap-2">
+              <input
+                value={stage.label}
+                onChange={(e) =>
+                  onChange({
+                    ...admin,
+                    stages: admin.stages.map((item) => (item.id === stage.id ? { ...item, label: e.target.value.slice(0, 40) } : item)),
+                  })
+                }
+                className="min-h-11 min-w-0 flex-1 rounded-xl border border-line bg-surface px-3 text-sm"
+              />
+              <button type="button" onClick={() => move(index, -1)} className="min-h-11 px-2 text-sm font-semibold" aria-label="Subir etapa">
+                Subir
+              </button>
+              <button type="button" onClick={() => move(index, 1)} className="min-h-11 px-2 text-sm font-semibold" aria-label="Bajar etapa">
+                Bajar
+              </button>
+            </li>
+          ))}
+        </ul>
+      </section>
+      <section>
+        <h2 className="text-sm font-semibold">Comerciales</h2>
+        <ul className="mt-2 flex flex-col gap-2">
+          {admin.commercials.map((commercial) => (
+            <li key={commercial} className="flex items-center justify-between gap-2 text-sm">
+              <span>{commercial}</span>
+              <button
+                type="button"
+                onClick={() => onChange({ ...admin, commercials: admin.commercials.filter((item) => item !== commercial) })}
+                className="min-h-11 text-sm font-semibold text-lime"
+              >
+                Quitar
+              </button>
+            </li>
+          ))}
+        </ul>
+        <form
+          className="mt-2 flex gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const clean = name.trim().slice(0, 80);
+            if (!clean || admin.commercials.includes(clean)) return;
+            onChange({ ...admin, commercials: [...admin.commercials, clean] });
+            setName("");
+          }}
+        >
+          <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Nombre" className="min-h-11 min-w-0 flex-1 rounded-xl border border-line bg-surface px-3 text-sm" />
+          <button type="submit" className="min-h-11 shrink-0 rounded-xl bg-lime px-3 font-semibold text-bg">
+            Añadir
+          </button>
+        </form>
+      </section>
+    </div>
+  );
+}
+
 function Ficha({
   row,
   rows,
@@ -262,6 +409,8 @@ function Ficha({
   onOpenRadar,
   onOpenAction,
   onUpdateFromRadar,
+  stages,
+  commercials,
 }: {
   row: Expediente;
   rows: Expediente[];
@@ -270,6 +419,8 @@ function Ficha({
   onOpenRadar: (bizId: number) => void;
   onOpenAction: () => void;
   onUpdateFromRadar: (bizId: number) => string;
+  stages: StageConf[];
+  commercials: string[];
 }) {
   const [draft, setDraft] = useState("");
   const [citaAt, setCitaAt] = useState("");
@@ -331,8 +482,14 @@ function Ficha({
           value={row.assigned}
           onChange={(e) => onChange(patchExpediente(rows, row.id, { assigned: e.target.value.slice(0, 80) }))}
           placeholder="Quién lo lleva"
+          list="commercials"
           className={field}
         />
+        <datalist id="commercials">
+          {commercials.map((name) => (
+            <option key={name} value={name} />
+          ))}
+        </datalist>
       </label>
       <label className="mt-3 block text-xs text-muted">
         Estado del negocio
@@ -341,7 +498,7 @@ function Ficha({
           onChange={(e) => onChange(moveStage(rows, row.id, e.target.value as StageId))}
           className={field}
         >
-          {STAGES.map((item) => (
+          {stages.map((item) => (
             <option key={item.id} value={item.id}>
               {item.label}
             </option>

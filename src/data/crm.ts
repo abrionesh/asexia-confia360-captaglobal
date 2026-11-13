@@ -1,5 +1,6 @@
 import { draftScripts, type Scripts } from "@/data/pitches";
 import { emptyModulos, mergeModulos, type ModuloCuenta, type ModuloId } from "@/motor/cuenta";
+import { DEFAULT_STAGES, stageName, type StageId } from "@/motor/admin";
 import {
   addRecordNote,
   closeRecordAlarm,
@@ -13,21 +14,12 @@ import {
   type MotorEvent,
 } from "@/motor/expediente";
 
+export type { StageId };
+export const STAGES = DEFAULT_STAGES;
+
 export type Channel = MotorChannel;
 export type Cita = MotorCita;
 export type CrmEvent = MotorEvent;
-
-export const STAGES = [
-  { id: "sin-contactar", label: "Sin contactar" },
-  { id: "contactado", label: "Contactado" },
-  { id: "visitado", label: "Visitado" },
-  { id: "propuesta", label: "Propuesta" },
-  { id: "cliente", label: "Cliente" },
-  { id: "no-ahora", label: "No ahora" },
-  { id: "perdido", label: "Perdido" },
-] as const;
-
-export type StageId = (typeof STAGES)[number]["id"];
 
 export type Contacto = {
   id: string;
@@ -138,7 +130,7 @@ export type CrmSeed = {
 const KEY = "asexia-radar-crm-v1";
 
 export function stageLabel(id: StageId) {
-  return STAGES.find((stage) => stage.id === id)?.label ?? id;
+  return stageName(id);
 }
 
 export function channelLabel(id: Channel) {
