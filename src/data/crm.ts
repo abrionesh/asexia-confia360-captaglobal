@@ -1,5 +1,21 @@
 import { draftScripts, type Scripts } from "@/data/pitches";
 import { emptyModulos, mergeModulos, type ModuloCuenta, type ModuloId } from "@/motor/cuenta";
+import {
+  addRecordNote,
+  closeRecordAlarm,
+  motorToday as today,
+  motorUid as uid,
+  moveRecord,
+  scheduleCita,
+  toggleRecordCita,
+  type MotorChannel,
+  type MotorCita,
+  type MotorEvent,
+} from "@/motor/expediente";
+
+export type Channel = MotorChannel;
+export type Cita = MotorCita;
+export type CrmEvent = MotorEvent;
 
 export const STAGES = [
   { id: "sin-contactar", label: "Sin contactar" },
@@ -12,22 +28,6 @@ export const STAGES = [
 ] as const;
 
 export type StageId = (typeof STAGES)[number]["id"];
-
-export type CrmEvent = {
-  id: string;
-  at: string;
-  kind: "alta" | "estado" | "nota" | "cita" | "alarma";
-  text: string;
-};
-
-export type Channel = "llamada" | "whatsapp" | "visita" | "email";
-
-export type Cita = {
-  id: string;
-  at: string;
-  title: string;
-  done: boolean;
-};
 
 export type Contacto = {
   id: string;
@@ -136,14 +136,6 @@ export type CrmSeed = {
 };
 
 const KEY = "asexia-radar-crm-v1";
-
-function today() {
-  return new Date().toISOString().slice(0, 10);
-}
-
-function uid() {
-  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
-}
 
 export function stageLabel(id: StageId) {
   return STAGES.find((stage) => stage.id === id)?.label ?? id;
@@ -299,26 +291,11 @@ export function openExpediente(rows: Expediente[], seed: CrmSeed): Expediente[] 
 }
 
 export function moveStage(rows: Expediente[], id: string, stage: StageId): Expediente[] {
-  const at = new Date().toISOString();
-  return rows.map((row) =>
-    row.id === id && row.stage !== stage
-      ? {
-          ...row,
-          stage,
-          stageAt: at.slice(0, 10),
-          events: [{ id: uid(), at, kind: "estado", text: `Estado: ${stageLabel(stage)}` }, ...row.events],
-        }
-      : row,
-  );
+  return moveRecord(rows, id, stage, stageLabel(stage));
 }
 
 export function addNote(rows: Expediente[], id: string, text: string): Expediente[] {
-  const clean = text.trim();
-  if (!clean) return rows;
-  const at = new Date().toISOString();
-  return rows.map((row) =>
-    row.id === id ? { ...row, events: [{ id: uid(), at, kind: "nota", text: clean.slice(0, 500) }, ...row.events] } : row,
-  );
+  return addRecordNote(rows, id, text);
 }
 
 export function patchExpediente(
@@ -541,33 +518,13 @@ export function addCommunication(rows: Expediente[], id: string, input: Omit<Com
 }
 
 export function closeAlarm(rows: Expediente[], id: string): Expediente[] {
-  const row = rows.find((item) => item.id === id);
-  if (!row?.nextWhat) return rows;
-  const at = new Date().toISOString();
-  const text = `Hecho: ${row.nextWhat}`;
-  return rows.map((item) =>
-    item.id === id ? { ...item, nextAt: "", nextWhat: "", events: [{ id: uid(), at, kind: "alarma", text }, ...item.events] } : item,
-  );
+  return closeRecordAlarm(rows, id);
 }
 
 export function addCita(rows: Expediente[], id: string, at: string, title: string): Expediente[] {
-  const clean = title.trim();
-  if (!clean || !at) return rows;
-  const now = new Date().toISOString();
-  const cita: Cita = { id: uid(), at, title: clean.slice(0, 160), done: false };
-  return rows.map((row) =>
-    row.id === id
-      ? {
-          ...row,
-          citas: [...row.citas, cita].sort((a, b) => a.at.localeCompare(b.at)),
-          events: [{ id: uid(), at: now, kind: "cita", text: `Cita: ${clean}` }, ...row.events],
-        }
-      : row,
-  );
+  return scheduleCita(rows, id, at, title);
 }
 
 export function toggleCita(rows: Expediente[], id: string, citaId: string): Expediente[] {
-  return rows.map((row) =>
-    row.id === id ? { ...row, citas: row.citas.map((cita) => (cita.id === citaId ? { ...cita, done: !cita.done } : cita)) } : row,
-  );
+  return toggleRecordCita(rows, id, citaId);
 }
