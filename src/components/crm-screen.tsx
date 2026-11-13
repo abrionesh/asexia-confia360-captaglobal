@@ -14,6 +14,7 @@ import {
   moveStage,
   oppLabel,
   patchExpediente,
+  patchModulo,
   patchOpportunity,
   rutaLabel,
   stageLabel,
@@ -25,6 +26,8 @@ import {
   type RutaWhen,
   type StageId,
 } from "@/data/crm";
+import { draftScripts, mailHref, waHref, type Scripts } from "@/data/pitches";
+import { moduloLabel, renewalDue, type ModuloEstado } from "@/motor/cuenta";
 
 function when(iso: string) {
   const date = new Date(iso);
@@ -93,7 +96,17 @@ export function CrmScreen({
       </div>
 
       {open ? (
-        <Ficha row={open} rows={rows} onChange={onChange} onClose={() => setOpenId(null)} onOpenRadar={onOpenRadar} />
+        <Ficha
+          row={open}
+          rows={rows}
+          onChange={onChange}
+          onClose={() => setOpenId(null)}
+          onOpenRadar={onOpenRadar}
+          onOpenAction={() => {
+            setView("actuar");
+            setOpenId(null);
+          }}
+        />
       ) : view === "tablero" ? (
         <Board rows={rows} onOpen={setOpenId} onMove={(id, stage) => onChange(moveStage(rows, id, stage))} />
       ) : view === "actuar" ? (
@@ -244,12 +257,14 @@ function Ficha({
   onChange,
   onClose,
   onOpenRadar,
+  onOpenAction,
 }: {
   row: Expediente;
   rows: Expediente[];
   onChange: (rows: Expediente[]) => void;
   onClose: () => void;
   onOpenRadar: (bizId: number) => void;
+  onOpenAction: () => void;
 }) {
   const [draft, setDraft] = useState("");
   const [citaAt, setCitaAt] = useState("");
@@ -292,8 +307,13 @@ function Ficha({
       ) : null}
       {row.email ? <p className="text-sm">{row.email}</p> : null}
       {onOpenRadar ? (
-        <button type="button" onClick={() => onOpenRadar(row.bizId)} className="mt-1 min-h-11 text-sm font-semibold text-lime">
+        <button type="button" onClick={() => onOpenRadar(row.bizId)} className="mt-1 block min-h-11 text-left text-sm font-semibold text-lime">
           Ver el punto en el radar
+        </button>
+      ) : null}
+      {row.nextWhat ? (
+        <button type="button" onClick={onOpenAction} className="block min-h-11 text-left text-sm font-semibold text-lime">
+          Ver la próxima acción
         </button>
       ) : null}
 
@@ -321,9 +341,8 @@ function Ficha({
         </select>
       </label>
       <p className="mt-1 text-xs text-muted">Fecha del estado: {row.stageAt}</p>
-      {row.stage === "cliente" ? (
-        <p className="mt-2 text-sm text-muted">Cuenta y módulos contratados: todavía no están conectados. La ficha ya marca que es cliente.</p>
-      ) : null}
+      <Guiones row={row} rows={rows} onChange={onChange} />
+      {row.stage === "cliente" ? <Cuenta row={row} rows={rows} onChange={onChange} /> : null}
 
       <h3 className="mt-5 text-sm font-semibold">Contactos</h3>
       <p className="mt-1 text-xs text-muted">Quién decide. No es el teléfono del local.</p>
@@ -647,6 +666,156 @@ function Ficha({
           </li>
         ))}
       </ol>
+    </div>
+  );
+}
+
+function Cuenta({
+  row,
+  rows,
+  onChange,
+}: {
+  row: Expediente;
+  rows: Expediente[];
+  onChange: (rows: Expediente[]) => void;
+}) {
+  const today = new Date().toISOString().slice(0, 10);
+  const due = row.modulos.filter((item) => renewalDue(item, today));
+  return (
+    <div className="mt-5">
+      <h3 className="text-sm font-semibold">Cuenta y módulos</h3>
+      <p className="mt-1 text-xs text-muted">Lo marca AsExIA. No cobra y no abre la otra app. Cada cliente solo ve lo suyo cuando eso exista.</p>
+      {due.length > 0 ? (
+        <p className="mt-2 text-sm text-rose">Renovación pendiente: {due.map((item) => moduloLabel(item.id)).join(", ")}.</p>
+      ) : null}
+      <ul className="mt-3 flex flex-col gap-3">
+        {row.modulos.map((item) => (
+          <li key={item.id} className="rounded-xl bg-surface p-3">
+            <p className="font-semibold">{moduloLabel(item.id)}</p>
+            <div className="mt-2 flex gap-2">
+              <select
+                value={item.estado}
+                onChange={(e) => onChange(patchModulo(rows, row.id, item.id, { estado: e.target.value as ModuloEstado }))}
+                className="min-h-11 min-w-0 flex-1 rounded-xl border border-line bg-card px-2 text-sm"
+              >
+                <option value="no-contratado">No contratado</option>
+                <option value="activo">Activo</option>
+                <option value="aviso">Aviso de renovación</option>
+              </select>
+              <input
+                type="date"
+                value={item.vence}
+                onChange={(e) => onChange(patchModulo(rows, row.id, item.id, { vence: e.target.value }))}
+                aria-label={`Vence ${moduloLabel(item.id)}`}
+                className="min-h-11 min-w-0 flex-1 rounded-xl border border-line bg-card px-2 text-sm"
+              />
+            </div>
+            <input
+              value={item.nota}
+              onChange={(e) => onChange(patchModulo(rows, row.id, item.id, { nota: e.target.value.slice(0, 160) }))}
+              placeholder="Nota de la cuenta"
+              className="mt-2 min-h-11 w-full rounded-xl border border-line bg-card px-3 text-sm"
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function Guiones({
+  row,
+  rows,
+  onChange,
+}: {
+  row: Expediente;
+  rows: Expediente[];
+  onChange: (rows: Expediente[]) => void;
+}) {
+  const [copied, setCopied] = useState("");
+  const scripts = row.scripts?.visita
+    ? row.scripts
+    : draftScripts({ name: row.name, city: row.city, sectorId: row.sectorId, angle: row.angle, chain: row.chain });
+  function setScript(key: keyof Scripts, value: string) {
+    onChange(patchExpediente(rows, row.id, { scripts: { ...scripts, [key]: value } }));
+  }
+  async function copy(key: keyof Scripts) {
+    try {
+      await navigator.clipboard.writeText(scripts[key]);
+      setCopied(key);
+    } catch {
+      setCopied("");
+    }
+  }
+  const wa = waHref(row.phone, scripts.whatsapp);
+  const mail = mailHref(row.email, row.name, scripts.email);
+  const box = "mt-1 w-full rounded-xl border border-line bg-surface px-3 py-2 text-sm text-ink";
+  return (
+    <div className="mt-5">
+      <h3 className="text-sm font-semibold">Mensajes y guion de visita</h3>
+      <p className="mt-1 text-xs text-muted">
+        Borrador para el comercial. Copiar o abrir no envía nada. Si no hay un hueco contrastado, el texto no inventa una carencia.
+      </p>
+      <button
+        type="button"
+        onClick={() =>
+          onChange(
+            patchExpediente(rows, row.id, {
+              scripts: draftScripts({ name: row.name, city: row.city, sectorId: row.sectorId, angle: row.angle, chain: row.chain }),
+            }),
+          )
+        }
+        className="mt-2 min-h-11 text-sm font-semibold text-lime"
+      >
+        Volver a proponer
+      </button>
+      {(
+        [
+          ["visita", "Guion de visita"],
+          ["whatsapp", "WhatsApp inicial"],
+          ["email", "Email"],
+          ["seguimiento", "Seguimiento si no contestan"],
+        ] as const
+      ).map(([key, label]) => (
+        <div key={key} className="mt-3">
+          <label className="text-xs text-muted">
+            {label}
+            <textarea value={scripts[key]} onChange={(e) => setScript(key, e.target.value.slice(0, 2000))} rows={key === "visita" ? 8 : 5} className={box} />
+          </label>
+          <div className="mt-2 flex flex-wrap gap-2">
+            <button type="button" onClick={() => void copy(key)} className="min-h-11 rounded-xl border border-line px-3 text-sm font-semibold">
+              {copied === key ? "Copiado" : "Copiar"}
+            </button>
+            {key === "whatsapp" && wa ? (
+              <a href={wa} target="_blank" rel="noreferrer" className="inline-flex min-h-11 items-center rounded-xl bg-lime px-3 text-sm font-semibold text-bg">
+                Abrir en WhatsApp
+              </a>
+            ) : null}
+            {key === "email" && mail ? (
+              <a href={mail} className="inline-flex min-h-11 items-center rounded-xl border border-line px-3 text-sm font-semibold">
+                Abrir email
+              </a>
+            ) : null}
+            {key !== "visita" ? (
+              <button
+                type="button"
+                onClick={() =>
+                  onChange(
+                    addCommunication(rows, row.id, {
+                      channel: key === "whatsapp" ? "whatsapp" : key === "email" ? "email" : "llamada",
+                      medium: "Borrador",
+                      detail: scripts[key],
+                    }),
+                  )
+                }
+                className="min-h-11 rounded-xl border border-line px-3 text-sm font-semibold"
+              >
+                Dejar constancia
+              </button>
+            ) : null}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

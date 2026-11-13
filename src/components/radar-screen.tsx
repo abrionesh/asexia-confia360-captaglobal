@@ -528,7 +528,20 @@ export function RadarScreen() {
   const showResearch = visible.length === 0 && !q;
 
   function follow(b: Biz) {
-    setCrm((prev) => openExpediente(prev, b));
+    setCrm((prev) =>
+      openExpediente(prev, {
+        id: b.id,
+        name: b.name,
+        city: townById(b.city)?.name || b.city,
+        sectorLabel: b.sectorLabel,
+        sectorId: b.sectorId,
+        phone: b.phone,
+        email: b.email,
+        address: b.address,
+        angle: gapLine(b, buildOffers(b), extras[b.id] ?? emptyPref()),
+        chain: b.chain,
+      }),
+    );
     setCrmFocus(String(b.id));
     setDesk("crm");
   }

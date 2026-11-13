@@ -1,3 +1,6 @@
+import { draftScripts, type Scripts } from "@/data/pitches";
+import { emptyModulos, mergeModulos, type ModuloCuenta, type ModuloId } from "@/motor/cuenta";
+
 export const STAGES = [
   { id: "sin-contactar", label: "Sin contactar" },
   { id: "contactado", label: "Contactado" },
@@ -77,6 +80,7 @@ export type Expediente = {
   name: string;
   city: string;
   sector: string;
+  sectorId: string;
   phone: string;
   email: string;
   address: string;
@@ -88,6 +92,8 @@ export type Expediente = {
   channel: Channel;
   hours: string;
   chain: boolean;
+  angle: string;
+  scripts: Scripts;
   significant: string;
   strategy: string;
   strategyAt: string;
@@ -96,6 +102,7 @@ export type Expediente = {
   route: RutaItem[];
   actions: Accion[];
   communications: Comunicacion[];
+  modulos: ModuloCuenta[];
   citas: Cita[];
   events: CrmEvent[];
 };
@@ -105,9 +112,12 @@ export type CrmSeed = {
   name: string;
   city: string;
   sectorLabel: string;
+  sectorId?: string;
   phone: string;
   email: string;
   address: string;
+  angle?: string;
+  chain?: boolean;
 };
 
 const KEY = "asexia-radar-crm-v1";
@@ -150,11 +160,24 @@ export function rutaLabel(when: RutaWhen) {
 }
 
 function normalize(row: Expediente): Expediente {
+  const sectorId = row.sectorId || "";
+  const angle = row.angle || "";
+  const scripts = row.scripts?.visita
+    ? row.scripts
+    : draftScripts({ name: row.name, city: row.city, sectorId, angle, chain: Boolean(row.chain) });
   return {
     ...row,
+    sectorId,
     channel: row.channel || "llamada",
     hours: row.hours || "",
     chain: Boolean(row.chain),
+    angle,
+    scripts: {
+      visita: scripts.visita || "",
+      whatsapp: scripts.whatsapp || "",
+      email: scripts.email || "",
+      seguimiento: scripts.seguimiento || "",
+    },
     significant: row.significant || "",
     strategy: row.strategy || "",
     strategyAt: row.strategyAt || "",
@@ -163,6 +186,7 @@ function normalize(row: Expediente): Expediente {
     route: Array.isArray(row.route) ? row.route : [],
     actions: Array.isArray(row.actions) ? row.actions : [],
     communications: Array.isArray(row.communications) ? row.communications : [],
+    modulos: mergeModulos(row.modulos),
     citas: Array.isArray(row.citas) ? row.citas : [],
     events: Array.isArray(row.events) ? row.events : [],
     nextAt: row.nextAt || "",
@@ -202,6 +226,9 @@ export function openExpediente(rows: Expediente[], seed: CrmSeed): Expediente[] 
             phone: seed.phone || row.phone,
             email: seed.email || row.email,
             address: seed.address || row.address,
+            sectorId: seed.sectorId || row.sectorId,
+            angle: row.angle || seed.angle || "",
+            chain: row.chain || Boolean(seed.chain),
           }
         : row,
     );
@@ -214,6 +241,7 @@ export function openExpediente(rows: Expediente[], seed: CrmSeed): Expediente[] 
     name: seed.name,
     city: seed.city,
     sector: seed.sectorLabel,
+    sectorId: seed.sectorId || "",
     phone: seed.phone,
     email: seed.email,
     address: seed.address,
@@ -224,7 +252,15 @@ export function openExpediente(rows: Expediente[], seed: CrmSeed): Expediente[] 
     nextWhat: "",
     channel: "llamada",
     hours: "",
-    chain: false,
+    chain: Boolean(seed.chain),
+    angle: seed.angle || "",
+    scripts: draftScripts({
+      name: seed.name,
+      city: seed.city,
+      sectorId: seed.sectorId || "",
+      angle: seed.angle || "",
+      chain: Boolean(seed.chain),
+    }),
     significant: "",
     strategy: "",
     strategyAt: "",
@@ -233,6 +269,7 @@ export function openExpediente(rows: Expediente[], seed: CrmSeed): Expediente[] 
     route: [],
     actions: [],
     communications: [],
+    modulos: emptyModulos(),
     citas: [],
     events: [{ id: uid(), at, kind: "alta", text: "Entra desde el radar" }],
   };
@@ -282,10 +319,25 @@ export function patchExpediente(
       | "significant"
       | "strategy"
       | "strategyAt"
+      | "angle"
+      | "scripts"
     >
   >,
 ) {
   return rows.map((row) => (row.id === id ? { ...row, ...patch } : row));
+}
+
+export function patchModulo(
+  rows: Expediente[],
+  id: string,
+  moduloId: ModuloId,
+  patch: Partial<Pick<ModuloCuenta, "estado" | "vence" | "nota">>,
+): Expediente[] {
+  return rows.map((row) =>
+    row.id === id
+      ? { ...row, modulos: row.modulos.map((item) => (item.id === moduloId ? { ...item, ...patch } : item)) }
+      : row,
+  );
 }
 
 export function addContact(rows: Expediente[], id: string, contact: Omit<Contacto, "id">): Expediente[] {
@@ -317,7 +369,12 @@ export function addOpportunity(rows: Expediente[], id: string, title: string, pr
   );
 }
 
-export function patchOpportunity(rows: Expediente[], id: string, oppId: string, patch: Partial<Pick<Oportunidad, "priority" | "stage" | "comment" | "title">>): Expediente[] {
+export function patchOpportunity(
+  rows: Expediente[],
+  id: string,
+  oppId: string,
+  patch: Partial<Pick<Oportunidad, "priority" | "stage" | "comment" | "title">>,
+): Expediente[] {
   const at = new Date().toISOString();
   return rows.map((row) => {
     if (row.id !== id) return row;
@@ -385,9 +442,7 @@ export function closeAlarm(rows: Expediente[], id: string): Expediente[] {
   const at = new Date().toISOString();
   const text = `Hecho: ${row.nextWhat}`;
   return rows.map((item) =>
-    item.id === id
-      ? { ...item, nextAt: "", nextWhat: "", events: [{ id: uid(), at, kind: "alarma", text }, ...item.events] }
-      : item,
+    item.id === id ? { ...item, nextAt: "", nextWhat: "", events: [{ id: uid(), at, kind: "alarma", text }, ...item.events] } : item,
   );
 }
 
