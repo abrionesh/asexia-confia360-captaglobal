@@ -56,6 +56,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "confia360-motor": "github:abrionesh/confia360-motor",
     "date-fns": "^4.0.0",
     "jose": "6.2.9",
     "kysely": "^0.28.5",

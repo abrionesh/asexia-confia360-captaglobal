@@ -1,6 +1,6 @@
 import { draftScripts, type Scripts } from "@/data/pitches";
-import { emptyModulos, mergeModulos, type ModuloCuenta, type ModuloId } from "@/motor/cuenta";
-import { DEFAULT_STAGES, stageName, type StageId } from "@/motor/admin";
+import { emptyModulos, mergeModulos, type ModuloCuenta, type ModuloId } from "confia360-motor/cuenta";
+import { DEFAULT_STAGES, stageName, type StageId } from "confia360-motor/admin";
 import {
   addRecordNote,
   closeRecordAlarm,
@@ -12,7 +12,7 @@ import {
   type MotorChannel,
   type MotorCita,
   type MotorEvent,
-} from "@/motor/expediente";
+} from "confia360-motor/expediente";
 
 export type { StageId };
 export const STAGES = DEFAULT_STAGES;

@@ -25,9 +25,9 @@ import {
   type StageId,
 } from "@/data/crm";
 import { draftScripts, mailHref, waHref, type Scripts } from "@/data/pitches";
-import { loadAdmin, saveAdmin, type MotorAdmin, type StageConf } from "@/motor/admin";
-import { moduloLabel, renewalDue, type ModuloEstado } from "@/motor/cuenta";
-import { buildMando } from "@/motor/mando";
+import { loadAdmin, saveAdmin, type MotorAdmin, type StageConf } from "confia360-motor/admin";
+import { moduloLabel, renewalDue, type ModuloEstado } from "confia360-motor/cuenta";
+import { buildMando } from "confia360-motor/mando";
 
 function when(iso: string) {
   const date = new Date(iso);
