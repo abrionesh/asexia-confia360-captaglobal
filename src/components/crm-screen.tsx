@@ -58,6 +58,7 @@ export function CrmScreen({
   onBack,
   onOpenRadar,
   onUpdateFromRadar,
+  onEnrich,
 }: {
   rows: Expediente[];
   focusId: string | null;
@@ -65,6 +66,7 @@ export function CrmScreen({
   onBack: () => void;
   onOpenRadar: (bizId: number) => void;
   onUpdateFromRadar: (bizId: number) => string;
+  onEnrich: (bizId: number) => string;
 }) {
   const [view, setView] = useState<ViewId>("tablero");
   const [openId, setOpenId] = useState<string | null>(focusId);
@@ -117,6 +119,7 @@ export function CrmScreen({
             setOpenId(null);
           }}
           onUpdateFromRadar={onUpdateFromRadar}
+          onEnrich={onEnrich}
           stages={admin.stages}
           commercials={admin.commercials}
         />
@@ -164,6 +167,7 @@ function Board({
                     <span className="mt-1 block text-xs text-muted">
                       desde {row.stageAt}
                       {row.assigned ? ` · ${row.assigned}` : ""}
+                      {row.opportunities.length ? ` · ${row.opportunities.length} oportunidades` : ""}
                     </span>
                   </button>
                   <label className="mt-2 block text-xs text-muted">
@@ -409,6 +413,7 @@ function Ficha({
   onOpenRadar,
   onOpenAction,
   onUpdateFromRadar,
+  onEnrich,
   stages,
   commercials,
 }: {
@@ -419,6 +424,7 @@ function Ficha({
   onOpenRadar: (bizId: number) => void;
   onOpenAction: () => void;
   onUpdateFromRadar: (bizId: number) => string;
+  onEnrich: (bizId: number) => string;
   stages: StageConf[];
   commercials: string[];
 }) {
@@ -576,8 +582,15 @@ function Ficha({
       <div className="mt-5">
         <button
           type="button"
-          onClick={() => setUpdateNote(onUpdateFromRadar(row.bizId))}
+          onClick={() => setUpdateNote(onEnrich(row.bizId))}
           className="min-h-11 rounded-xl bg-lime px-4 text-sm font-semibold text-bg"
+        >
+          Crear y enriquecer estrategia
+        </button>
+        <button
+          type="button"
+          onClick={() => setUpdateNote(onUpdateFromRadar(row.bizId))}
+          className="mt-2 min-h-11 rounded-xl border border-line px-4 text-sm font-semibold"
         >
           Actualizar desde el radar
         </button>
@@ -602,7 +615,9 @@ function Ficha({
       {row.strategyAt ? <p className="mt-1 text-xs text-muted">Fecha de la propuesta: {row.strategyAt}</p> : null}
 
       <h3 className="mt-5 text-sm font-semibold">Oportunidades</h3>
-      <p className="mt-1 text-xs text-muted">Todas se quedan, de mayor a menor probabilidad estimada. El estado de cada una no es el estado del negocio.</p>
+      <p className="mt-1 text-xs text-muted">
+        Se ven todas. Cada una tiene su estado y su tempo. El tempo lo marca la estrategia y no es el estado del negocio.
+      </p>
       <ul className="mt-2 flex flex-col gap-3">
         {opportunities.map((item, index) => (
           <OppCard key={item.id} index={index} item={item} row={row} rows={rows} onChange={onChange} />
@@ -983,9 +998,21 @@ function OppCard({
       <p className="text-xs text-muted">{index + 1}. {item.evidenced ? "Localizado" : "Hipótesis"}{item.money ? ` · ${item.money}` : ""}</p>
       <p className="font-semibold">{item.title}</p>
       <p className="mt-1 text-xs text-muted">
-        Prioridad {item.priority} · {oppLabel(item.stage)} desde {item.stageAt}
+        Prioridad {item.priority} · {oppLabel(item.stage)} desde {item.stageAt} · tempo {item.when === "despues" ? "después" : item.when === "luego" ? "más adelante" : "ahora"}
       </p>
-      <div className="mt-2 flex gap-2">
+      <div className="mt-2 flex flex-col gap-2">
+        <select
+          value={item.when}
+          onChange={(e) =>
+            onChange(patchOpportunity(rows, row.id, item.id, { when: e.target.value as RutaWhen, whenTouched: true }))
+          }
+          className="min-h-11 w-full rounded-xl border border-line bg-card px-2 text-sm"
+        >
+          <option value="ahora">Tempo: ahora</option>
+          <option value="despues">Tempo: después</option>
+          <option value="luego">Tempo: más adelante</option>
+        </select>
+        <div className="flex gap-2">
         <select
           value={item.priority}
           onChange={(e) => onChange(patchOpportunity(rows, row.id, item.id, { priority: Number(e.target.value) as 1 | 2 | 3 }))}
@@ -1006,6 +1033,7 @@ function OppCard({
             </option>
           ))}
         </select>
+        </div>
       </div>
       <label className="mt-2 block text-xs text-muted">
         Detalle

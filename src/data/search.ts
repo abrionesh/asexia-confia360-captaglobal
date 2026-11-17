@@ -78,11 +78,105 @@ function fromNominatim(h: NominatimHit): RawPlace | null {
   };
 }
 
+function belongsToSector(place: RawPlace, sectorId: string) {
+  const value = (place.osmValue || "").toLowerCase();
+  if (/highway|residential|road|street|pedestrian|bus_stop|suburb|administrative|town|city|locality/.test(value)) return false;
+  const name = place.name.toLowerCase();
+  const vet = /veterinar|canin|felin|mascota/.test(name) || value === "veterinary";
+  if (sectorId === "vet") return vet;
+  if (sectorId !== "clinica") return true;
+  if (/farmacia|pharmacy/.test(name) || value === "pharmacy") return false;
+  if (vet) return false;
+  if (/clinic|doctor|dentist|physiotherapist|hospital|healthcare/.test(value)) return true;
+  return /clinic|dental|dentista|odont|fisio|medic|salud|podolog|osteopat|quiro|logoped|psicolog|sanitas|quir[oó]n|hospital|policlin/.test(name);
+}
+
+function searchBox(town: ReturnType<typeof townGeo>) {
+  const dLat = town.radiusKm / 111;
+  const dLon = town.radiusKm / (111 * Math.cos((town.lat * Math.PI) / 180));
+  return `${town.lat - dLat},${town.lon - dLon},${town.lat + dLat},${town.lon + dLon}`;
+}
+
+async function overpassPlaces(town: ReturnType<typeof townGeo>, sectorId: string) {
+  if (sectorId !== "clinica" && sectorId !== "vet") return [] as RawPlace[];
+  const bbox = searchBox(town);
+  const body =
+    sectorId === "vet"
+      ? `node["amenity"="veterinary"](${bbox});way["amenity"="veterinary"](${bbox});node["healthcare"="veterinary"](${bbox});way["healthcare"="veterinary"](${bbox});`
+      : `node["amenity"~"^(clinic|doctors|dentist|hospital)$"](${bbox});way["amenity"~"^(clinic|doctors|dentist|hospital)$"](${bbox});node["healthcare"~"^(clinic|doctor|dentist|centre|hospital|physiotherapist|psychotherapist|speech_therapist|podiatrist|laboratory|optometrist)$"](${bbox});way["healthcare"~"^(clinic|doctor|dentist|centre|hospital|physiotherapist|speech_therapist|podiatrist|laboratory|optometrist)$"](${bbox});`;
+  const query = `[out:json][timeout:20];(${body});out tags center;`;
+  const endpoints = ["https://overpass.openstreetmap.fr/api/interpreter", "https://overpass.osm.ch/api/interpreter"];
+  for (const endpoint of endpoints) {
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ data: query }),
+        signal: AbortSignal.timeout(22000),
+      });
+      if (!res.ok) continue;
+      const data = (await res.json()) as {
+        elements?: { type?: string; id?: number; lat?: number; lon?: number; center?: { lat?: number; lon?: number }; tags?: Record<string, string> }[];
+      };
+      const places: RawPlace[] = [];
+      for (const el of data.elements ?? []) {
+        const tags = el.tags ?? {};
+        const name = (tags.name || "").trim();
+        const lat = el.lat ?? el.center?.lat;
+        const lon = el.lon ?? el.center?.lon;
+        if (!name || !el.id || lat == null || lon == null) continue;
+        if (/pharmacy|farmacia/i.test(`${tags.amenity || ""} ${tags.healthcare || ""} ${name}`)) continue;
+        places.push({
+          osmType: el.type === "way" ? "W" : el.type === "relation" ? "R" : "N",
+          osmId: el.id,
+          name: name.slice(0, 120),
+          lat,
+          lon,
+          city: tags["addr:city"],
+          street: tags["addr:street"],
+          housenumber: tags["addr:housenumber"],
+          postcode: tags["addr:postcode"],
+          osmValue: tags.healthcare || tags.amenity,
+          tags,
+        });
+      }
+      return places;
+    } catch {
+      /* el otro servidor */
+    }
+  }
+  return [] as RawPlace[];
+}
+
+function directoryKind(url: string) {
+  if (/paginasamarillas\.es/i.test(url)) return "Páginas Amarillas";
+  if (/doctoralia\./i.test(url)) return "Doctoralia";
+  if (/cylex\.es/i.test(url)) return "Cylex";
+  if (/topdoctors\./i.test(url)) return "Top Doctors";
+  return "";
+}
+
+function listingName(title: string, town: string) {
+  const head = title.split(/\s+[|·]\s+|\s+-\s+|\s+en\s+/i)[0]?.trim() || "";
+  if (!head || head.length < 3) return "";
+  if (/p[aá]ginas amarillas|doctoralia|cylex|top doctors|buscar|directorio/i.test(head)) return "";
+  if (nameKey(head) === nameKey(town)) return "";
+  return head.slice(0, 120);
+}
+
+function sameBusiness(a: string, b: string) {
+  const left = nameKey(a);
+  const right = nameKey(b);
+  if (!left || !right) return false;
+  if (left === right) return true;
+  return left.length >= 8 && right.length >= 8 && (left.includes(right) || right.includes(left));
+}
+
 export async function runSearch(cityId: string, sectorId: string, force = false) {
   const queries = SECTOR_QUERIES[sectorId];
   const town = townGeo(cityId);
   if (!queries) return { ok: false as const, error: "Elige un sector para buscar." };
-  const key = `v2:${cityId}:${sectorId}`;
+  const key = `v5:${cityId}:${sectorId}`;
   const hit = cache.get(key);
   if (!force && hit && Date.now() - hit.at < TTL) return { ok: true as const, rows: hit.rows, note: hit.note, at: hit.at };
 
@@ -96,18 +190,18 @@ export async function runSearch(cityId: string, sectorId: string, force = false)
   const photonJobs = queries.map(async (q) => {
     const url = new URL("https://photon.komoot.io/api/");
     url.searchParams.set("q", `${q} ${town.name}`);
-    url.searchParams.set("limit", "50");
+    url.searchParams.set("limit", "40");
     url.searchParams.set("lat", String(town.lat));
     url.searchParams.set("lon", String(town.lon));
     const body = (await grab(url.toString())) as { features?: PhotonFeature[] };
     for (const feature of body.features ?? []) add(fromPhoton(feature));
   });
 
-  const nominatimJob = (async () => {
+  const nominatimJobs = queries.slice(0, 3).map(async (q) => {
     const url = new URL("https://nominatim.openstreetmap.org/search");
-    url.searchParams.set("q", `${queries[0]} ${town.name}`);
+    url.searchParams.set("q", `${q} ${town.name}`);
     url.searchParams.set("format", "jsonv2");
-    url.searchParams.set("limit", "40");
+    url.searchParams.set("limit", "30");
     url.searchParams.set("addressdetails", "1");
     url.searchParams.set("extratags", "1");
     url.searchParams.set("countrycodes", "es");
@@ -115,9 +209,9 @@ export async function runSearch(cityId: string, sectorId: string, force = false)
     url.searchParams.set("bounded", "1");
     const body = (await grab(url.toString())) as NominatimHit[];
     if (Array.isArray(body)) for (const row of body) add(fromNominatim(row));
-  })();
+  });
 
-  const settled = await Promise.allSettled([...photonJobs, nominatimJob]);
+  const settled = await Promise.allSettled([...photonJobs, ...nominatimJobs, overpassPlaces(town, sectorId).then((list) => list.forEach((place) => add(place)))]);
   if (settled.every((s) => s.status === "rejected") && places.size === 0) {
     return { ok: false as const, error: "El mapa no ha respondido. Prueba de nuevo o importa un Excel." };
   }
@@ -150,6 +244,7 @@ export async function runSearch(cityId: string, sectorId: string, force = false)
   const seen = new Set<string>();
   const rows: Biz[] = [];
   for (const place of places.values()) {
+    if (!belongsToSector(place, sectorId)) continue;
     const biz = toBiz(place, cityId, sectorId);
     if (!biz) continue;
     const nk = nameKey(biz.name);
@@ -160,10 +255,75 @@ export async function runSearch(cityId: string, sectorId: string, force = false)
   }
   rows.sort((a, b) => Number(Boolean(b.phone)) - Number(Boolean(a.phone)) || a.name.localeCompare(b.name, "es"));
 
+  let fromDirectory = 0;
+  if (sectorId === "clinica" || sectorId === "vet") {
+    const queriesDir =
+      sectorId === "vet"
+        ? [`veterinarios ${town.name}`, `clínica veterinaria ${town.name} páginas amarillas`]
+        : [`clínicas ${town.name} doctoralia`, `dentistas ${town.name} páginas amarillas`, `fisioterapia ${town.name} cylex`];
+    const hits: { title: string; url: string }[] = [];
+    await Promise.all(
+      queriesDir.map(async (q) => {
+        try {
+          for (const hit of await duckHits(q)) {
+            if (!directoryKind(hit.url)) continue;
+            if (!nameKey(`${hit.title} ${hit.url}`).includes(nameKey(town.name))) continue;
+            if (!hits.some((item) => item.url === hit.url)) hits.push(hit);
+          }
+        } catch {
+          /* el directorio no ha respondido */
+        }
+      }),
+    );
+    for (const hit of hits.slice(0, 12)) {
+      const label = directoryKind(hit.url);
+      const title = listingName(hit.title, town.name);
+      if (!title) continue;
+      const current = rows.find((row) => sameBusiness(row.name, title));
+      if (current) {
+        if (!current.sources.some((item) => item.url === hit.url)) current.sources.push({ label, url: hit.url });
+        continue;
+      }
+      const sector = sectorById(sectorId);
+      fromDirectory += 1;
+      rows.push({
+        id: webId(town.id, title),
+        city: town.id,
+        sectorId: sector.id,
+        name: title,
+        sectorLabel: sector.label,
+        sub: sector.id === "vet" ? "Veterinaria" : "Clínica",
+        zone: "",
+        address: "",
+        phone: "",
+        phoneAlt: "",
+        email: "",
+        web: "",
+        hasPage: false,
+        certIssue: false,
+        rating: null,
+        reviews: 0,
+        reservations: "",
+        orders: "",
+        whatsapp: "sin-dato",
+        chain: false,
+        presence: "Directorio",
+        why: `Sale en ${label} y el resultado nombra ${town.name}. No se ha leído el teléfono: ábrelo y contrasta. No es el mapa.`,
+        lat: null,
+        lng: null,
+        pending: false,
+        mapsOk: false,
+        sources: [{ label, url: hit.url }],
+        imported: false,
+        origin: "web",
+      });
+    }
+  }
+
   const note =
     cityId === "madrid"
       ? `${rows.length} fichas de OpenStreetMap cerca del centro. Madrid no cabe entero en una consulta. No es un censo y no inventa teléfonos.`
-      : `${rows.length} fichas de OpenStreetMap en ${town.name}. No es un censo: lo que no sale puede existir. No inventa teléfonos.`;
+      : `${rows.length} fichas en ${town.name}. El mapa entra por etiqueta, no solo por el nombre.${fromDirectory ? ` ${fromDirectory} solo salen en un directorio que nombra el municipio.` : ""} No es un censo y no inventa teléfonos.`;
   const at = Date.now();
   cache.set(key, { at, rows, note });
   return { ok: true as const, rows, note, at };
@@ -190,7 +350,15 @@ export type WebHit = { title: string; url: string };
 
 const BROWSER = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/121.0.0.0 Safari/537.36";
 const SKIP_HOST = /yahoo\.|bing\.|gstatic|yimg\.|duckduckgo\.|microsoft\.|schema\.org|apple\.com|doubleclick|googlesyndication|googleadservices/i;
-const NO_FETCH = /restaurantguru\.|tripadvisor\.|menuweb\.|carta\.menu|cylex\.es|instagram\.com|facebook\.com|tiktok\.com|google\./i;
+const NO_FETCH = /restaurantguru\.|tripadvisor\.|menuweb\.|carta\.menu|cylex\.es|instagram\.com|facebook\.com|tiktok\.com|google\.|paginasamarillas\.|cybo\.com|qdq\.com|11870\.com/i;
+const NOT_OWN = /cylex\.es|paginasamarillas\.es|cybo\.com|qdq\.com|11870\.com|google\.|instagram\.com|facebook\.com|tiktok\.com|just-eat\.|glovo\.|ubereats\.|tripadvisor\.|restaurantguru\.|thefork\.|yelp\./i;
+const DIRECTORIES: { test: RegExp; label: string }[] = [
+  { test: /(^|\.)cylex\.es$/i, label: "Cylex" },
+  { test: /(^|\.)paginasamarillas\.es$/i, label: "Páginas Amarillas" },
+  { test: /(^|\.)cybo\.com$/i, label: "Cybo" },
+  { test: /(^|\.)qdq\.com$/i, label: "QDQ" },
+  { test: /(^|\.)11870\.com$/i, label: "11870" },
+];
 
 function hostOf(url: string) {
   try {
@@ -246,6 +414,33 @@ function yahooLinks(html: string) {
     }
   }
   return out.slice(0, 8);
+}
+
+async function duckHits(query: string) {
+  const html = await pull(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`);
+  const out: { url: string; title: string }[] = [];
+  const re = /class="result__a"[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(html)) && out.length < 12) {
+    const href = match[1].replace(/&/g, "&");
+    const found = href.match(/uddg=([^&]+)/);
+    if (!found) continue;
+    let url = "";
+    try {
+      url = decodeURIComponent(found[1]);
+    } catch {
+      continue;
+    }
+    if (!/^https?:\/\//i.test(url) || SKIP_HOST.test(url)) continue;
+    const title = match[2].replace(/<[^>]+>/g, " ").replace(/&/g, "&").replace(/\s+/g, " ").trim();
+    if (!out.some((item) => item.url === url)) out.push({ url: url.slice(0, 300), title: title.slice(0, 140) });
+  }
+  return out;
+}
+
+function siteTitle(title: string) {
+  const head = title.split(/\s+[|·]\s+|\s+-\s+/)[0]?.trim() || title;
+  return head.replace(/\s+/g, " ").trim().slice(0, 80);
 }
 
 function plausiblePhone(digits: string) {
@@ -314,7 +509,12 @@ async function geocode(query: string, town: ReturnType<typeof townGeo>) {
   return { lat, lon };
 }
 
-type PublicLink = { label: string; url: string; kind: "google" | "carta" | "instagram" | "facebook" | "tiktok" | "page" };
+type PublicLink = {
+  label: string;
+  url: string;
+  kind: "google" | "directory" | "carta" | "instagram" | "facebook" | "tiktok" | "page";
+  siteName?: string;
+};
 
 function nameTokens(name: string) {
   return name
@@ -330,7 +530,7 @@ function tokenHit(value: string, tokens: string[]) {
   return tokens.some((token) => got.includes(token));
 }
 
-function classifyLink(raw: string, tokens: string[]): PublicLink | null {
+function classifyLink(raw: string, tokens: string[], title = ""): PublicLink | null {
   let url: URL;
   try {
     url = new URL(raw);
@@ -340,6 +540,11 @@ function classifyLink(raw: string, tokens: string[]): PublicLink | null {
   const host = url.hostname.replace(/^www\./, "");
   const path = decodeURIComponent(url.pathname);
   if (SKIP_HOST.test(host) || /youtube\.com|youtu\.be|wikipedia\.org/.test(host)) return null;
+  const directory = DIRECTORIES.find((item) => item.test.test(host));
+  if (directory) {
+    if (!tokenHit(`${raw} ${title}`, tokens)) return null;
+    return { label: directory.label, url: url.toString().slice(0, 300), kind: "directory", siteName: directory.label };
+  }
   if ((host === "google.com" || host === "www.google.com") && !path.startsWith("/maps") && !url.search.includes("cid=")) return null;
   if (/instagram\.com$/.test(host)) {
     const user = path.split("/").filter(Boolean)[0] || "";
@@ -359,13 +564,14 @@ function classifyLink(raw: string, tokens: string[]): PublicLink | null {
     return { label: "TikTok", url: `https://www.tiktok.com/${user}`, kind: "tiktok" };
   }
   if (/^(maps\.google\.com|google\.com|maps\.app\.goo\.gl)$/.test(host) && (path.startsWith("/maps") || url.search.includes("cid=") || url.search.includes("daddr="))) {
-    return { label: "Google", url: url.toString().slice(0, 400), kind: "google" };
+    return { label: "Google Business", url: url.toString().slice(0, 400), kind: "google" };
   }
   if (/carta|\/menu|tripadvisor/.test(`${host}${path}`) && tokenHit(raw, tokens)) {
     return { label: /tripadvisor/.test(host) ? "Tripadvisor" : "Carta", url: url.toString().slice(0, 300), kind: "carta" };
   }
-  if (!tokenHit(raw, tokens)) return null;
-  return { label: host, url: url.toString().slice(0, 300), kind: "page" };
+  if (!tokenHit(`${raw} ${title}`, tokens)) return null;
+  const name = title ? siteTitle(title) : host;
+  return { label: name, url: url.toString().slice(0, 300), kind: "page", siteName: name };
 }
 
 function jsonLdNodes(html: string) {
@@ -397,6 +603,7 @@ function placeNode(nodes: Record<string, unknown>[]) {
 async function fichaFromWeb(name: string, town: ReturnType<typeof townGeo>, sectorHint: string): Promise<Biz | null> {
   const tokens = nameTokens(name);
   const queries = [`${name} ${town.name}`, `${name} ${town.name} teléfono`, `${name} ${town.name} instagram`, `${name} ${town.name} carta`];
+  const duckQueries = [`${name} ${town.name}`, `${name} ${town.name} cylex`, `${name} ${town.name} páginas amarillas`];
   const found: PublicLink[] = [];
   const seen = new Set<string>();
   const push = (link: PublicLink | null) => {
@@ -406,7 +613,7 @@ async function fichaFromWeb(name: string, town: ReturnType<typeof townGeo>, sect
       if (idx >= 0) {
         const current = found[idx];
         const rank = (url: string) => (url.includes("cid=") ? 3 : url.includes("query=") || url.includes("/maps/search") ? 2 : 1);
-        const betterGoogle = link.label === "Google" && rank(link.url) > rank(current.url);
+        const betterGoogle = link.label === "Google Business" && rank(link.url) > rank(current.url);
         const betterCarta = link.label === "Carta" && /menu/i.test(link.url) && !/menu/i.test(current.url);
         if (betterGoogle || betterCarta) {
           seen.delete(current.url);
@@ -427,6 +634,21 @@ async function fichaFromWeb(name: string, town: ReturnType<typeof townGeo>, sect
         for (const link of yahooLinks(html)) push(classifyLink(link, tokens));
       } catch {
         /* otra consulta */
+      }
+    }),
+  );
+  await Promise.all(
+    duckQueries.map(async (q) => {
+      try {
+        const hits = await duckHits(q);
+        for (const hit of hits) {
+          if (!nameKey(`${hit.url} ${hit.title}`).includes(nameKey(town.name))) continue;
+          const link = classifyLink(hit.url, tokens, hit.title);
+          if (link?.kind === "page") link.siteName = siteTitle(hit.title) || link.siteName;
+          push(link);
+        }
+      } catch {
+        /* el directorio no ha respondido */
       }
     }),
   );
@@ -499,7 +721,8 @@ async function fichaFromWeb(name: string, town: ReturnType<typeof townGeo>, sect
     }
   }
 
-  if (!phone && !found.some((link) => link.kind !== "page")) return null;
+  const own = found.find((link) => link.kind === "page" && !NOT_OWN.test(link.url));
+  if (!phone && !own && !found.some((link) => link.kind !== "page")) return null;
 
   if (lat == null && address) {
     try {
@@ -515,16 +738,18 @@ async function fichaFromWeb(name: string, town: ReturnType<typeof townGeo>, sect
 
   const googleQuery = encodeURIComponent([bestName, address, town.name].filter(Boolean).join(" "));
   push({
-    label: "Google",
+    label: "Google Business",
     url: `https://www.google.com/maps/search/?api=1&query=${googleQuery}`,
     kind: "google",
   });
-  const order = ["google", "carta", "instagram", "facebook", "tiktok", "page"];
+  const web = own?.url || "";
+  const webName = own ? own.siteName || hostOf(own.url) : "";
+  const order = ["google", "directory", "carta", "instagram", "facebook", "tiktok", "page"];
   const sources = found
-    .filter((link) => link.kind !== "page" || link.url.includes(dataHost))
+    .filter((link) => link.kind !== "page" || link.url === web || (dataHost && link.url.includes(dataHost)))
     .sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind))
     .slice(0, 8)
-    .map((link) => ({ label: link.kind === "page" ? "Fuente" : link.label, url: link.url }));
+    .map((link) => ({ label: link.kind === "page" ? link.siteName || hostOf(link.url) : link.label, url: link.url }));
 
   const sectorId = sectorHint && sectorHint !== "todos" ? sectorHint : "hosteleria";
   const sector = sectorById(sectorId);
@@ -540,8 +765,9 @@ async function fichaFromWeb(name: string, town: ReturnType<typeof townGeo>, sect
     phone,
     phoneAlt,
     email,
-    web: "",
-    hasPage: false,
+    web,
+    webName,
+    hasPage: Boolean(web),
     certIssue: false,
     rating,
     reviews,
@@ -550,7 +776,7 @@ async function fichaFromWeb(name: string, town: ReturnType<typeof townGeo>, sect
     whatsapp: "sin-dato",
     chain: false,
     presence: rating ? "Nota" : "Web",
-    why: `Teléfono y dirección${dataHost ? ` de ${dataHost}` : ""}. Google abre la ficha con carta y reseñas. Las redes solo entran si el enlace contiene el nombre. No es el informe del 6 nov: contrasta antes de usarlos.`,
+    why: `Teléfono y dirección${dataHost ? ` de ${dataHost}` : ""}${webName ? `. Web: ${webName}` : ""}. Google Business abre la ficha. Cylex, Páginas Amarillas y otros directorios públicos solo entran si el resultado nombra el municipio. No es el informe del 6 nov: contrasta antes de usarlos.`,
     lat,
     lng,
     pending: false,
@@ -637,6 +863,22 @@ export async function runSearchNamed(cityId: string, name: string, sectorHint: s
   }
 
   if (!biz) biz = await fichaFromWeb(name, town, sectorHint);
+  else {
+    const extra = await fichaFromWeb(name, town, sectorHint);
+    if (extra) {
+      if (!biz.web && extra.web) {
+        biz = { ...biz, web: extra.web, webName: extra.webName, hasPage: true };
+      }
+      const urls = new Set(biz.sources.map((item) => item.url));
+      const sources = [...biz.sources];
+      for (const item of extra.sources) {
+        if (urls.has(item.url)) continue;
+        urls.add(item.url);
+        sources.push(item);
+      }
+      biz = { ...biz, sources: sources.slice(0, 8) };
+    }
+  }
   return { ok: true as const, biz, web: biz ? [] : webLinks(name, town.name) };
 }
 
@@ -709,13 +951,32 @@ export async function runSearchOne(cityId: string, name: string) {
   }
 
   const contact = contactOf(tags);
+  let web = contact.web;
+  let webName = web ? hostOf(web) : "";
+  if (!web) {
+    try {
+      const hits = await duckHits(`${name} ${town.name}`);
+      const tokens = nameTokens(name);
+      for (const hit of hits) {
+        if (!nameKey(`${hit.url} ${hit.title}`).includes(nameKey(town.name))) continue;
+        const link = classifyLink(hit.url, tokens, hit.title);
+        if (!link || link.kind !== "page" || NOT_OWN.test(link.url)) continue;
+        web = link.url;
+        webName = siteTitle(hit.title) || hostOf(link.url);
+        break;
+      }
+    } catch {
+      /* sin web en los directorios */
+    }
+  }
   const address = [best.street, best.housenumber, best.postcode, best.city].filter(Boolean).join(", ");
   return {
     ok: true as const,
     name: best.name,
     phone: contact.phone,
     email: contact.email,
-    web: contact.web,
+    web,
+    webName,
     address: address.slice(0, 160),
     sourceUrl: osmLink(best.osmType, best.osmId),
   };

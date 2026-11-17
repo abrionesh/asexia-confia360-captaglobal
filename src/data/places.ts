@@ -30,9 +30,9 @@ export const SECTOR_QUERIES: Record<string, string[]> = {
   hosteleria: ["restaurante", "bar", "cafeteria"],
   peluqueria: ["peluqueria", "barberia"],
   gimnasio: ["gimnasio"],
-  clinica: ["clinica", "dentista"],
+  clinica: ["clinica", "dentista", "fisioterapia", "centro de salud", "podologo"],
   estetica: ["estetica", "centro de belleza"],
-  vet: ["veterinario"],
+  vet: ["veterinario", "clinica veterinaria"],
   inmobiliaria: ["inmobiliaria"],
   gestion: ["gestion de pisos"],
   taller: ["taller mecanico"],
@@ -58,8 +58,15 @@ const SUB: Record<string, string> = {
   beauty: "Estética",
   fitness_centre: "Gimnasio",
   clinic: "Clínica",
-  doctors: "Clínica",
+  doctors: "Consulta",
   dentist: "Clínica dental",
+  physiotherapist: "Fisioterapia",
+  hospital: "Hospital",
+  psychotherapist: "Psicología",
+  speech_therapist: "Logopedia",
+  podiatrist: "Podología",
+  laboratory: "Laboratorio",
+  centre: "Centro de salud",
   veterinary: "Veterinaria",
   estate_agent: "Inmobiliaria",
   car_repair: "Taller",
@@ -195,8 +202,15 @@ export function toBiz(place: RawPlace, cityId: string, sectorId: string): Biz | 
   const email = (tags.email || tags["contact:email"] || "").includes("@")
     ? (tags.email || tags["contact:email"]).slice(0, 120)
     : "";
+  const street = place.street || tags["addr:street"] || tags["addr:place"] || "";
+  const number = place.housenumber || tags["addr:housenumber"] || "";
+  const post = place.postcode || tags["addr:postcode"] || "";
+  const locality = tags["addr:city"] || tags["addr:town"] || town.name;
+  const full = (tags["addr:full"] || "").trim();
+  const line = (full || [street, number, post].filter(Boolean).join(", ")).trim();
+  const address = (line ? (locality && !line.toLowerCase().includes(locality.toLowerCase()) ? `${line}, ${locality}` : line) : "").slice(0, 160);
+  const point = `https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lon}#map=18/${place.lat}/${place.lon}`;
   const sub = SUB[place.osmValue || ""] || sector.label;
-  const address = [place.street, place.housenumber, place.postcode].filter(Boolean).join(", ");
   return {
     id: bizId(place.osmType, place.osmId),
     city: cityId,
@@ -205,7 +219,7 @@ export function toBiz(place: RawPlace, cityId: string, sectorId: string): Biz | 
     sectorLabel: sector.label,
     sub,
     zone: (place.district || "").slice(0, 60),
-    address: address.slice(0, 160),
+    address,
     phone,
     phoneAlt: "",
     email,
@@ -224,7 +238,10 @@ export function toBiz(place: RawPlace, cityId: string, sectorId: string): Biz | 
     lng: place.lon,
     pending: false,
     mapsOk: false,
-    sources: [{ label: "OpenStreetMap", url: osmUrl(place.osmType, place.osmId) }],
+    sources: [
+      { label: "OpenStreetMap", url: osmUrl(place.osmType, place.osmId) },
+      { label: "Punto en el mapa", url: point },
+    ],
     imported: false,
     origin: "osm",
   };

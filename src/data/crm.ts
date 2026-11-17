@@ -1,4 +1,5 @@
 import { draftScripts, type Scripts } from "@/data/pitches";
+import { readKeep, writeKeep } from "@/data/keep";
 import { emptyModulos, mergeModulos, type ModuloCuenta, type ModuloId } from "confia360-motor/cuenta";
 import { DEFAULT_STAGES, stageName } from "confia360-motor/admin";
 import {
@@ -42,6 +43,8 @@ export type Oportunidad = {
   evidenced: boolean;
   stage: OppStage;
   stageAt: string;
+  when: RutaWhen;
+  whenTouched: boolean;
   detail: string;
   comment: string;
 };
@@ -188,6 +191,10 @@ function normalize(row: Expediente): Expediente {
       score: item.score || 0,
       money: item.money || "",
       evidenced: Boolean(item.evidenced),
+      stage: item.stage || "abierta",
+      stageAt: item.stageAt || "",
+      when: item.when === "despues" || item.when === "luego" || item.when === "ahora" ? item.when : item.priority === 1 ? "ahora" : item.priority === 2 ? "despues" : "luego",
+      whenTouched: Boolean(item.whenTouched),
     })),
     route: Array.isArray(row.route) ? row.route : [],
     actions: Array.isArray(row.actions) ? row.actions : [],
@@ -201,23 +208,34 @@ function normalize(row: Expediente): Expediente {
   };
 }
 
+function parseCrm(raw: string | null): Expediente[] {
+  if (!raw) return [];
+  const data = JSON.parse(raw) as Expediente[];
+  return Array.isArray(data) ? data.filter((row) => row && row.id && row.name).map(normalize) : [];
+}
+
 export function loadCrm(): Expediente[] {
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return [];
-    const data = JSON.parse(raw) as Expediente[];
-    return Array.isArray(data) ? data.filter((row) => row && row.id && row.name).map(normalize) : [];
+    const packed = JSON.parse(raw) as { at?: number; json?: string };
+    const body = packed && typeof packed.json === "string" && typeof packed.at === "number" ? packed.json : raw;
+    return parseCrm(body);
+  } catch {
+    return [];
+  }
+}
+
+export async function loadCrmKeep(): Promise<Expediente[]> {
+  try {
+    return parseCrm(await readKeep(KEY));
   } catch {
     return [];
   }
 }
 
 export function saveCrm(rows: Expediente[]) {
-  try {
-    localStorage.setItem(KEY, JSON.stringify(rows));
-  } catch {
-    /* quota */
-  }
+  return writeKeep(KEY, JSON.stringify(rows));
 }
 
 export function openExpediente(rows: Expediente[], seed: CrmSeed): Expediente[] {
@@ -351,6 +369,8 @@ export function addOpportunity(rows: Expediente[], id: string, title: string, pr
     evidenced: false,
     stage: "abierta",
     stageAt: at.slice(0, 10),
+    when: priority === 1 ? "ahora" : priority === 2 ? "despues" : "luego",
+    whenTouched: false,
     detail: "",
     comment: comment.trim().slice(0, 400),
   };
@@ -369,7 +389,7 @@ export function patchOpportunity(
   rows: Expediente[],
   id: string,
   oppId: string,
-  patch: Partial<Pick<Oportunidad, "priority" | "stage" | "comment" | "title" | "detail">>,
+  patch: Partial<Pick<Oportunidad, "priority" | "stage" | "comment" | "title" | "detail" | "when" | "whenTouched">>,
 ): Expediente[] {
   const at = new Date().toISOString();
   return rows.map((row) => {
@@ -417,6 +437,8 @@ export function applyRadarUpdate(rows: Expediente[], id: string, offers: OfferSe
       evidenced: seed.evidenced,
       stage: "abierta",
       stageAt: at.slice(0, 10),
+      when: index < 2 ? "ahora" : index < 4 ? "despues" : "luego",
+      whenTouched: false,
       detail: seed.detail.slice(0, 500),
       comment: "",
     });
@@ -457,6 +479,65 @@ export function applyRadarUpdate(rows: Expediente[], id: string, offers: OfferSe
               added > 0
                 ? [{ id: uid(), at, kind: "nota" as const, text: `Radar: ${added} oportunidades nuevas` }, ...item.events]
                 : item.events,
+          }
+        : item,
+    ),
+  };
+}
+
+function tempoWord(when: RutaWhen) {
+  if (when === "despues") return "después";
+  if (when === "luego") return "más adelante";
+  return "ahora";
+}
+
+export function enrichStrategy(rows: Expediente[], id: string, offers: OfferSeed[]): { rows: Expediente[]; note: string } {
+  const first = applyRadarUpdate(rows, id, offers);
+  const row = first.rows.find((item) => item.id === id);
+  if (!row) return first;
+  const ranked = [...row.opportunities].sort((a, b) => (b.score || 0) - (a.score || 0) || a.priority - b.priority || a.title.localeCompare(b.title, "es"));
+  const opportunities = ranked.map((item, index) =>
+    item.whenTouched ? item : { ...item, when: (index < 2 ? "ahora" : index < 4 ? "despues" : "luego") as RutaWhen },
+  );
+  const lines: string[] = [];
+  const add = (line: string) => {
+    const clean = line.trim();
+    if (clean && !row.strategy.includes(clean)) lines.push(clean);
+  };
+  add(`${row.name}. ${row.sector}. ${row.address}`.replace(/\s+\./g, "."));
+  if (row.phone) add(`Teléfono: ${row.phone}`);
+  if (row.email) add(`Correo: ${row.email}`);
+  if (row.chain) add("Es cadena: la decisión puede no ser local.");
+  if (row.angle) add(`Ángulo: ${row.angle}`);
+  if (row.significant.trim()) add(`Notas: ${row.significant.trim()}`);
+  for (const contact of row.contacts) {
+    add(`Contacto: ${contact.name}${contact.role ? `, ${contact.role}` : ""}${contact.decides ? ", decide" : ""}`);
+  }
+  for (const item of opportunities) {
+    add(`${item.title}: ${oppLabel(item.stage)}, tempo ${tempoWord(item.when)}${item.money ? `, ${item.money}` : ""}.`);
+  }
+  for (const step of row.route) add(`Ruta ${tempoWord(step.when)}: ${step.text}`);
+  for (const action of row.actions.slice(0, 6)) add(`Acción ${action.kind}: ${action.result}`);
+  for (const item of row.communications.slice(0, 6)) add(`Comunicación ${channelLabel(item.channel)}: ${item.detail || item.medium}`);
+  if (lines.length === 0) {
+    return {
+      note: `${first.note} La estrategia ya tenía esos datos.`.trim(),
+      rows: first.rows.map((item) => (item.id === id ? { ...item, opportunities } : item)),
+    };
+  }
+  const at = new Date().toISOString();
+  const head = row.strategy.trim() ? `\n\nEstrategia ${at.slice(0, 10)}, con los datos de la ficha:\n` : `Estrategia para ${row.name}. Se puede corregir.\n`;
+  const strategy = `${row.strategy.trim()}${head}${lines.join("\n")}`.slice(0, 4000);
+  return {
+    note: `Estrategia enriquecida. ${opportunities.length} oportunidades, cada una con su estado y su tempo. Lo escrito antes se mantiene.`,
+    rows: first.rows.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            opportunities,
+            strategy,
+            strategyAt: at.slice(0, 10),
+            events: [{ id: uid(), at, kind: "nota" as const, text: "Estrategia enriquecida con los datos de la ficha" }, ...item.events],
           }
         : item,
     ),

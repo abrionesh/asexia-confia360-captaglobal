@@ -30,7 +30,8 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { RadarMap } from "@/components/radar-map";
 import { CrmScreen } from "@/components/crm-screen";
-import { loadCrm, openExpediente, saveCrm, applyRadarUpdate, type Expediente } from "@/data/crm";
+import { loadCrmKeep, openExpediente, saveCrm, applyRadarUpdate, enrichStrategy, type Expediente } from "@/data/crm";
+import { readKeep, writeKeep } from "@/data/keep";
 import {
   CATALOG,
   SECTORS,
@@ -40,6 +41,8 @@ import {
   emptyPref,
   euro,
   gapLine,
+  distinctBiz,
+  fitsSector,
   heatOf,
   moneyLine,
   nameKey,
@@ -64,7 +67,19 @@ const KEY = "asexia-radar-municipio-v1";
 const FOUND_KEY = "asexia-radar-busqueda-v2";
 
 type Found = Record<string, { at: number; rows: Biz[]; note: string }>;
-type ContactPatch = { phone?: string; email?: string; phoneAlt?: string; web?: string; address?: string };
+type ContactPatch = { phone?: string; email?: string; phoneAlt?: string; web?: string; webName?: string; address?: string };
+
+function cleanFound(found: Found) {
+  const next: Found = {};
+  for (const [key, pack] of Object.entries(found)) {
+    if (!key.endsWith(":v5") && !key.endsWith(":nombre")) continue;
+    if (key.startsWith("getafe:hosteleria")) continue;
+    const rows = distinctBiz((pack.rows || []).filter((row) => fitsSector(row)));
+    if (!rows.length) continue;
+    next[key] = { ...pack, rows };
+  }
+  return next;
+}
 
 const ICONS: Record<string, LucideIcon> = {
   todos: LayoutGrid,
@@ -96,6 +111,83 @@ const TICKET: Record<string, string> = {
 
 const HEAT_LABEL: Record<Heat, string> = { high: "Alta", mid: "Media", low: "Baja" };
 
+function sourceUrl(b: Biz, re: RegExp) {
+  return b.sources.find((s) => re.test(`${s.label} ${s.url}`))?.url || "";
+}
+
+function summaryPoints(b: Biz) {
+  const map = sourceUrl(b, /maps|openstreetmap|punto en el mapa/i) || (b.lat != null && b.lng != null ? `https://www.openstreetmap.org/?mlat=${b.lat}&mlon=${b.lng}#map=18/${b.lat}/${b.lng}` : "");
+  const web = b.web || sourceUrl(b, /web atribuida|^web\b/i);
+  const reservas = sourceUrl(b, /reserva/i);
+  const pedidos = sourceUrl(b, /pedido|uber|glovo|just-eat/i);
+  const reviews = b.reviews > 0 ? `${b.reviews.toLocaleString("es-ES")} reseñas` : "Reseñas";
+  return [
+    { id: "mapa", label: "Mapa", on: Boolean(map), url: map },
+    { id: "web", label: "Web", on: Boolean(web), url: web },
+    { id: "tel", label: "Teléfono", on: Boolean((b.phone || "").trim() || (b.phoneAlt || "").trim()), url: telHref(b.phone || b.phoneAlt) },
+    { id: "mail", label: "Correo", on: b.email.includes("@"), url: b.email.includes("@") ? `mailto:${b.email}` : "" },
+    { id: "res", label: "Reservas", on: Boolean(reservas || b.reservations), url: reservas },
+    { id: "ped", label: "Pedidos", on: Boolean(pedidos || b.orders), url: pedidos },
+    { id: "ig", label: "Instagram", on: Boolean(sourceUrl(b, /instagram/i)), url: sourceUrl(b, /instagram/i) },
+    { id: "fb", label: "Facebook", on: Boolean(sourceUrl(b, /facebook/i)), url: sourceUrl(b, /facebook/i) },
+    { id: "tt", label: "TikTok", on: Boolean(sourceUrl(b, /tiktok/i)), url: sourceUrl(b, /tiktok/i) },
+    { id: "wa", label: "WhatsApp", on: b.whatsapp === "anunciado", url: "" },
+    { id: "rev", label: reviews, on: b.reviews > 0, url: b.reviews > 0 ? map : "" },
+  ];
+}
+
+function matchesClass(b: Biz, kind: string, value: string, crmIds: Set<number>) {
+  if (!value) return true;
+  if (kind === "contacto") {
+    if (value === "Con teléfono") return Boolean((b.phone || "").trim() || (b.phoneAlt || "").trim());
+    if (value === "Sin teléfono") return !(b.phone || "").trim() && !(b.phoneAlt || "").trim();
+    if (value === "Con web") return Boolean(b.web);
+    if (value === "Con correo") return b.email.includes("@");
+  }
+  if (kind === "reseñas") {
+    if (value === "Sin reseñas") return b.reviews <= 0;
+    if (value === "Con reseñas") return b.reviews > 0;
+    if (value === "100 o más") return b.reviews >= 100;
+    if (value === "500 o más") return b.reviews >= 500;
+    if (value === "1.000 o más") return b.reviews >= 1000;
+  }
+  if (kind === "oportunidad") {
+    const titles = buildOffers(b).map((o) => o.title);
+    if (value === "3 o más") return titles.length >= 3;
+    if (value === "2 o más") return titles.length >= 2;
+    return titles.includes(value);
+  }
+  return classOf(b, kind, crmIds) === value;
+}
+
+function classOf(b: Biz, kind: string, crmIds: Set<number>) {
+  if (kind === "zona") return b.zone || "Sin zona";
+  if (kind === "origen") {
+    const origin = originOf(b);
+    if (origin === "osm") return "Mapa";
+    if (origin === "web") return "Directorio";
+    if (origin === "archivo") return "Archivo";
+    return "Informe";
+  }
+  if (kind === "cadena") return b.chain ? "Cadena" : "No es cadena";
+  if (kind === "crm") return crmIds.has(b.id) ? "En seguimiento" : "Sin seguimiento";
+  return "";
+}
+
+function hostLabel(url: string) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return "Web";
+  }
+}
+
+function ownCandidate(url: string) {
+  return !/cylex\.es|paginasamarillas\.es|cybo\.com|qdq\.com|11870\.com|google\.|instagram\.com|facebook\.com|tiktok\.com|just-eat\.|glovo\.|ubereats\.|tripadvisor\.|restaurantguru\.|openstreetmap\.org/i.test(
+    url,
+  );
+}
+
 function ticketClass(ticket: Sector["ticket"], active: boolean) {
   if (!ticket) return "";
   if (ticket === "high") return active ? "bg-lime text-bg" : "text-lime";
@@ -105,15 +197,18 @@ function ticketClass(ticket: Sector["ticket"], active: boolean) {
 
 export function RadarScreen() {
   const scroller = useRef<HTMLDivElement>(null);
+  const listHead = useRef<HTMLParagraphElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const foundRef = useRef<Found>({});
   const force = useRef(false);
   const [city, setCity] = useState("getafe");
   const [sector, setSector] = useState("hosteleria");
   const [sub, setSub] = useState("");
+  const [classKind, setClassKind] = useState<"" | "zona" | "origen" | "contacto" | "cadena" | "crm" | "reseñas" | "oportunidad">("");
+  const [classValue, setClassValue] = useState("");
   const [q, setQ] = useState("");
-  const [phoneOnly, setPhoneOnly] = useState(true);
-  const [sort, setSort] = useState<"money" | "reviews" | "name">("money");
+  const [phoneOnly, setPhoneOnly] = useState(false);
+  const [sort, setSort] = useState<"money" | "reviews" | "name" | "offers">("money");
   const [openId, setOpenId] = useState<number | null>(null);
   const [extras, setExtras] = useState<Record<number, Pref>>({});
   const [imported, setImported] = useState<Biz[]>([]);
@@ -121,6 +216,8 @@ export function RadarScreen() {
   const [patches, setPatches] = useState<Record<number, ContactPatch>>({});
   const [refreshingId, setRefreshingId] = useState<number | null>(null);
   const [booted, setBooted] = useState(false);
+  const [keepOn, setKeepOn] = useState(false);
+  const [saved, setSaved] = useState<"pendiente" | "si" | "no">("pendiente");
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState("");
   const [tick, setTick] = useState(0);
@@ -138,55 +235,61 @@ export function RadarScreen() {
   foundRef.current = found;
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) {
-        const data = JSON.parse(raw) as {
-          imported?: Biz[];
-          extras?: Record<number, Pref>;
-          city?: string;
-          patches?: Record<number, ContactPatch>;
-        };
-        if (Array.isArray(data.imported)) setImported(data.imported);
-        if (data.extras) setExtras(data.extras);
-        if (data.patches) setPatches(data.patches);
-        if (data.city && TOWNS.some((t) => t.id === data.city)) setCity(data.city);
+    let dead = false;
+    void (async () => {
+      try {
+        const [appRaw, foundRaw, crmRows] = await Promise.all([readKeep(KEY), readKeep(FOUND_KEY), loadCrmKeep()]);
+        if (dead) return;
+        if (appRaw) {
+          const data = JSON.parse(appRaw) as {
+            imported?: Biz[];
+            extras?: Record<number, Pref>;
+            city?: string;
+            patches?: Record<number, ContactPatch>;
+          };
+          if (Array.isArray(data.imported)) setImported(data.imported);
+          if (data.extras) setExtras(data.extras);
+          if (data.patches) setPatches(data.patches);
+          if (data.city && TOWNS.some((t) => t.id === data.city)) setCity(data.city);
+        }
+        if (foundRaw) {
+          const parsed = JSON.parse(foundRaw) as Found;
+          if (parsed && typeof parsed === "object") setFound(cleanFound(parsed));
+        }
+        setCrm(crmRows);
+        if (!dead) {
+          setBooted(true);
+          setCrmReady(true);
+          setKeepOn(true);
+        }
+      } catch {
+        if (!dead) setBooted(true);
       }
-      const saved = localStorage.getItem(FOUND_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved) as Found;
-        if (parsed && typeof parsed === "object") setFound(parsed);
-      }
-    } catch {
-      /* ignore broken local copy */
-    }
-    setBooted(true);
-    setCrm(loadCrm());
-    setCrmReady(true);
+    })();
+    return () => {
+      dead = true;
+    };
   }, []);
 
   useEffect(() => {
-    if (!booted) return;
-    localStorage.setItem(KEY, JSON.stringify({ imported, extras, city, patches }));
-  }, [imported, extras, city, patches, booted]);
+    if (!keepOn) return;
+    setSaved(writeKeep(KEY, JSON.stringify({ imported, extras, city, patches })) ? "si" : "no");
+  }, [imported, extras, city, patches, keepOn]);
 
   useEffect(() => {
-    if (!booted) return;
-    try {
-      localStorage.setItem(FOUND_KEY, JSON.stringify(found));
-    } catch {
-      /* quota */
-    }
-  }, [found, booted]);
+    if (!keepOn) return;
+    setSaved(writeKeep(FOUND_KEY, JSON.stringify(found)) ? "si" : "no");
+  }, [found, keepOn]);
 
   useEffect(() => {
-    if (!crmReady) return;
-    saveCrm(crm);
-  }, [crm, crmReady]);
+    if (!keepOn) return;
+    setSaved(saveCrm(crm) === false ? "no" : "si");
+  }, [crm, keepOn]);
 
   useEffect(() => {
     if (!booted || sector === "todos") return;
-    const key = `${city}:${sector}`;
+    if (city === "getafe" && sector === "hosteleria") return;
+    const key = `${city}:${sector}:v5`;
     const bypass = force.current;
     force.current = false;
     const cached = foundRef.current[key];
@@ -205,7 +308,11 @@ export function RadarScreen() {
             setSearchError(res.error);
             return;
           }
-          setFound((prev) => ({ ...prev, [key]: { at: res.at, rows: res.rows, note: res.note } }));
+          setFound((prev) => {
+            const next = cleanFound({ ...prev, [key]: { at: res.at, rows: res.rows, note: res.note } });
+            setSaved(writeKeep(FOUND_KEY, JSON.stringify(next)) ? "si" : "no");
+            return next;
+          });
         })
         .catch(() => {
           if (!dead) setSearchError("No se ha podido buscar. Puedes importar un Excel.");
@@ -226,19 +333,22 @@ export function RadarScreen() {
     return () => window.clearTimeout(t);
   }, [toast]);
 
+  useEffect(() => {
+    setPhoneOnly(false);
+  }, []);
+
   const town = townById(city);
   const sectorMeta = sectorById(sector);
 
   const pool = useMemo(() => {
     const base = city === "getafe" ? CATALOG : [];
-    const known = new Set(base.map((b) => nameKey(b.name)));
-    const fromFile = imported.filter((b) => b.city === city && !known.has(nameKey(b.name)));
-    for (const b of fromFile) known.add(nameKey(b.name));
+    const fromFile = imported.filter((b) => b.city === city);
     const fromMap = Object.entries(found)
-      .filter(([k]) => k.startsWith(`${city}:`))
+      .filter(([k]) => k.startsWith(`${city}:`) && (k.endsWith(":v5") || k.endsWith(":nombre")))
+      .filter(([k]) => !(city === "getafe" && k.startsWith(`${city}:hosteleria`)))
       .flatMap(([, pack]) => pack.rows)
-      .filter((b) => b.city === city && !known.has(nameKey(b.name)));
-    return [...base, ...fromFile, ...fromMap];
+      .filter((b) => b.city === city && fitsSector(b));
+    return distinctBiz([...base, ...fromFile, ...fromMap]);
   }, [city, imported, found]);
 
   const patched = useMemo(
@@ -252,6 +362,7 @@ export function RadarScreen() {
           email: p.email ?? b.email,
           phoneAlt: p.phoneAlt ?? b.phoneAlt,
           web: p.web ?? b.web,
+          webName: p.webName ?? b.webName,
           address: p.address ?? b.address,
           hasPage: p.web ? true : b.hasPage,
         };
@@ -273,25 +384,89 @@ export function RadarScreen() {
     return [...map.entries()].sort((a, b) => b[1] - a[1]);
   }, [pool, sector]);
 
+  const crmIds = useMemo(() => new Set(crm.map((row) => row.bizId)), [crm]);
+
+  const classOptions = useMemo(() => {
+    if (classKind === "contacto") {
+      const rows = pool.filter((b) => (sector === "todos" || b.sectorId === sector) && (!sub || b.sub === sub));
+      const options: [string, number][] = [
+        ["Con teléfono", rows.filter((b) => (b.phone || "").trim() || (b.phoneAlt || "").trim()).length],
+        ["Sin teléfono", rows.filter((b) => !(b.phone || "").trim() && !(b.phoneAlt || "").trim()).length],
+        ["Con web", rows.filter((b) => b.web).length],
+        ["Con correo", rows.filter((b) => b.email.includes("@")).length],
+      ];
+      return options.filter(([, n]) => n > 0);
+    }
+    if (classKind === "reseñas") {
+      const rows = pool.filter((b) => (sector === "todos" || b.sectorId === sector) && (!sub || b.sub === sub));
+      const options: [string, number][] = [
+        ["Con reseñas", rows.filter((b) => b.reviews > 0).length],
+        ["100 o más", rows.filter((b) => b.reviews >= 100).length],
+        ["500 o más", rows.filter((b) => b.reviews >= 500).length],
+        ["1.000 o más", rows.filter((b) => b.reviews >= 1000).length],
+        ["Sin reseñas", rows.filter((b) => b.reviews <= 0).length],
+      ];
+      return options.filter(([, n]) => n > 0);
+    }
+    if (classKind === "oportunidad") {
+      const rows = pool.filter((b) => (sector === "todos" || b.sectorId === sector) && (!sub || b.sub === sub));
+      const map = new Map<string, number>();
+      let two = 0;
+      let three = 0;
+      for (const b of rows) {
+        const titles = buildOffers(b).map((o) => o.title);
+        if (titles.length >= 2) two += 1;
+        if (titles.length >= 3) three += 1;
+        for (const title of new Set(titles)) map.set(title, (map.get(title) ?? 0) + 1);
+      }
+      const options: [string, number][] = [
+        ["3 o más", three],
+        ["2 o más", two],
+        ...[...map.entries()].sort((a, b) => b[1] - a[1]),
+      ];
+      return options.filter(([, n]) => n > 0);
+    }
+    const map = new Map<string, number>();
+    for (const b of pool) {
+      if (sector !== "todos" && b.sectorId !== sector) continue;
+      if (sub && b.sub !== sub) continue;
+      const name = classOf(b, classKind, crmIds);
+      if (!name) continue;
+      map.set(name, (map.get(name) ?? 0) + 1);
+    }
+    return [...map.entries()].sort((a, b) => b[1] - a[1]);
+  }, [pool, sector, sub, classKind, crmIds]);
+
   const visible = useMemo(() => {
     const query = q.trim().toLowerCase();
     const list = patched.filter((b) => {
       if (sector !== "todos" && b.sectorId !== sector) return false;
       if (sub && b.sub !== sub) return false;
+      if (classValue && !matchesClass(b, classKind, classValue, crmIds)) return false;
       if (phoneOnly && !(b.phone || "").trim() && !(b.phoneAlt || "").trim()) return false;
       if (!query) return true;
-      return `${b.name} ${b.zone} ${b.sub} ${b.address} ${b.email}`.toLowerCase().includes(query);
+      return nameKey(`${b.name} ${b.zone} ${b.sub} ${b.address} ${b.email}`).includes(nameKey(query));
     });
     const prefOf = (b: Biz) => extras[b.id] ?? emptyPref();
     list.sort((a, b) => {
       if (sort === "name") return a.name.localeCompare(b.name, "es");
       if (sort === "reviews") return (b.reviews || 0) - (a.reviews || 0);
+      if (sort === "offers") return buildOffers(b).length - buildOffers(a).length || (b.reviews || 0) - (a.reviews || 0);
       const ma = totals(buildOffers(a), prefOf(a)).b;
       const mb = totals(buildOffers(b), prefOf(b)).b;
       return mb - ma || (b.reviews || 0) - (a.reviews || 0);
     });
     return list;
-  }, [patched, sector, sub, phoneOnly, q, sort, extras]);
+  }, [patched, sector, sub, classKind, classValue, crmIds, phoneOnly, q, sort, extras]);
+
+  useEffect(() => {
+    listHead.current?.scrollIntoView({ block: "nearest" });
+  }, [sector]);
+
+  useEffect(() => {
+    if (openId == null) return;
+    document.getElementById(`biz-${openId}`)?.scrollIntoView({ block: "start" });
+  }, [openId, visible]);
 
   const points = useMemo(
     () =>
@@ -317,6 +492,13 @@ export function RadarScreen() {
     setPatches((prev) => ({ ...prev, [id]: { ...prev[id], [field]: value.slice(0, 120) } }));
   }
 
+  function chooseWeb(id: number, url: string, name: string) {
+    setPatches((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], web: url.slice(0, 200), webName: name.slice(0, 80) },
+    }));
+  }
+
   async function refreshBiz(b: Biz) {
     setRefreshingId(b.id);
     try {
@@ -330,7 +512,10 @@ export function RadarScreen() {
         const next = { ...cur };
         if (res.phone) next.phone = res.phone;
         if (res.email) next.email = res.email;
-        if (res.web) next.web = res.web;
+        if (res.web) {
+          next.web = res.web;
+          if (res.webName) next.webName = res.webName;
+        }
         if (res.address) next.address = res.address;
         return { ...prev, [b.id]: next };
       });
@@ -367,6 +552,7 @@ export function RadarScreen() {
       const pickFrom = exact.length ? exact : local;
       const first = pickFrom.find((b) => sector === "todos" || b.sectorId === sector) ?? pickFrom[0];
       setSub("");
+      setClassValue("");
       if (first.sectorId !== sector) setSector(first.sectorId);
       if (!(first.phone || first.phoneAlt)) setPhoneOnly(false);
       setOpenId(first.id);
@@ -382,7 +568,9 @@ export function RadarScreen() {
         setFound((prev) => {
           const cur = prev[key]?.rows ?? [];
           const rows = [biz, ...cur.filter((row) => nameKey(row.name) !== nameKey(biz.name) && row.id !== biz.id)];
-          return { ...prev, [key]: { at: Date.now(), rows, note: "Búsqueda por nombre" } };
+          const next = cleanFound({ ...prev, [key]: { at: Date.now(), rows, note: "Búsqueda por nombre" } });
+          setSaved(writeKeep(FOUND_KEY, JSON.stringify(next)) ? "si" : "no");
+          return next;
         });
         setSub("");
         setSector(biz.sectorId);
@@ -528,9 +716,19 @@ export function RadarScreen() {
 
   const showResearch = visible.length === 0 && !q;
 
+  if (!booted) {
+    return (
+      <main className="safe-pad mx-auto flex min-h-screen max-w-lg flex-col justify-center px-4">
+        <p className="text-xs font-semibold tracking-widest text-lime uppercase">Radar · AsExIA</p>
+        <h1 className="mt-2 font-display text-3xl font-extrabold">Cargando lo guardado</h1>
+        <p className="mt-2 text-sm text-muted">Restaurantes y clínicas salen juntos, cuando el teléfono ya los tiene.</p>
+      </main>
+    );
+  }
+
   function follow(b: Biz) {
-    setCrm((prev) =>
-      openExpediente(prev, {
+    setCrm((prev) => {
+      const next = openExpediente(prev, {
         id: b.id,
         name: b.name,
         city: townById(b.city)?.name || b.city,
@@ -541,8 +739,10 @@ export function RadarScreen() {
         address: b.address,
         angle: gapLine(b, buildOffers(b), extras[b.id] ?? emptyPref()),
         chain: b.chain,
-      }),
-    );
+      });
+      setSaved(saveCrm(next) ? "si" : "no");
+      return next;
+    });
     setCrmFocus(String(b.id));
     setDesk("crm");
   }
@@ -554,7 +754,10 @@ export function RadarScreen() {
         <CrmScreen
           rows={crm}
           focusId={crmFocus}
-          onChange={setCrm}
+          onChange={(rows) => {
+            setSaved(saveCrm(rows) ? "si" : "no");
+            setCrm(rows);
+          }}
           onBack={() => {
             setCrmFocus(null);
             setDesk("radar");
@@ -589,6 +792,35 @@ export function RadarScreen() {
                 })),
               );
               note = result.note;
+              setSaved(saveCrm(result.rows) ? "si" : "no");
+              return result.rows;
+            });
+            return note;
+          }}
+          onEnrich={(bizId) => {
+            const biz =
+              patched.find((item) => item.id === bizId) ||
+              CATALOG.find((item) => item.id === bizId) ||
+              imported.find((item) => item.id === bizId) ||
+              Object.values(found)
+                .flatMap((pack) => pack.rows)
+                .find((item) => item.id === bizId);
+            const offers = biz
+              ? buildOffers(biz).map((offer) => ({
+                  id: offer.id,
+                  title: offer.title,
+                  short: offer.short,
+                  detail: offer.detail,
+                  money: moneyLine(offer),
+                  evidenced: offer.evidenced,
+                  score: offerScore(offer),
+                }))
+              : [];
+            let note = "";
+            setCrm((prev) => {
+              const result = enrichStrategy(prev, String(bizId), offers);
+              note = result.note;
+              setSaved(saveCrm(result.rows) ? "si" : "no");
               return result.rows;
             });
             return note;
@@ -671,6 +903,9 @@ export function RadarScreen() {
             Ver {hiddenPhones} sin teléfono
           </button>
         ) : null}
+        <p className={"mt-1 text-xs " + (saved === "no" ? "text-rose" : "text-muted")}>
+          {saved === "si" ? "Guardado en este teléfono" : saved === "no" ? "Sin guardar" : "Aún no se ha guardado"}
+        </p>
       </div>
 
       <div className="mt-4 flex items-center gap-2">
@@ -695,6 +930,7 @@ export function RadarScreen() {
                 onClick={() => {
                   setSector(s.id);
                   setSub("");
+                  setClassValue("");
                   setOpenId(null);
                 }}
                 className={
@@ -744,6 +980,44 @@ export function RadarScreen() {
         </div>
       ) : null}
 
+      <div className="scroll-x mt-3 flex gap-2">
+        {(
+          [
+            ["zona", "Zona"],
+            ["origen", "Origen"],
+            ["contacto", "Contacto"],
+            ["cadena", "Cadena"],
+            ["crm", "Seguimiento"],
+            ["reseñas", "Reseñas"],
+            ["oportunidad", "Oportunidad"],
+          ] as const
+        ).map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            onClick={() => {
+              setClassKind((current) => (current === id ? "" : id));
+              setClassValue("");
+            }}
+            className={
+              "min-h-11 shrink-0 rounded-full border px-3 text-sm font-semibold " +
+              (classKind === id ? "border-lime bg-lime text-bg" : "border-line")
+            }
+          >
+            {label}
+            {classKind === id && classValue ? ` · ${classValue}` : ""}
+          </button>
+        ))}
+      </div>
+      {classKind ? (
+        <div className="scroll-x mt-2 flex gap-2">
+          <SubChip active={!classValue} label="Todos" count={pool.filter((b) => sector === "todos" || b.sectorId === sector).length} onClick={() => setClassValue("")} />
+          {classOptions.map(([name, n]) => (
+            <SubChip key={name} active={classValue === name} label={name} count={n} onClick={() => setClassValue(name)} />
+          ))}
+        </div>
+      ) : null}
+
       <form
         className="mt-4 flex flex-wrap items-center gap-2"
         onSubmit={(e) => {
@@ -780,6 +1054,7 @@ export function RadarScreen() {
           >
             <option value="money">Más dinero primero</option>
             <option value="reviews">Más reseñas</option>
+            <option value="offers">Más oportunidades</option>
             <option value="name">Nombre</option>
           </select>
         </label>
@@ -843,25 +1118,33 @@ export function RadarScreen() {
       </div>
 
       {showResearch ? (
-        <section className="mt-4 rounded-3xl border border-dashed border-line bg-card p-4">
+        <section ref={listHead} className="mt-4 rounded-3xl border border-dashed border-line bg-card p-4">
           <h2 className="font-display text-xl font-semibold">
-            {searching ? "Buscando en el mapa" : `Sin fichas de ${sectorMeta.label.toLowerCase()} en ${town.name}`}
+            {searching
+              ? "Buscando en el mapa"
+              : phoneOnly && hiddenPhones > 0
+                ? `${hiddenPhones} fichas de ${sectorMeta.label.toLowerCase()} sin teléfono`
+                : `Sin fichas de ${sectorMeta.label.toLowerCase()} en ${town.name}`}
           </h2>
           <p className="mt-2 text-sm text-muted">
             {phoneOnly && hiddenPhones > 0
-              ? "Hay fichas sin teléfono. Quita el filtro para verlas, o importa un Excel con los contactos que ya tengas."
-              : "OpenStreetMap no ha devuelto esta lista. No significa que no existan. Puedes repetir la búsqueda o importar CSV / Excel."}
+              ? "Están guardadas. El filtro «solo con teléfono» las oculta. No es que no existan."
+              : "El mapa no ha devuelto esta lista. No significa que no existan. Puedes repetir la búsqueda o importar CSV / Excel."}
           </p>
           <div className="mt-4 flex gap-2">
             <button
               type="button"
               onClick={() => {
+                if (phoneOnly && hiddenPhones > 0) {
+                  setPhoneOnly(false);
+                  return;
+                }
                 force.current = true;
                 setTick((n) => n + 1);
               }}
               className="min-h-11 rounded-xl bg-lime px-4 font-semibold text-bg"
             >
-              Buscar otra vez
+              {phoneOnly && hiddenPhones > 0 ? `Ver las ${hiddenPhones}` : "Buscar otra vez"}
             </button>
             <button type="button" onClick={() => fileRef.current?.click()} className="min-h-11 rounded-xl border border-line px-4">
               Importar
@@ -869,7 +1152,11 @@ export function RadarScreen() {
           </div>
         </section>
       ) : (
-        <p className="mt-3 text-sm text-muted">{visible.length} fichas en pantalla</p>
+        <p ref={listHead} className="mt-3 text-sm font-semibold text-ink">
+          {sub || sectorMeta.label} en {town.name}
+          {classValue ? <span className="font-normal text-muted"> · {classValue}</span> : null}
+          <span className="font-normal text-muted"> · {visible.length} en pantalla</span>
+        </p>
       )}
 
       <div className="mt-3 flex flex-col gap-3">
@@ -879,9 +1166,6 @@ export function RadarScreen() {
           const sum = totals(offers, pref);
           const heat = heatOf(sum.b);
           const open = openId === b.id;
-          const chips = channels(b);
-          const shown = chips.slice(0, 2);
-          const rest = chips.length - shown.length;
           const call = telHref(b.phone);
           const callAlt = telHref(b.phoneAlt);
           return (
@@ -910,7 +1194,8 @@ export function RadarScreen() {
                         {b.sectorLabel} · {b.sub}
                         {b.zone ? ` · ${b.zone}` : ""}
                       </span>
-                      <span className="mt-1 block text-rose">{gapLine(b, offers, pref)}</span>
+                      <span className="mt-1 block text-ink">{b.address || "Sin dirección en la fuente"}</span>
+                      {originOf(b) === "informe" ? <span className="mt-1 block text-rose">{gapLine(b, offers, pref)}</span> : null}
                     </p>
                     <p className="shrink-0 text-right">
                       <span className="block text-xs text-muted">hasta</span>
@@ -919,22 +1204,31 @@ export function RadarScreen() {
                   </div>
                 </button>
                 <div className="mt-3 flex items-center justify-between gap-2">
-                  <button type="button" onClick={() => setOpenId(open ? null : b.id)} className="flex min-w-0 flex-1 flex-wrap gap-1 text-left">
-                    {shown.map((c) => (
-                      <span key={c} className="rounded-full bg-surface px-2 py-1 text-xs text-muted">
-                        {c}
-                      </span>
-                    ))}
-                    {rest > 0 ? <span className="rounded-full bg-surface px-2 py-1 text-xs text-muted">+{rest}</span> : null}
-                    {b.chain ? <span className="rounded-full bg-surface px-2 py-1 text-xs text-amber">Cadena</span> : null}
-                    {b.pending ? <span className="rounded-full bg-surface px-2 py-1 text-xs text-rose">Pendiente</span> : null}
+                  <div className="flex min-w-0 flex-1 flex-wrap gap-1 text-left">
+                    {summaryPoints(b).map((point) =>
+                      point.on && point.url ? (
+                        <a
+                          key={point.id}
+                          href={point.url}
+                          target={point.url.startsWith("tel:") || point.url.startsWith("mailto:") ? undefined : "_blank"}
+                          rel="noreferrer"
+                          className="rounded-full border border-lime px-2 py-1 text-xs font-semibold text-lime"
+                        >
+                          {point.label}
+                        </a>
+                      ) : (
+                        <span key={point.id} className={"rounded-full border px-2 py-1 text-xs font-semibold " + (point.on ? "border-lime text-lime" : "border-line text-muted")}>
+                          {point.label}
+                        </span>
+                      ),
+                    )}
                     <span className="rounded-full bg-surface px-2 py-1 text-xs text-muted">
                       {originOf(b) === "osm" ? "Mapa" : originOf(b) === "archivo" ? "Archivo" : originOf(b) === "web" ? "Web" : "Informe"}
                     </span>
                     {crm.some((row) => row.bizId === b.id) ? (
                       <span className="rounded-full bg-surface px-2 py-1 text-xs text-lime">En CRM</span>
                     ) : null}
-                  </button>
+                  </div>
                   <span className="inline-flex items-center gap-2 text-sm text-muted">
                     {sum.m > 0 ? <span>+{sum.m} €/mes</span> : null}
                     {call ? (
@@ -1025,7 +1319,7 @@ export function RadarScreen() {
                     ) : null}
                     {b.web ? (
                       <a href={b.web} target="_blank" rel="noreferrer" className="flex min-h-11 items-center justify-center rounded-2xl border border-line px-4">
-                        Ver web
+                        {b.webName || hostLabel(b.web)}
                       </a>
                     ) : null}
                     {b.sources.map((s) => (
@@ -1039,6 +1333,18 @@ export function RadarScreen() {
                         {s.label}
                       </a>
                     ))}
+                    {b.sources
+                      .filter((s) => ownCandidate(s.url) && s.url !== b.web)
+                      .map((s) => (
+                        <button
+                          key={`use-${s.url}`}
+                          type="button"
+                          onClick={() => chooseWeb(b.id, s.url, s.label)}
+                          className="min-h-11 rounded-2xl border border-lime px-4 text-sm font-semibold text-lime"
+                        >
+                          Usar {s.label}
+                        </button>
+                      ))}
                     <button
                       type="button"
                       onClick={() => follow(b)}

@@ -46,6 +46,7 @@ export type Biz = {
   phoneAlt: string;
   email: string;
   web: string;
+  webName?: string;
   hasPage: boolean;
   certIssue: boolean;
   rating: number | null;
@@ -463,6 +464,63 @@ export const nameKey = norm;
 export function originOf(b: Biz): "informe" | "osm" | "archivo" | "web" {
   if (b.origin) return b.origin;
   return b.imported ? "archivo" : "informe";
+}
+
+export function fitsSector(b: { name: string; sectorId: string; sub: string }) {
+  const name = b.name.toLowerCase();
+  if (b.sectorId === "vet") return /veterinar|canin|felin|mascota/.test(name) || /veter/.test(b.sub.toLowerCase());
+  if (b.sectorId === "clinica") {
+    if (/farmacia|veterinar/.test(name)) return false;
+    if (/^(bar|restaurante|cafeter[ií]a|taberna)\b/.test(name)) return false;
+  }
+  if (b.sectorId === "hosteleria" && /veterinar|farmacia|cl[ií]nica dental|fisioterapia/.test(name)) return false;
+  return true;
+}
+
+function coreName(name: string) {
+  const key = nameKey(name).replace(/^(bar|restaurante|cafeteria|cafe|taberna|meson|clinica|dental|veterinaria|centrodesalud)/, "");
+  return key || nameKey(name);
+}
+
+function richness(b: Biz) {
+  return (b.phone ? 8 : 0) + (b.email ? 2 : 0) + (b.web ? 2 : 0) + (b.address ? 1 : 0) + (b.lat ? 1 : 0) + (!b.origin || b.origin === "informe" ? 4 : 0);
+}
+
+export function distinctBiz(rows: Biz[]) {
+  const out: Biz[] = [];
+  for (const row of rows) {
+    const key = nameKey(row.name);
+    if (!key || key.length < 3) continue;
+    if (["bar", "restaurante", "cafeteria", "clinica", "dentista", "veterinario"].includes(key)) continue;
+    const core = coreName(row.name);
+    const phone = (row.phone || "").replace(/\D/g, "").slice(-9);
+    const idx = out.findIndex((item) => {
+      const other = nameKey(item.name);
+      const otherCore = coreName(item.name);
+      const otherPhone = (item.phone || "").replace(/\D/g, "").slice(-9);
+      if (other === key) return true;
+      if (core.length >= 6 && core === otherCore) return true;
+      return Boolean(phone.length === 9 && phone === otherPhone && (core.includes(otherCore) || otherCore.includes(core)));
+    });
+    if (idx < 0) {
+      out.push(row);
+      continue;
+    }
+    const prev = out[idx];
+    const keep = richness(prev) >= richness(row) ? prev : row;
+    const rest = keep === prev ? row : prev;
+    out[idx] = {
+      ...keep,
+      phone: keep.phone || rest.phone,
+      phoneAlt: keep.phoneAlt || rest.phoneAlt,
+      email: keep.email || rest.email,
+      web: keep.web || rest.web,
+      webName: keep.webName || rest.webName,
+      address: keep.address || rest.address,
+      sources: [...keep.sources, ...rest.sources.filter((item) => !keep.sources.some((s) => s.url === item.url))].slice(0, 6),
+    };
+  }
+  return out;
 }
 
 export function sectorIdFromLabel(label: string) {
